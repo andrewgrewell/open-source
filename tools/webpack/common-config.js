@@ -1,6 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
+/**
+ * Exports a common webpack config to use used by all projects using Webpack
+ * @type {{resolveLoader: {alias: {'remove-test-utils-loader': string}}, resolve: {alias: {[p: string]: boolean, '@monorepo-v2/js-test-utils': boolean, './__test_utils__': boolean}}, module: {rules: [{test: RegExp, use: string[]}]}}}
+ */
 module.exports = {
   module: {
     rules: [
@@ -16,7 +20,7 @@ module.exports = {
       [path.resolve(__dirname, '../../packages/test-utils/node')]: false,
       ['./__test_utils__']: false,
 
-      ['@monorepo-v2/js-test-utils']: false,
+      ['@internal/test-utils-js']: false,
     },
   },
   resolveLoader: {

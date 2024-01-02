@@ -33,7 +33,10 @@
 
 ### Module boundaries
 Module boundaries are defined in the `project.json` under `tags`, and enforced by the
-`@nx/enforce-module-boundaries` eslint rule. see [Enforce Module Boundaries](https://nx.dev/latest/react/plugins/enforce-module-boundaries) for more info.
+`@nx/enforce-module-boundaries` eslint rule. see [Enforce Module Boundaries](https://nx.dev/core-features/enforce-module-boundaries) for more info.
+
+All open source projects have the `as-oss` tag, if the tag is not present in the project.json it is assumed to not be published.
+`ag-oss` can only depend on other `ag-oss` projects as well as the module boundaries defined in the eslint.json. Internal packages follow the module boundaries defined in the `eslint.json`.
 
 ### Creating Applications
 
