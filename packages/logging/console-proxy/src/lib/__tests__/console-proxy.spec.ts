@@ -1,6 +1,11 @@
-import { consoleProxy } from './console-proxy';
+import { consoleProxy } from '../console-proxy';
+import { mockConsole } from '../../__test-utils__/mock-console';
 
 describe('consoleProxy', () => {
+  beforeAll(() => {
+    mockConsole(console, { disable: true, noopErrors: true });
+  });
+
   it.each([
     ['log', 'test-log'],
     ['info', 'test-info'],

@@ -13,7 +13,8 @@
       "packages",
       "docs",
       "tests",
-      "dev"
+      "repo-tools",
+      "logging"
     ],
     "releaseTagGlobPattern": "[a-z-][0-9].*",
     "issueRegexPattern": "[A-Z]{3,}-\\d+"
