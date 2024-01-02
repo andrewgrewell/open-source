@@ -8,6 +8,8 @@
 - `npm install --g git-conventional-commits`
 - `npm install --g nx`
 
+---
+
 # Docs
 ### Monorepo
 - [File Structure](docs/monorepo/file-structure.md)
@@ -45,4 +47,6 @@ nx g @nx/react-native:app <app-name> --directory=apps/{app-name}/clients/mobile
 ```bash
 nx g nx-electron:app <app-name> --frontendProject=<browser-app-name> --directory=apps/{app-name}/clients/desktop
 ```
+
+---
 
