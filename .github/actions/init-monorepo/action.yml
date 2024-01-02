@@ -5,19 +5,19 @@ inputs:
   node-version:
     required: false
     description: Version of Node to use
-    default: '16.16.0'
+    default: '20.10.0'
   nx-version:
     required: false
     description: Version of NX to use
-    default: '15.8.3'
+    default: '17.2.8'
   npm-cache-version:
     description: Used for busting the cache
     required: false
-    default: '3'
+    default: '0'
   nx-cache-version:
     description: Used for busting the cache
     required: false
-    default: '1'
+    default: '0'
 
 outputs:
   npm-cache-hit:
@@ -45,7 +45,7 @@ runs:
       name: Nx Cache
       id: nx-cache
       with:
-        path: ./node_modules/.cache/nx
+        path: ./node_modules/.nx/cache
         key: nx-cache-${{ inputs.nx-cache-version }}-${{ inputs.nx-version }}
 
     - uses: actions/cache@v3
