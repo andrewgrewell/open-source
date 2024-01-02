@@ -1,0 +1,37 @@
+{
+  "convention": {
+    "commitTypes": [
+      "feat",
+      "bug",
+      "wip",
+      "chore",
+      "merge",
+      "revert"
+    ],
+    "commitScopes": [
+      "apps",
+      "packages",
+      "docs",
+      "tests",
+      "dev"
+    ],
+    "releaseTagGlobPattern": "[a-z-][0-9].*",
+    "issueRegexPattern": "[A-Z]{3,}-\\d+"
+  },
+
+  "changelog": {
+    "commitTypes": ["feat", "bug", "chore"],
+    "includeInvalidCommits": true,
+    "commitIgnoreRegexPattern": "^WIP ",
+    "headlines": {
+      "feat": "Features",
+      "bug": "Bug Fixes",
+      "chore": "Chores",
+      "breakingChange": "BREAKING CHANGES"
+    },
+
+    "commitUrl": "https://github.com/andrewgrewell/open-source/commit/%commit%",
+    "commitRangeUrl": "https://github.com/andrewgrewell/open-source/compare/%from%...%to%?diff=split",
+    "issueUrl": "https://github.com/andrewgrewell/open-source/issues/%issue%"
+  }
+}

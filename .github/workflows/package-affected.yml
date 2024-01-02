@@ -1,0 +1,28 @@
+name: Package Affected
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: 'package-affected-${{ github.head_ref }}'
+  cancel-in-progress: true
+
+jobs:
+  package-affected:
+    runs-on: ubuntu-latest
+    env:
+      NX_CLOUD_DISTRIBUTED_EXECUTION: false
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/init-monorepo
+
+      - name: package
+        uses: ./.github/actions/target-affected
+        with:
+          target: package
+          max-parallel: 1

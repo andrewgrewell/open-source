@@ -1,0 +1,13 @@
+node_modules
+.git-hooks
+.github
+.storybook
+.vscode
+coverage
+docs
+infrastructure
+packages
+reports
+scripts
+services
+tmp
