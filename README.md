@@ -1,6 +1,23 @@
 # Andrew's Open Source Monorepo
 
-# Setup
+## Table of Contents
+- [Setup](#setup)
+- Concepts
+  - [File Structure](docs/monorepo/file-structure.md)
+  - [File Generators](docs/monorepo/generators.md)
+  - Product Development
+    - [Core Principles](docs/product-development/core-principles.md)
+    - [Product Development Lifecycle](docs/product-development/product-development-lifecycle.md)
+- [Development](#development)
+  - [Project Planning Page](https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c)
+  - [Modules / Projects](#modules--projects)
+  - [Module boundaries](#module-boundaries)
+  - [Creating Applications](#creating-applications)
+    - [Browser](#browser)
+    - [Mobile](#mobile)
+    - [Desktop](#desktop)
+
+## Setup
 
 **1. Clone or fork the repo**
 
@@ -8,43 +25,27 @@
 - `npm install --g git-conventional-commits`
 - `npm install --g nx`
 
----
 
-# Docs
-
-### Monorepo
-- [File Structure](docs/monorepo/file-structure.md)
-- [File Generators](docs/monorepo/generators.md)
-
-### Product Development
-- [Core Principles](docs/product-development/core-principles.md)
-- [Product Development Lifecycle](docs/product-development/product-development-lifecycle.md)
-
----
-
-# Development
+## Development
 [Project planning page](https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c)
 
-## Modules / Projects
-*All modules in the repo are interchangeably referred to as projects.*
-
-## Module boundaries
+### Module boundaries
 Module boundaries are defined in the `project.json` under `tags`, and enforced by the
 `@nx/enforce-module-boundaries` eslint rule. see [Enforce Module Boundaries](https://nx.dev/latest/react/plugins/enforce-module-boundaries) for more info.
 
-## Creating Applications
+### Creating Applications
 
-### Browser
+#### Browser
 ```bash
 nx g @nx/next:app <app-name> --directory=apps/{app-name}/clients/browser
 ```
 
-### Mobile
+#### Mobile
 ```bash
 nx g @nx/react-native:app <app-name> --directory=apps/{app-name}/clients/mobile
 ```
 
-### Desktop
+#### Desktop
 *Note: A Desktop app UI is assumed to be driven by a browser app*
 ```bash
 nx g nx-electron:app <app-name> --frontendProject=<browser-app-name> --directory=apps/{app-name}/clients/desktop
