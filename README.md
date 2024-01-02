@@ -8,6 +8,17 @@
 - `npm install --g git-conventional-commits`
 - `npm install --g nx`
 
+# Docs
+### Monorepo
+- [File Structure](docs/monorepo/file-structure.md)
+- [File Generators](docs/monorepo/generators.md)
+
+### Product Development
+- [Core Principles](docs/product-development/core-principles.md)
+- [Product Development Lifecycle](docs/product-development/product-development-lifecycle.md)
+
+---
+
 # Development
 
 ## Modules / Projects
