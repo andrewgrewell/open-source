@@ -11,6 +11,7 @@
 ---
 
 # Docs
+
 ### Monorepo
 - [File Structure](docs/monorepo/file-structure.md)
 - [File Generators](docs/monorepo/generators.md)
@@ -22,6 +23,7 @@
 ---
 
 # Development
+[Project planning page](https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c)
 
 ## Modules / Projects
 *All modules in the repo are interchangeably referred to as projects.*
