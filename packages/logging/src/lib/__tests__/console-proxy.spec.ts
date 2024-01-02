@@ -3,7 +3,7 @@ import { mockConsole } from '../../__test-utils__/mock-console';
 
 describe('consoleProxy', () => {
   beforeAll(() => {
-    mockConsole(console, { disable: true, noopErrors: true });
+    mockConsole(console, { disableMethods: true, noopErrors: true });
   });
 
   it.each([

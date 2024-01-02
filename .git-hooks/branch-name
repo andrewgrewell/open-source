@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Check branch name
+LC_ALL=C
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+# (bug|story|task|epic)\/[A-Z]{3,}-\d+\/[a-z-]+$
+valid_branch_regex="^|[A-Z]+-[0-9]+-[a-z-]+$"
+if [[ ! $local_branch =~ $valid_branch_regex ]]
+then
+    RED='\033[0;31m'
+    YELLOW='\033[0;33m'
+    RESET='\033[0m'
+    echo -e "Invalid branch name: ${RED}$local_branch${RESET}"
+    echo -e "Branch names in this project must adhere to this contract: ${YELLOW}$valid_branch_regex${RESET}"
+    echo -e "Rename your branch to a valid name and try again. (Example: git branch -m story/JIRA-123/add-widgets)"
+    exit 1
+fi

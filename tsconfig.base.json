@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@ag-oss/console-proxy": ["packages/logging/console-proxy/src/index.ts"]
+      "@ag-oss/logging-js": ["packages/logging/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -14,11 +14,20 @@ type ConsoleMethodNames = keyof ConsoleMethodSpies;
 
 export interface MockConsoleOptions {
   noopErrors?: boolean;
-  disable?: boolean;
+  disableMethods?: boolean;
 }
 
-export function mockConsole(console: Console, options?: MockConsoleOptions) {
-  const { noopErrors = false, disable = false } = options || {};
+export interface ConsoleMock {
+  clearAll: () => void;
+  disableAll: () => void;
+  disableNextError: () => void;
+  resetAll: () => void;
+  restoreAll: () => void;
+  spies: ConsoleMethodSpies;
+}
+
+export function mockConsole(console: Console, options?: MockConsoleOptions): ConsoleMock {
+  const { noopErrors = false, disableMethods = true } = options || {};
 
   const spies: ConsoleMethodSpies = methods.reduce((result, method) => {
     result[method as ConsoleMethodNames] = jest.spyOn(
@@ -68,7 +77,7 @@ export function mockConsole(console: Console, options?: MockConsoleOptions) {
     });
   }
 
-  if (disable) {
+  if (disableMethods) {
     disableAll();
   }
 
