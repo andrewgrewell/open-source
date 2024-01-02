@@ -111,6 +111,10 @@
               {
                 "sourceTag": "js",
                 "onlyDependOnLibsWithTags": ["js"]
+              },
+              {
+                "sourceTag": "ag-oss",
+                "onlyDependOnLibsWithTags": ["/ag-oss/"]
               }
             ]
           }

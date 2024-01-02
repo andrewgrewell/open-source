@@ -9,6 +9,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
 
+/**
+ * Exports a function that can be used to merge config that is common to all NextJS projects
+ * @param nextConfig
+ * @returns {*}
+ */
 module.exports.nextCommonConfig = (nextConfig = {}) => {
   const { webpack: projectWebpackConfig } = nextConfig;
   return withNx(
