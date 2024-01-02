@@ -2,10 +2,7 @@
 
 # Setup
 
-**1. Clone the repo to your local machine**
-```bash
-git clone git@github.com:andrewgrewell/devsigner-monorepo.git
-```
+**1. Clone or fork the repo**
 
 **2. Install global dependencies**
 - `npm install --g git-conventional-commits`
@@ -14,7 +11,7 @@ git clone git@github.com:andrewgrewell/devsigner-monorepo.git
 # Development
 
 ## Modules / Projects
-All modules in the repo are interchangeably referred to as projects.
+*All modules in the repo are interchangeably referred to as projects.*
 
 ## Module boundaries
 Module boundaries are defined in the `project.json` under `tags`, and enforced by the
