@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+log_failure() {
+  echo -e "\033[0;31mPre-commit checks failed, commit aborted. Please fix the issues re-run the commit command\033[0m"
+}
+
+run_validations() {
+  if nx run repo-tools:validate-projects; then
+    if nx affected --target=lint --fix --parallel=5; then
+      if rm -rf coverage && nx affected --target=test --parallel=5 --detectLeaks -- --coverage --coverageReporters json; then
+        ./scripts/merge-coverage-reports.sh;
+        exit 0
+      else
+        ./scripts/merge-coverage-reports.sh;
+        log_failure
+        exit 1
+      fi
+    else
+      log_failure
+      exit 1
+    fi
+
+  else
+    log_failure
+    exit 1
+  fi
+}
+
+invalid_branch=$(. "$(dirname "$0")/branch-name")
+if [ "$invalid_branch" ]; then
+  echo "$invalid_branch"
+  exit 1
+else
+  run_validations
+fi

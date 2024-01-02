@@ -1,0 +1,74 @@
+name: Initialize Monorepo
+description: Common action required to get the monorepo initialized
+
+inputs:
+  node-version:
+    required: false
+    description: Version of Node to use
+    default: '16.16.0'
+  nx-version:
+    required: false
+    description: Version of NX to use
+    default: '15.8.3'
+  npm-cache-version:
+    description: Used for busting the cache
+    required: false
+    default: '3'
+  nx-cache-version:
+    description: Used for busting the cache
+    required: false
+    default: '1'
+
+outputs:
+  npm-cache-hit:
+    description: True if node modules were found in cache
+    value: ${{ steps.npm-cache.outputs.cache-hit }}
+  nx-cache-hit:
+    description: True if Nx cache was found
+    value: ${{ steps.nx-cache.outputs.cache-hit }}
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - uses: actions/cache@v3
+      name: Node Modules Cache
+      id: npm-cache
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-npm-cache-${{ inputs.npm-cache-version }}-${{ hashFiles('./package-lock.json') }}
+
+    - uses: actions/cache@v3
+      name: Nx Cache
+      id: nx-cache
+      with:
+        path: ./node_modules/.cache/nx
+        key: nx-cache-${{ inputs.nx-cache-version }}-${{ inputs.nx-version }}
+
+    - uses: actions/cache@v3
+      with:
+        path: |
+          ~/.npm
+          ${{ github.workspace }}/.next/cache
+        # Generate a new cache whenever packages or source files change.
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        # If source files changed but packages didn't, rebuild from a prior cache.
+        restore-keys: |
+          ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+    - name: Install Nx
+      shell: bash
+      run: npm install -g nx@${{ inputs.nx-version }}
+
+    - name: Install fresh NPM deps
+      shell: bash
+      if: steps.npm-cache.outputs.cache-hit != 'true'
+      run: npm ci --ignore-scripts --loglevel warn --yes
+
+    - name: Run NPM install
+      shell: bash
+      if: steps.npm-cache.outputs.cache-hit == 'true'
+      run: npm install

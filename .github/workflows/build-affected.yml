@@ -1,0 +1,52 @@
+name: Build Affected
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+concurrency:
+  group: 'build-affected-${{ github.head_ref }}'
+  cancel-in-progress: true
+
+jobs:
+  build-affected:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/init-monorepo
+
+#      - run: npx nx-cloud start-ci-run
+
+      - name: build
+        uses: ./.github/actions/target-affected
+        with:
+          target: build
+          max-parallel: 3
+
+#      - name: Stop Agents
+#        if: always()
+#        run: npx nx-cloud stop-all-agents
+
+#  agents:
+#    runs-on: ubuntu-latest
+#    name: Agent ${{ matrix.agent }}
+#    timeout-minutes: 30
+#    strategy:
+#      matrix:
+#        agent: [1, 2, 3]
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0
+#
+#      - uses: ./.github/actions/init-monorepo
+#
+#      - name: Start Nx Agent ${{ matrix.agent }}
+#        run: npx nx-cloud start-agent

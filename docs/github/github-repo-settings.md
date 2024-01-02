@@ -13,6 +13,6 @@ Go to **Settings > Branches** and add a new branch protection rule for `main`
 - [ ] Check **"Require pull request reviews before merging"**
 - [ ] Check **"Require approvals"** and keep value at 1.
 - [ ] Check **"Require review from Code Owners"** (It's up to your team to decide on ownership boundaries if any)
-- [ ] Check **"Require status checks to pass before merging"** and **"Require branches to be up to date before merging"**
+- [ ] Check **"Require status checks to pass before merging"** and **"Require branches to be up-to-date before merging"**
 - [ ] Add **build-affect**, **lint-affected**, **package-affected**, **test-affected** as required status checks (Note: you will have needed to run these for them to show up
 - [ ] Press **Create**/**Save changes**

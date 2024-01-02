@@ -1,0 +1,23 @@
+name: Validate Semver
+description: Validates if a value conforms to semver
+
+inputs:
+  version:
+    required: true
+    description: The version to check
+
+runs:
+  using: composite
+  steps:
+    - name: Parse value
+      id: parse-value
+      shell: bash
+      run: |
+        version=${{ github.event.inputs.version }}
+        echo "Checking $version"
+        if ./tools/scripts/check-semver.sh $version ; then
+          echo "Version is valid"
+        else
+          echo "Version $version is not a valid semver version"
+          exit 1
+        fi

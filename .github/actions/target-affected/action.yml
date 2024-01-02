@@ -1,0 +1,60 @@
+name: Target Affected
+description: Common action abstracting the Nx affected logic for CI
+
+inputs:
+  additional-args:
+    description: Additional arguments to pass to the target command
+    required: false
+    default: ''
+  target:
+    required: true
+    description: Nx executor to run
+  max-parallel:
+    required: false
+    default: '1'
+    description: Max parallel tasks to run
+  skip-nx-cache:
+    required: false
+    default: 'false'
+    description: Skip NX cache
+
+outputs:
+  base:
+    description: Base SHA
+    value: ${{ steps.setSHAs.outputs.base }}
+  head:
+    description: Head SHA
+    value: ${{steps.setSHAs.outputs.head }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get branch name
+      id: branch-info
+      uses: tj-actions/branch-names@v6.3
+
+    - name: Log Info
+      shell: bash
+      run: |
+        echo "Base: ${{ steps.branch-info.outputs.base_ref_branch }}"
+        echo "Head: ${{ steps.branch-info.outputs.current_branch }}"
+
+    - name: Validate has base branch
+      shell: bash
+      run: |
+        BASE="${{ steps.branch-info.outputs.base_ref_branch }}"
+        if [ -z "$BASE" ]; then
+          echo "No base branch found"
+          exit 1
+        fi
+
+    - name: Run affected executor
+      shell: bash
+      run: |
+        nx affected \
+          --target=${{ inputs.target }} \
+          --skip-nx-cache=${{ inputs.skip-nx-cache }} \
+          --base=origin/${{ steps.branch-info.outputs.base_ref_branch }} \
+          --head=origin/${{ steps.branch-info.outputs.current_branch }} \
+          --parallel \
+          --max-parallel=${{ inputs.max-parallel }} ${{ inputs.additional-args }}

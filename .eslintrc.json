@@ -1,0 +1,127 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "plugins": [
+    "@nx",
+    "filenames",
+    "import",
+    "unused-imports",
+    "react",
+    "@typescript-eslint",
+    "sort-keys-fix",
+    "jest"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended",
+    "plugin:json/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "tsconfig.base.json",
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "@typescript-eslint/no-empty-function": "off",
+    "sort-keys-fix/sort-keys-fix": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "excludedFiles": ["jest.setup.postenv.ts"],
+      "rules": {
+        "import/prefer-default-export": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "args": "none",
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/no-misused-promises": "warn",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "error",
+          { "vars": "all", "varsIgnorePattern": "^_", "args": "none", "argsIgnorePattern": "^_" }
+        ],
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "nx",
+                "onlyDependOnLibsWithTags": ["nx", "node", "js"]
+              },
+              {
+                "sourceTag": "react-native",
+                "onlyDependOnLibsWithTags": ["react-native", "react", "js"]
+              },
+              {
+                "sourceTag": "electron",
+                "onlyDependOnLibsWithTags": ["electron", "js"]
+              },
+              {
+                "sourceTag": "browser",
+                "onlyDependOnLibsWithTags": ["browser", "react", "js"]
+              },
+              {
+                "sourceTag": "desktop",
+                "onlyDependOnLibsWithTags": ["desktop", "electron", "browser", "node", "react", "js"]
+              },
+              {
+                "sourceTag": "desktop",
+                "onlyDependOnLibsWithTags": ["desktop", "electron", "browser", "node", "react", "js"]
+              },
+              {
+                "sourceTag": "mobile",
+                "onlyDependOnLibsWithTags": ["mobile", "react-native", "react", "js"]
+              },
+              {
+                "sourceTag": "next",
+                "onlyDependOnLibsWithTags": ["next", "js"]
+              },
+              {
+                "sourceTag": "react",
+                "onlyDependOnLibsWithTags": ["react", "js"]
+              },
+              {
+                "sourceTag": "node",
+                "onlyDependOnLibsWithTags": ["node", "js"]
+              },
+              {
+                "sourceTag": "js",
+                "onlyDependOnLibsWithTags": ["js"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "filenames/match-regex": [2, "^[a-z-.]+[a-z0-9-.]*$", true]
+      }
+    }
+  ]
+}

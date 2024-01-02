@@ -1,0 +1,28 @@
+name: Lint Affected
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+concurrency:
+  group: 'lint-affected-${{ github.head_ref }}'
+  cancel-in-progress: true
+
+jobs:
+  lint-affected:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/init-monorepo
+
+      - name: lint
+        uses: ./.github/actions/target-affected
+        with:
+          target: lint

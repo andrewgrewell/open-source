@@ -1,8 +1,9 @@
 # Andrew's Open Source Monorepo
+
 ![ag-open-source-image](https://github.com/andrewgrewell/open-source/assets/8173965/aa147b6e-5125-4b7d-a82a-aa4b508c7de2)
 
 ## Table of Contents
-- [Setup](#setup)
+- [Usage](#usage)
 - Concepts
   - [File Structure](docs/monorepo/file-structure.md)
   - [File Generators](docs/monorepo/generators.md)
@@ -18,7 +19,7 @@
     - [Mobile](#mobile)
     - [Desktop](#desktop)
 
-## Setup
+## Usage
 
 **1. Clone or fork the repo**
 
