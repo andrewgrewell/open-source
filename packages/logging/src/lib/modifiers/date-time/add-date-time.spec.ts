@@ -18,7 +18,7 @@ describe('addDateTime', () => {
     const console = addDateTime(global.console);
     console[method]('test', { foo: 'bar' });
     expect(consoleMock.spies[method].mock.calls[0]).toEqual([
-      '2024-01-02T23:30:45.123Z',
+      '2024-01-02T15:30:45-08:00',
       'test',
       { foo: 'bar' },
     ]);
