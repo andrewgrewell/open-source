@@ -11,6 +11,7 @@
     "commitScopes": [
       "apps",
       "packages",
+      "utils",
       "docs",
       "testing",
       "repo-tools",
