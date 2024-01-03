@@ -3,7 +3,7 @@ export default {
   prettierPath: require.resolve('prettier-2'),
   displayName: 'logging-js',
   preset: '../../jest.preset.js',
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },

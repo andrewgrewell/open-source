@@ -1,16 +1,18 @@
 import { ConsoleLogMethods } from '../../types';
 
-const methodColorMap = {
-  [ConsoleLogMethods.DEBUG]: { color: 'cyan' },
-  [ConsoleLogMethods.ERROR]: { color: 'red' },
-  [ConsoleLogMethods.INFO]: { color: 'green' },
-  [ConsoleLogMethods.LOG]: { color: 'green' },
-  [ConsoleLogMethods.TRACE]: { color: 'magenta' },
-  [ConsoleLogMethods.WARN]: { color: 'yellow' },
+const methodColorMap: Record<ConsoleLogMethods, string> = {
+  [ConsoleLogMethods.DEBUG]: 'cyan',
+  [ConsoleLogMethods.ERROR]: 'red',
+  [ConsoleLogMethods.INFO]: 'green',
+  [ConsoleLogMethods.LOG]: 'green',
+  [ConsoleLogMethods.TRACE]: 'magenta',
+  [ConsoleLogMethods.WARN]: 'yellow',
 };
 
 export function colorizeBrowser(string: string, logMethod: ConsoleLogMethods) {
-  const { color } = methodColorMap[logMethod];
-  const colorCss = color ? `color: ${color};` : '';
-  return [`%c${string}`, `${colorCss}`];
+  const color = methodColorMap[logMethod];
+  if (!color) {
+    return string;
+  }
+  return [`%c${string}`, `color: ${color};`];
 }
