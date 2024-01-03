@@ -1,12 +1,11 @@
 /* eslint-disable */
 export default {
-  prettierPath: require.resolve('prettier-2'),
-  displayName: 'logging-js',
+  displayName: 'string-utils',
   preset: '../../jest.preset.js',
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/packages/logging',
+  coverageDirectory: '../../coverage/packages/string-utils',
 };

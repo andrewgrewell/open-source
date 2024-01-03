@@ -16,7 +16,8 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@ag-oss/logging-js": ["packages/logging/src/index.ts"]
+      "@ag-oss/logging-js": ["packages/logging/src/index.ts"],
+      "@ag-oss/string-utils": ["packages/string-utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
