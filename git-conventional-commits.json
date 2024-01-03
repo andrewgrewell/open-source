@@ -11,10 +11,12 @@
     "commitScopes": [
       "apps",
       "packages",
+      "utils",
       "docs",
-      "tests",
+      "testing",
       "repo-tools",
-      "logging"
+      "logging",
+      "ci"
     ],
     "releaseTagGlobPattern": "[a-z-][0-9].*",
     "issueRegexPattern": "[A-Z]{3,}-\\d+"

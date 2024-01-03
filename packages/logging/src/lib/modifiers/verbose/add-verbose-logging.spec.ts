@@ -1,5 +1,5 @@
-import { addVerboseLogging } from '../add-verbose-logging';
-import { mockConsole, ConsoleMock } from '../../__test-utils__/mock-console';
+import { addVerboseLogging } from './add-verbose-logging';
+import { mockConsole, ConsoleMock } from '../../../__test-utils__/mock-console';
 
 describe('addVerboseLogging', () => {
   const ORIGINAL_ENV = process.env;

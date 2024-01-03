@@ -16,8 +16,7 @@
     "build:affected": "nx affected --target=build --parallel=8",
     "lint:all": "nx run-many --target=lint --projects=*",
     "lint:affected": "nx affected --target=lint --fix --parallel=8",
-    "clear-nx-cache": "rm -rf ./node_modules/.cache/nx",
-    "clear-caches": "rm -rf ./.nx/cache",
+    "clear:nx-cache": "rm -rf ./.nx/cache",
     "open:coverage": "open $INIT_CWD/coverage/lcov-report/index.html"
   },
   "devDependencies": {
@@ -66,10 +65,12 @@
     "jest-environment-node": "^29.7.0",
     "jest-junit": "^16.0.0",
     "jest-react-native": "^18.0.0",
+    "jest-serializer-ansi-escapes": "^2.0.1",
     "jest-silent-reporter": "^0.5.0",
     "jsonc-eslint-parser": "^2.4.0",
     "nx": "17.2.8",
     "prettier": "^3.1.1",
+    "prettier-2": "npm:prettier@^2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "^5.3.3",
@@ -77,6 +78,7 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
+    "date-fns": "^3.0.6",
     "tslib": "^2.3.0"
   },
   "nx": {

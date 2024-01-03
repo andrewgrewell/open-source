@@ -12,7 +12,8 @@ mkdir -p coverage/_merged
 # it  will be broken down by project and not used for failing checks
 EXCLUDED_PROJECTS=(
   "repo-tools"
-  "test-utils"
+  "test-utils-js"
+  "test-utils-node"
 )
 isProjectExcluded() {
   local path=$1

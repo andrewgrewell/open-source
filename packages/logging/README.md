@@ -1,11 +1,21 @@
 # @ag-oss/logging-js
 
-This library was generated with [Nx](https://nx.dev).
+This library provides loggers and utilities for building well formatted loggers.
 
-## Building
+The secondary goal is to also serve as an example of functional programming and modular code.
 
-Run `nx build logging-js` to build the library.
+## Installation
 
-## Running unit tests
+```bash
+npm install @ag-oss/logging-js
+```
 
-Run `nx test logging-js` to execute the unit tests via [Jest](https://jestjs.io).
+## Usage
+
+```typescript
+import { verboseLogger as log } from '@ag-oss/logging-js';
+
+...
+
+log.verbose('This will only show up if global.verbose is true');
+```
