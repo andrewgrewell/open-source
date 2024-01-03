@@ -12,7 +12,7 @@
       "apps",
       "packages",
       "docs",
-      "tests",
+      "testing",
       "repo-tools",
       "logging"
     ],
