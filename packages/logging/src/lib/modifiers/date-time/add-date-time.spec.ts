@@ -7,7 +7,7 @@ describe('addDateTime', () => {
 
   beforeAll(() => {
     consoleMock = mockConsole(console);
-    jest.useFakeTimers().setSystemTime(new Date(2024, 0, 2, 15, 30, 45, 123));
+    jest.useFakeTimers().setSystemTime(1370866345);
   });
 
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe('addDateTime', () => {
     const console = addDateTime(global.console);
     console[method]('test', { foo: 'bar' });
     expect(consoleMock.spies[method].mock.calls[0]).toEqual([
-      '2024-01-02T15:30:45-08:00',
+      '1970-01-16T12:47:46-08:00',
       'test',
       { foo: 'bar' },
     ]);
