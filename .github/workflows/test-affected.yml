@@ -26,7 +26,7 @@ jobs:
         uses: ./.github/actions/target-affected
         with:
           target: test
-          additional-args: -- --ci --runInBand
+          additional-args: -- --ci --runInBand --passWithNoTests
 
 #      - name: Merge Coverage Reports
 #        if: always()
