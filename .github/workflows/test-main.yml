@@ -1,0 +1,77 @@
+name: Test Main
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at 00:00 UTC every day
+  workflow_dispatch:
+    inputs:
+      skip-nx-cache:
+        required: false
+        default: 'false'
+        description: Skip NX cache
+
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+jobs:
+  test-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/init-monorepo
+
+      - name: Run tests
+        shell: bash
+        run: |
+          nx run-many \
+          --target=test \
+          --projects=* \
+          --skip-nx-cache=${{ inputs.skip-nx-cache }} \
+          --parallel \
+          --max-parallel=4 \
+          -- \
+          --coverage \
+          --coverageReporters json
+
+      - name: Merge Coverage Reports
+        id: merge-coverage-reports
+        if: always()
+        run: ./tools/scripts/merge-coverage-reports.sh
+
+      - name: Upload coverage reports to Codecov
+        if: steps.merge-coverage-reports.outputs.exists == 'true'
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+            fail_ci_if_error: true
+            flags: unittests
+            files: coverage/lcov.info
+            verbose: true
+
+      - name: Check for Test Results
+        if: success() || failure()
+        id: test-results
+        shell: bash
+        run: |
+          #!/bin/bash
+          FILE=reports/jest/junit.xml
+          if test -f "$FILE"; then
+            echo "Reports file exists at reports/jest/junit.xml"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Reports file does not exist at reports/jest/junit.xml"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Jest Results
+        if: always() && steps.test-results.outputs.exists == 'true'
+        uses: phoenix-actions/test-reporting@v12
+        with:
+          name: Jest Results            # Name of the check run which will be created
+          path: reports/jest/junit.xml    # Path to test results
+          reporter: jest-junit        # Format of test results
+          fail-on-error: false
