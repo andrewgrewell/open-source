@@ -1,21 +1,26 @@
 # Andrew's Open Source Monorepo
 
-![ag-open-source-image](https://github.com/andrewgrewell/open-source/assets/8173965/aa147b6e-5125-4b7d-a82a-aa4b508c7de2)
-
+[![codecov](https://codecov.io/github/andrewgrewell/open-source/graph/badge.svg?token=SXU7TEYVNX)](https://codecov.io/github/andrewgrewell/open-source)
+[![Test Status](https://github.com/andrewgrewell/open-source/actions/workflows/test-main.yml/badge.svg)](https://github.com/andrewgrewell/open-source/actions/workflows/test-main.yml)
 [![Nx Cloud](https://img.shields.io/badge/Nx%20Cloud-FFFFFF)](https://cloud.nx.app/orgs/6593acbc4ae95b7b5c4ad5af/workspaces/6593acd9d49e660082c656ff/overview)
 [![Notion](https://img.shields.io/badge/Notion-FFFFFF)](https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c)
 
+This project will serve as a place where I can share the code, patterns, and philosophy of software development that I have refined over the years.
+If you are reading this you have discovered this pretty early so please keep in mind I'm in the process of transferring over my projects to this repo, and refining the structure.
+
+<a href="https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c">
+    <img src="https://github.com/andrewgrewell/open-source/assets/8173965/aa147b6e-5125-4b7d-a82a-aa4b508c7de2" alt="AG Open Source" title="AG Open Source" height="300" />
+</a>
+
 ## Table of Contents
 - [Usage](#usage)
-- Concepts
-  - [File Structure](docs/monorepo/file-structure.md)
-  - [File Generators](docs/monorepo/generators.md)
-  - Product Development
-    - [Core Principles](docs/product-development/core-principles.md)
-    - [Product Development Lifecycle](docs/product-development/product-development-lifecycle.md)
 - [Development](#development)
+  - [Core Principles](docs/product-development/core-principles.md)
+  - [Product Development Lifecycle](docs/product-development/product-development-lifecycle.md)
   - [Modules / Projects](#modules--projects)
+  - [File Structure](docs/monorepo/file-structure.md)
   - [Module boundaries](#module-boundaries)
+  - [File Generators](docs/monorepo/generators.md)
   - [Creating Applications](#creating-applications)
     - [Browser](#browser)
     - [Mobile](#mobile)
