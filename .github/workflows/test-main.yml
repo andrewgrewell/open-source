@@ -33,6 +33,7 @@ jobs:
           --parallel \
           --max-parallel=4 \
           -- \
+          --passWithNoTests \
           --coverage \
           --coverageReporters json
 
