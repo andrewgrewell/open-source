@@ -4,6 +4,12 @@ COVERAGE_ROOT=coverage
 COVERAGE_FILE_NAME=coverage-final.json
 COVERAGE_PATHS=$(find $COVERAGE_ROOT -type f -name $COVERAGE_FILE_NAME)
 
+if [ -z "$COVERAGE_PATHS" ]; then
+    echo "No coverage files found. Aborting script."
+    echo "exists=false" >> $GITHUB_OUTPUT
+    exit 0
+fi
+
 mkdir -p coverage/_merged
 
 # we maintain a list of projects we don't want to show up in coverage reports
@@ -48,3 +54,4 @@ done <<<"$COVERAGE_PATHS"
 
 npx nyc merge coverage/_merged coverage/_merged/coverage.json
 npx nyc report -t coverage/_merged --reporter json-summary --reporter lcov
+echo "exists=true" >> $GITHUB_OUTPUT

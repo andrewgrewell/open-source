@@ -3,6 +3,7 @@
 ![ag-open-source-image](https://github.com/andrewgrewell/open-source/assets/8173965/aa147b6e-5125-4b7d-a82a-aa4b508c7de2)
 
 [![Nx Cloud](https://img.shields.io/badge/Nx%20Cloud-FFFFFF)](https://cloud.nx.app/orgs/6593acbc4ae95b7b5c4ad5af/workspaces/6593acd9d49e660082c656ff/overview)
+[![Notion](https://img.shields.io/badge/Notion-FFFFFF)](https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c)
 
 ## Table of Contents
 - [Usage](#usage)
@@ -13,7 +14,6 @@
     - [Core Principles](docs/product-development/core-principles.md)
     - [Product Development Lifecycle](docs/product-development/product-development-lifecycle.md)
 - [Development](#development)
-  - [Project Planning Page](https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c)
   - [Modules / Projects](#modules--projects)
   - [Module boundaries](#module-boundaries)
   - [Creating Applications](#creating-applications)
@@ -31,7 +31,6 @@
 
 
 ## Development
-[Project planning page](https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c)
 
 ### Module boundaries
 Module boundaries are defined in the `project.json` under `tags`, and enforced by the
