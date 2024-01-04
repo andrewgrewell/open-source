@@ -9,14 +9,11 @@
       "revert"
     ],
     "commitScopes": [
-      "apps",
-      "packages",
-      "utils",
       "docs",
       "testing",
-      "repo-tools",
-      "logging",
-      "ci"
+      "tools",
+      "ci",
+      "logging"
     ],
     "releaseTagGlobPattern": "[a-z-][0-9].*",
     "issueRegexPattern": "[A-Z]{3,}-\\d+"

@@ -11,6 +11,7 @@ import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 
 import devkit from '@nx/devkit';
+import { resolve } from 'path';
 const { readCachedProjectGraph } = devkit;
 
 function invariant(condition, message) {
@@ -57,4 +58,7 @@ try {
 }
 
 // Execute "npm publish" to publish
-execSync(`npm publish --access public --tag ${tag}`);
+const npmrcPath = resolve(__dirname, '../../');
+execSync(`npm whoami -C ${npmrcPath}`, { stdio: 'inherit' });
+execSync(`npm publish -C ${npmrcPath} --access public --tag ${tag}`, { stdio: 'inherit' });
+
