@@ -4,9 +4,16 @@ COVERAGE_ROOT=coverage
 COVERAGE_FILE_NAME=coverage-final.json
 COVERAGE_PATHS=$(find $COVERAGE_ROOT -type f -name $COVERAGE_FILE_NAME)
 
+writeToGithubOutput() {
+  if [ -z "$GITHUB_OUTPUT" ]; then
+      echo "exists=$1" >> $GITHUB_OUTPUT
+  fi
+
+}
+
 if [ -z "$COVERAGE_PATHS" ]; then
     echo "No coverage files found. Aborting script."
-    echo "exists=false" >> $GITHUB_OUTPUT
+    writeToGithubOutput false
     exit 0
 fi
 
@@ -54,4 +61,4 @@ done <<<"$COVERAGE_PATHS"
 
 npx nyc merge coverage/_merged coverage/_merged/coverage.json
 npx nyc report -t coverage/_merged --reporter json-summary --reporter lcov
-echo "exists=true" >> $GITHUB_OUTPUT
+writeToGithubOutput true
