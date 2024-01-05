@@ -58,7 +58,10 @@ try {
 }
 
 // Execute "npm publish" to publish
-const npmrcPath = resolve(__dirname, '../../');
-execSync(`npm whoami -C ${npmrcPath}`, { stdio: 'inherit' });
-execSync(`npm publish -C ${npmrcPath} --access public --tag ${tag}`, { stdio: 'inherit' });
+execSync(`npm publish --access public --tag ${tag}`);
+
+// Not sure if I want to publish to GH Packages yet
+//const npmrcPath = resolve(__dirname, '../../');
+//execSync(`npm whoami -C ${npmrcPath}`, { stdio: 'inherit' });
+//execSync(`npm publish -C ${npmrcPath} --access public --tag ${tag}`, { stdio: 'inherit' });
 
