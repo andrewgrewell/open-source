@@ -37,14 +37,27 @@
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@nx/typescript"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "excludedFiles": ["jest.setup.postenv.ts"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
+      "excludedFiles": [
+        "jest.setup.postenv.ts"
+      ],
       "rules": {
+        "@typescript-eslint/no-explicit-any": "warn",
         "import/prefer-default-export": "off",
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": [
@@ -61,7 +74,12 @@
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
           "error",
-          { "vars": "all", "varsIgnorePattern": "^_", "args": "none", "argsIgnorePattern": "^_" }
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "none",
+            "argsIgnorePattern": "^_"
+          }
         ],
         "@nx/enforce-module-boundaries": [
           "error",
@@ -70,51 +88,92 @@
             "depConstraints": [
               {
                 "sourceTag": "nx",
-                "onlyDependOnLibsWithTags": ["nx", "node", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "nx",
+                  "node",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "react-native",
-                "onlyDependOnLibsWithTags": ["react-native", "react", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "react-native",
+                  "react",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "electron",
-                "onlyDependOnLibsWithTags": ["electron", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "electron",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "browser",
-                "onlyDependOnLibsWithTags": ["browser", "react", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "browser",
+                  "react",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "desktop",
-                "onlyDependOnLibsWithTags": ["desktop", "electron", "browser", "node", "react", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "desktop",
+                  "electron",
+                  "browser",
+                  "node",
+                  "react",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "desktop",
-                "onlyDependOnLibsWithTags": ["desktop", "electron", "browser", "node", "react", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "desktop",
+                  "electron",
+                  "browser",
+                  "node",
+                  "react",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "mobile",
-                "onlyDependOnLibsWithTags": ["mobile", "react-native", "react", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "mobile",
+                  "react-native",
+                  "react",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "next",
-                "onlyDependOnLibsWithTags": ["next", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "next",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "react",
-                "onlyDependOnLibsWithTags": ["react", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "react",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "node",
-                "onlyDependOnLibsWithTags": ["node", "js"]
+                "onlyDependOnLibsWithTags": [
+                  "node",
+                  "js"
+                ]
               },
               {
                 "sourceTag": "js",
-                "onlyDependOnLibsWithTags": ["js"]
-              },
-              {
-                "sourceTag": "ag-oss",
-                "onlyDependOnLibsWithTags": ["/ag-oss/"]
+                "onlyDependOnLibsWithTags": [
+                  "js"
+                ]
               }
             ]
           }
@@ -122,9 +181,18 @@
       }
     },
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
       "rules": {
-        "filenames/match-regex": [2, "^[a-z-.]+[a-z0-9-.]*$", true]
+        "filenames/match-regex": [
+          2,
+          "^[a-z-.]+[a-z0-9-.]*$",
+          true
+        ]
       }
     }
   ]

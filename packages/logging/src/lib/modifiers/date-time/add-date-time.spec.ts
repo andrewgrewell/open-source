@@ -1,7 +1,7 @@
 import { addDateTime } from './add-date-time';
 import { mockConsole, ConsoleMock } from '../../../__test-utils__/mock-console';
 import { ConsoleLogMethods } from '../../types';
-import { getTimeWithOffset } from '@ag-oss/date-utils';
+import { getTimeWithOffset } from '@ag-oss/dates';
 
 describe('addDateTime', () => {
   const mockDate = new Date(2020, 0, 1, 2, 3, 4, 5);

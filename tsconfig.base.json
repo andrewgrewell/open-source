@@ -10,28 +10,25 @@
     "importHelpers": true,
     "target": "ES2020",
     "module": "commonjs",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@ag-oss/date-utils": [
-        "packages/date-utils/src/index.ts"
-      ],
-      "@ag-oss/logging-js": [
-        "packages/logging/src/index.ts"
-      ],
-      "@ag-oss/string-utils": [
-        "packages/string-utils/src/index.ts"
-      ]
+      "@ag-oss/child-process": ["packages/child-process/src/index.ts"],
+      "@ag-oss/dates": ["packages/dates/src/index.ts"],
+      "@ag-oss/fs": ["packages/fs/src/index.ts"],
+      "@ag-oss/logging": ["packages/logging/src/index.ts"],
+      "@ag-oss/loops": ["packages/loops/src/index.ts"],
+      "@ag-oss/objects": ["packages/objects/src/index.ts"],
+      "@ag-oss/prompts": ["packages/prompts/src/index.ts"],
+      "@ag-oss/repo": ["packages/repo/src/index.ts"],
+      "@ag-oss/rxjs": ["packages/rxjs/src/index.ts"],
+      "@ag-oss/strings": ["packages/strings/src/index.ts"],
+      "@ag-oss/workflows-js": ["packages/workflows/js/src/index.ts"],
+      "@ag-oss/workflows-node": ["packages/workflows/node/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

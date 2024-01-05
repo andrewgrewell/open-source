@@ -1,0 +1,52 @@
+{
+  "name": "repo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/repo/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/repo",
+        "main": "packages/repo/src/index.ts",
+        "tsConfig": "packages/repo/tsconfig.lib.json",
+        "assets": [
+          "packages/repo/*.md",
+          {
+            "input": "./packages/repo/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/repo/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/repo",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/repo",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/repo/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["node"]
+}
