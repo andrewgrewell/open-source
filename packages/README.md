@@ -1,8 +1,5 @@
 # Packages
 
-Root level packages are assumed to be published packages.
-Packages under `internal/` are not published and mainly only used for local development (e.g. generator code, test utils, etc.).
-
 ## Creating a new package
 New packages are created using the Nx generators and then the name of the plugin package
 

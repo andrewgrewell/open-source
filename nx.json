@@ -25,5 +25,28 @@
     ],
     "sharedGlobals": []
   },
+  "release": {
+    "projectsRelationship": "independent",
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    },
+    "git": {
+      "commit": true,
+      "tag": true
+    },
+    "groups": {
+      "logging": {
+        "projects": "logging"
+      }
+    },
+    "version": {
+      "generatorOptions": {
+        "currentVersionResolver": "git-tag",
+        "specifierSource": "conventional-commits"
+      }
+    }
+  },
   "nxCloudAccessToken": "NDFlYjAwODktYWM4NC00N2IyLTk2NDQtODQzYjk4ZjRkMjA5fHJlYWQ="
 }

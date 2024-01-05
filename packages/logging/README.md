@@ -1,4 +1,4 @@
-# @ag-oss/logging-js
+# @ag-oss/logging
 
 This library provides loggers and utilities for building well formatted loggers.
 
@@ -7,7 +7,7 @@ The secondary goal is to also serve as an example of functional programming and 
 ## Installation
 
 ```bash
-npm install @ag-oss/logging-js
+npm install @ag-oss/logging
 ```
 
 ## Usage
