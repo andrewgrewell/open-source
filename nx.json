@@ -26,24 +26,24 @@
     "sharedGlobals": []
   },
   "release": {
+    "projects": ["*", "!@ag-oss/source"],
     "projectsRelationship": "independent",
+    "releaseTagPattern": "{projectName}@{version}",
     "changelog": {
+      "createRelease": false,
+      "workspaceChangelog":  false,
       "projectChangelogs": {
         "createRelease": "github"
       }
     },
     "git": {
       "commit": true,
-      "tag": true
-    },
-    "groups": {
-      "logging": {
-        "projects": "logging"
-      }
+      "tag": false
     },
     "version": {
       "generatorOptions": {
         "currentVersionResolver": "git-tag",
+        "preid": "next",
         "specifierSource": "conventional-commits"
       }
     }

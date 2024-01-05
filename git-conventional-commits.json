@@ -13,6 +13,7 @@
       "testing",
       "tools",
       "ci",
+      "release",
       "logging",
       "date-utils",
       "string-utils"
