@@ -13,7 +13,9 @@
       "testing",
       "tools",
       "ci",
-      "logging"
+      "logging",
+      "date-utils",
+      "string-utils"
     ],
     "releaseTagGlobPattern": "[a-z-][0-9].*",
     "issueRegexPattern": "[A-Z]{3,}-\\d+"

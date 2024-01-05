@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
   prettierPath: require.resolve('prettier-2'),
-  displayName: 'logging-js',
+  displayName: 'logging',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
