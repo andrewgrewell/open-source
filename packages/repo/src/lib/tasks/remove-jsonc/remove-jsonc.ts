@@ -26,16 +26,18 @@ export function removeJsonc(options: RemoveJsoncOptions) {
       if (!overrides) {
         return;
       }
+      let removeCount = 0;
       json.overrides = overrides.filter((override) => {
         const remove = override.parser === ('jsonc-eslint-parser' as string);
         if (remove) {
           verboseLogger.verbose(
             `Removing jsonc-eslint-parser from "${options.projectName}" .eslintrc.json`,
           );
+          removeCount++;
         }
         return !remove;
       });
-      return json;
+      return removeCount ? json : false;
     },
     taskName: `Remove jsonc-eslint-parser from "${options.projectName}" .eslintrc.json`,
   });
