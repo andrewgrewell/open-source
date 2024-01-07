@@ -14,7 +14,8 @@ async function parseDirectory(
   depthCount = 0,
 ): Promise<FileNode | undefined> {
   const { include: includeList, excludeDirectories, excludeFiles, fileVisitor } = options;
-  if (options.maxDepth != null && depthCount > options.maxDepth) {
+  const maxDepth = Math.max(options.maxDepth ?? 0, 0);
+  if (depthCount > maxDepth) {
     return;
   }
   const contents = await readDirAsync(currentPath, { withFileTypes: true });

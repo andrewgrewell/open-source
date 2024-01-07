@@ -20,6 +20,12 @@ describe('getFoldersAtPath', () => {
     expect(folders).toEqual([]);
   });
 
+  it('should return an empty array if readdir returns nothing', async () => {
+    mockReadDirAsync.mockResolvedValueOnce(undefined);
+    const folders = await getFoldersAtPath('some/path');
+    expect(folders).toEqual([]);
+  });
+
   it('should return an array of folder names', async () => {
     mockReadDirAsync.mockResolvedValueOnce([
       { isDirectory: () => true, name: 'folder1' },

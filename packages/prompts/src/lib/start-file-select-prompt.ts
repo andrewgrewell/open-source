@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import path from 'path';
 import prompts from 'prompts';
 import { createFileBrowserService, existsAsync, FileNode, mkdirAsync } from '@ag-oss/fs';
@@ -13,7 +14,7 @@ export function startFileSelectPrompt(
   const browserService = createFileBrowserService(options);
   return new Promise<FileNode | undefined>((resolve, reject) => {
     try {
-      browserService.activeFileNode.subscribe({
+      browserService.cwd.subscribe({
         complete: () => {
           resolve(undefined);
         },

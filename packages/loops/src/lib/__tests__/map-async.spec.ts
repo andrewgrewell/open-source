@@ -20,4 +20,8 @@ describe('mapAsync', () => {
     });
     await expect(mapAsync(items, mapper)).resolves.toEqual([2, 4, 6]);
   });
+
+  it('should return empty array if no data', async () => {
+    await expect(mapAsync(undefined as never, undefined as never)).resolves.toEqual([]);
+  });
 });

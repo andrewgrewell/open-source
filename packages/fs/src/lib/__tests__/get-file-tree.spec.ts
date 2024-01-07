@@ -109,6 +109,15 @@ describe('getFileTree', () => {
     `);
   });
 
+  it.each([undefined, { maxDepth: -1 }])(
+    'should use a depth of 0 if options.maxDepth is not provided or negative',
+    async (options) => {
+      const result = await getFileTree(DEFAULT_ROOT_PATH, options);
+      const children = result?.children.map((item) => item.name);
+      expect(children).toEqual(['file1.md', 'file2.md']);
+    },
+  );
+
   it('should exclude files in options.exclude list', async () => {
     const result = await getFileTree(DEFAULT_ROOT_PATH, { exclude: [/file2\.md/] });
     expect(result?.children?.find((item) => item.name === 'file2.md')).toBeUndefined();
@@ -155,5 +164,12 @@ describe('getFileTree', () => {
     expect(result?.children?.find((item) => item.name === 'file1.md')).toBeTruthy();
   });
 
-  // TODO: test fileVisitor
+  it('should exclude files if fileVisitor returns false', async () => {
+    const result = await getFileTree(DEFAULT_ROOT_PATH, {
+      fileVisitor: (node) => {
+        return node.name !== 'file1.md';
+      },
+    });
+    expect(result?.children?.find((item) => item.name === 'file1.md')).toBeFalsy();
+  });
 });

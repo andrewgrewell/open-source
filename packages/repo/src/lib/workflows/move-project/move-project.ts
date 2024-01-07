@@ -14,12 +14,14 @@ export interface MoveProjectOptions extends ProjectConfig {
   toPath: string;
 }
 
+type WorkflowType = MoveProjectOptions & Record<string, unknown>;
+
 export function moveProject(
   options: MoveProjectOptions,
 ): TaskWorkflow<MoveProjectOptions> {
   const projectParentPath = getProjectParentPath(options, options.projectType);
   const fromPath = join(options.repoPath, projectParentPath, options.projectPath);
-  return createWorkflow({
+  return createWorkflow<WorkflowType>({
     baseTaskOptions: options,
     name: `Move '${options.projectPath}' to '${options.toPath}'`,
     tasks: [

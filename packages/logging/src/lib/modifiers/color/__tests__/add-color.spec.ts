@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import ansiEscapesSerializer from 'jest-serializer-ansi-escapes';
-import { addColor } from './add-color';
-import { ConsoleMock, mockConsole } from '../../../__test-utils__/mock-console';
+import { addColor } from '../add-color';
+import { ConsoleMock, mockConsole } from '../../../../__test-utils__/mock-console';
 
 expect.addSnapshotSerializer(ansiEscapesSerializer);
 

@@ -30,9 +30,12 @@ describe('getValueAtPath', () => {
       ['b', testObject.b],
       ['c', testObject.c],
       ['q.r.s', undefined],
-    ])('should return expected value for path %s', (path, expectedValue) => {
-      expect(getValueAtPath(testObject, path, '.')).toEqual(expectedValue);
-    });
+    ])(
+      'should return expected value for path %s and use dot delimiter by default',
+      (path, expectedValue) => {
+        expect(getValueAtPath(testObject, path)).toEqual(expectedValue);
+      },
+    );
   });
 
   describe('forward slash delimiter', () => {

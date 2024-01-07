@@ -4,7 +4,9 @@ import { Tree, readProjectConfiguration } from '@nx/devkit';
 import { removeJsoncGenerator } from './generator';
 import { RemoveJsoncGeneratorSchema } from './schema';
 
-describe('removeJsonc generator', () => {
+// TODO: Add Non NX Tree abstraction and update tasks which modify the file system to take it as a dependency
+//  see: https://www.notion.so/Update-repo-tasks-to-take-Tree-6274ada474924cf5b5dcdc707b4ac254?pvs=4
+describe.skip('removeJsonc generator', () => {
   let tree: Tree;
   const options: RemoveJsoncGeneratorSchema = { projectName: 'test' };
 

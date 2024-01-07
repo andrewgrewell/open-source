@@ -43,14 +43,13 @@ describe('getProjectWorkflowOptions', () => {
     });
     expect(options).toMatchInlineSnapshot(`
       {
+        "appsPath": "products",
         "distPath": "dist",
         "executionContext": "js",
         "fullProjectPath": "/test/path/to/repo-name/packages/test/test-project",
-        "name": "test-project",
         "npmScope": "@npm-scope",
         "packagesPath": "packages",
         "pathInRepo": "packages/test/test-project",
-        "appsPath": "products",
         "projectName": "test-project",
         "projectPath": "test/test-project",
         "projectType": "library",

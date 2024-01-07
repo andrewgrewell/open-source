@@ -1,16 +1,20 @@
 import { FileNode } from './fs-util.types';
 
-export function getNodeInFileTree(tree: FileNode, path: string) {
-  let targetNode: FileNode | undefined;
-  const traverse = (node: FileNode) => {
-    if (node.path === path) {
-      targetNode = node;
-    } else if (node.children) {
-      node.children.forEach((child) => {
-        traverse(child);
-      });
+function findNode(node: FileNode, path: string): FileNode | undefined {
+  if (node.path === path) {
+    return node;
+  }
+  if (node.children) {
+    for (const child of node.children) {
+      const found = findNode(child, path);
+      if (found) {
+        return found;
+      }
     }
-  };
-  traverse(tree);
-  return targetNode;
+  }
+  return undefined;
+}
+
+export function getNodeInFileTree(tree: FileNode, path: string): FileNode | undefined {
+  return findNode(tree, path);
 }

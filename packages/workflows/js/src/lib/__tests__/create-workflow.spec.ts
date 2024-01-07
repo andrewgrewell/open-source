@@ -1,8 +1,15 @@
 import { createWorkflow } from '../create-workflow';
 import { createTask } from '../create-task';
 import { skip } from 'rxjs';
+import { mockConsole } from '@ag-oss/logging';
 
 describe('createWorkflow', () => {
+  const consoleMock = mockConsole(console);
+
+  afterEach(() => {
+    consoleMock.clearAll();
+  });
+
   it('should set the name of the workflow', () => {
     const name = 'Test Workflow';
     const workflow = createWorkflow({

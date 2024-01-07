@@ -1,45 +1,34 @@
-import { BehaviorSubject, from, map, merge, withLatestFrom } from 'rxjs';
-import {
-  CreateFileBrowserServiceOptions,
-  FileBrowserService,
-  FileNode,
-} from './fs-util.types';
-import { createFileTreeMap } from './create-file-tree-map';
+import { CreateFileBrowserServiceOptions, FileBrowserService } from './fs-util.types';
 import { getFileTree } from './get-file-tree';
-import { createRxAction } from '@ag-oss/rxjs';
+import { createFileTreeBrowser } from './create-file-tree-browser';
+import { catchError, from, of, switchMap } from 'rxjs';
+import { nextValueCallback } from '@ag-oss/rxjs';
 
+async function observeTreeBrowser(options: CreateFileBrowserServiceOptions) {
+  const { rootPath, initialPath, treeOptions } = options;
+  const tree = await getFileTree(rootPath, treeOptions);
+  if (!tree) {
+    throw new Error(`Could not find root path: ${rootPath}`);
+  }
+  return createFileTreeBrowser({ fileTree: tree, initialPath });
+}
+
+/**
+ * Returns a Service which can be used to navigate a file tree starting at options.rootPath
+ * @param options
+ */
 export function createFileBrowserService(
   options: CreateFileBrowserServiceOptions,
 ): FileBrowserService {
-  const { rootPath, initialPath, treeOptions } = options;
-  const treeSubject = new BehaviorSubject<FileNode | null>(null);
-  const treeMapStream = merge(from(getFileTree(rootPath, treeOptions)), treeSubject).pipe(
-    map((tree) => {
-      if (!tree) {
-        return {};
-      }
-      return createFileTreeMap(tree);
-    }),
-  );
-  const goToAction = createRxAction<string, FileNode | undefined>({
-    outputModifier: (input) => {
-      return input.pipe(
-        withLatestFrom(treeMapStream),
-        map(([path, treeMap]) => {
-          return treeMap[path];
-        }),
-      );
-    },
-  });
+  const browser = from(observeTreeBrowser(options));
   return {
-    activeFileNode: merge(
-      treeMapStream.pipe(
-        map((treeMap) => {
-          return treeMap[initialPath || rootPath];
-        }),
-      ),
-      goToAction.output,
-    ),
-    goTo: (path: string) => goToAction.trigger.next(path),
+    cwd: browser.pipe(switchMap((browser) => browser.cwd)),
+    error: browser.pipe(catchError((error) => of(error))),
+    goTo: (path: string) => {
+      nextValueCallback(browser, (browser) => browser.goTo(path));
+    },
+    goUp: () => {
+      nextValueCallback(browser, (browser) => browser.goUp());
+    },
   };
 }

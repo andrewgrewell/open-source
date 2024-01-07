@@ -12,10 +12,10 @@ describe('getRepoConfig', () => {
     const repoConfig = getRepoConfig();
     expect(repoConfig).toMatchInlineSnapshot(`
       {
+        "appsPath": "apps",
         "distPath": "dist",
         "npmScope": "@ag-oss",
         "packagesPath": "packages",
-        "appsPath": "apps",
         "repoPath": "/test/path/to/repo-name",
       }
     `);

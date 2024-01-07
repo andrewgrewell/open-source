@@ -6,7 +6,7 @@ log_failure() {
 
 run_validations() {
   if nx affected --target=lint --fix --parallel=5; then
-    if rm -rf coverage && nx affected --target=test --parallel=5 --detectLeaks -- --passWithNoTests --coverage --coverageReporters json; then
+    if rm -rf coverage && nx affected --target=test --runInBand --detectLeaks -- --passWithNoTests --coverage --coverageReporters json; then
       ./tools/scripts/merge-coverage-reports.sh;
       exit 0
     else

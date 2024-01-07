@@ -38,6 +38,17 @@ export interface Task<
   run: (options: TRunnerOptions) => Observable<TRunnerOutput>;
 }
 
+/**
+ * A task exposed by a workflow
+ * @note: the run method is not exposed as it is handled by the workflow
+ */
+export interface WorkflowTask<TRunnerOutput = any> {
+  name: string;
+  status: Observable<TaskStatus>;
+  progress: Observable<TaskProgressUpdate>;
+  output: Observable<TRunnerOutput>;
+}
+
 export interface CreateWorkflowOptions<TWorkflowOptions = unknown> {
   /**
    * The name is often displayed in UI to identify the workflow.
@@ -46,7 +57,7 @@ export interface CreateWorkflowOptions<TWorkflowOptions = unknown> {
   /**
    * Array of tasks to run.
    */
-  tasks: Task<TWorkflowOptions>[];
+  tasks: Task<TWorkflowOptions | void>[];
   /**
    * Provide a base set of options to be passed to each task.
    * These options will be merged with the run options, with the run options taking precedence.
@@ -65,7 +76,7 @@ export interface TaskWorkflow<
   /**
    * Array of tasks to run.
    */
-  tasks: Task<TWorkflowOptions>[];
+  tasks: WorkflowTask<TWorkflowResult>[];
   /**
    * Observable which emits a record of the result of each task, where the key is the task name.
    */

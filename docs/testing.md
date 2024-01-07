@@ -14,6 +14,7 @@ This is the report that should be used with coverage tools. Coverage collection 
   * @jest-environment jsdom
   */
     ```
-- **Tests that use timezones**
-  There are some time mocking libraries that can be used to mock timezones, but the easiest solution
-  I have found is to use a unix timestamp, e.g. 1370866345 and pass that into `jest.useFakeTimers().setSystemTime()`
+- **Avoid using snapshots**
+  Snapshots are fine for very complex data structures and if you dont have much time. But ideally specific assertions
+  should be made. The issue with snapshots is they can be hard to read, and thus can hide subtle bugs, also it is tempting
+  to update the snapshot when it fails, without really digging into if the failure is valid or not.

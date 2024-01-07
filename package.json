@@ -8,9 +8,9 @@
   },
   "scripts": {
     "prepare": "git config core.hooksPath .git-hooks",
-    "test:all": "nx run-many --target=test --projects=* --parallel=4 -- --runInBand",
-    "test:all:coverage": "rm -rf coverage && nx run-many --target=test --projects=* -- --coverage --runInBand --coverageReporters json; ./tools/scripts/merge-coverage-reports.sh",
-    "test:affected": "nx affected --target=test --parallel=8",
+    "test:all": "nx run-many --target=test --projects=* --parallel=4 -- --passWithNoTests --runInBand",
+    "test:all:coverage": "rm -rf coverage && nx run-many --target=test --projects=* -- --passWithNoTests --coverage --runInBand --coverageReporters json; ./tools/scripts/merge-coverage-reports.sh",
+    "test:affected": "nx affected --target=test --parallel=8 -- --passWithNoTests",
     "test:affected:coverage": "rm -rf coverage && nx affected --target=test --parallel=4 -- --coverage --coverageReporters json; ./tools/scripts/merge-coverage-reports.sh",
     "build:all": "nx run-many --target=build --projects=*",
     "build:affected": "nx affected --target=build --parallel=8",

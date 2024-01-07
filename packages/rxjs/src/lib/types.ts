@@ -82,3 +82,5 @@ export type RxAction<TInput = unknown, TOutput = TInput> = {
 export type RxActionSync<TData = unknown> = {
   value: TData | null;
 } & RxAction<TData>;
+
+export type SourcesMap = Record<string, any>;

@@ -51,6 +51,8 @@ export interface CreateFileBrowserServiceOptions {
 }
 
 export interface FileBrowserService {
-  activeFileNode: Observable<FileNode | undefined>;
+  error: Observable<unknown>;
+  cwd: Observable<FileNode | undefined>;
+  goUp: () => void;
   goTo: (path: string) => void;
 }

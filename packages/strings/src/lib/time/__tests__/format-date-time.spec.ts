@@ -1,5 +1,5 @@
 import { formatDateTime } from '../format-date-time';
-import { getTimeWithOffset } from '@ag-oss/date-utils';
+import { getTimeWithOffset } from '@ag-oss/dates';
 
 describe('formatDateTime', () => {
   it('should return the expected output', () => {
