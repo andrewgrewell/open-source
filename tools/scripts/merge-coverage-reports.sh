@@ -5,10 +5,9 @@ COVERAGE_FILE_NAME=coverage-final.json
 COVERAGE_PATHS=$(find $COVERAGE_ROOT -type f -name $COVERAGE_FILE_NAME)
 
 writeToGithubOutput() {
-  if [ -z "$GITHUB_OUTPUT" ]; then
-      echo "exists=$1" >> $GITHUB_OUTPUT
+  if [ -n "$GITHUB_OUTPUT" ]; then  # Check if GITHUB_OUTPUT is not empty
+      echo "exists=$1" >> "$GITHUB_OUTPUT"
   fi
-
 }
 
 if [ -z "$COVERAGE_PATHS" ]; then
@@ -24,9 +23,7 @@ mkdir -p coverage/_merged
 # still get the report for the overall coverage in the entire monorepo, but
 # it  will be broken down by project and not used for failing checks
 EXCLUDED_PROJECTS=(
-  "repo-tools"
-  "test-utils-js"
-  "test-utils-node"
+
 )
 isProjectExcluded() {
   local path=$1

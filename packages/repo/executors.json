@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "example": {
+      "implementation": "./src/executors/example/executor",
+      "schema": "./src/executors/example/schema.json",
+      "description": "example executor"
+    }
+  }
+}

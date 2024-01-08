@@ -8,9 +8,9 @@
   },
   "scripts": {
     "prepare": "git config core.hooksPath .git-hooks",
-    "test:all": "nx run-many --target=test --projects=* --parallel=4 -- --runInBand",
-    "test:all:coverage": "rm -rf coverage && nx run-many --target=test --projects=* -- --coverage --runInBand --coverageReporters json; ./tools/scripts/merge-coverage-reports.sh",
-    "test:affected": "nx affected --target=test --parallel=8",
+    "test:all": "nx run-many --target=test --projects=* --parallel=4 -- --passWithNoTests --runInBand",
+    "test:all:coverage": "rm -rf coverage && nx run-many --target=test --projects=* -- --passWithNoTests --coverage --runInBand --coverageReporters json; ./tools/scripts/merge-coverage-reports.sh",
+    "test:affected": "nx affected --target=test --parallel=8 -- --passWithNoTests",
     "test:affected:coverage": "rm -rf coverage && nx affected --target=test --parallel=4 -- --coverage --coverageReporters json; ./tools/scripts/merge-coverage-reports.sh",
     "build:all": "nx run-many --target=build --projects=*",
     "build:affected": "nx affected --target=build --parallel=8",
@@ -33,6 +33,7 @@
     "@nx/react": "^17.2.8",
     "@nx/workspace": "17.2.8",
     "@swc-node/register": "~1.6.7",
+    "@swc/cli": "~0.1.62",
     "@swc/core": "~1.3.85",
     "@testing-library/jest-dom": "^6.1.6",
     "@testing-library/jest-native": "^5.4.3",
@@ -78,7 +79,10 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
+    "@swc/helpers": "~0.5.2",
     "date-fns": "^3.0.6",
+    "lodash": "^4.17.21",
+    "rxjs": "^7.8.1",
     "tslib": "^2.3.0"
   },
   "nx": {

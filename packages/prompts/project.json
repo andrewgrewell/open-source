@@ -1,0 +1,34 @@
+{
+  "name": "prompts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/prompts/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/prompts",
+        "main": "packages/prompts/src/index.ts",
+        "tsConfig": "packages/prompts/tsconfig.lib.json",
+        "assets": ["packages/prompts/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs prompts {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/prompts/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["node"]
+}

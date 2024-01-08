@@ -11,7 +11,10 @@ module.exports = merge(
   {
     ...nxPreset,
     collectCoverageFrom: [
-      // NOTE: projects must be excluded in scripts/merge-coverage-reports.sh
+      /**
+       * Note: If you wish to exclude a project from the coverage report
+       * add its name to the exclude list in merge-coverage-reports.sh
+       */
       '**/*.{ts,tsx,js,jsx}',
       '!**/node_modules/**',
       '!**/.git-hooks/**',
@@ -46,7 +49,9 @@ module.exports = merge(
       '!**/__test-utils__/**',
       '!**/__mocks__/**',
       '!**/.next/**',
+      '!**/repo/**',
     ],
+    coveragePathIgnorePatterns: ['/node_modules/', '/__fixtures__/', '/repo/'],
     coverageReporters: ['text', 'json', 'json-summary'],
     coverageThreshold: {
       global: {

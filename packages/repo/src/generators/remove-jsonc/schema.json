@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "RemoveJsonc",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "optional project name to run against, otherwise runs on all projects.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "verbose output",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    }
+  },
+  "required": []
+}
