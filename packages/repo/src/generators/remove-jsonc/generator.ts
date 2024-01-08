@@ -51,7 +51,7 @@ export async function removeJsoncGenerator(
         }),
     });
     const results = await promisifyObservable(workflow.run());
-    verboseLogger.verbose('Results', results);
+    verboseLogger.verbose('Remove jsonc results', results);
   }
 }
 

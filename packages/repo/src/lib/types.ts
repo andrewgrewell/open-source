@@ -59,6 +59,7 @@ export enum ExecutionContext {
   NODE = 'node',
   REACT_NATIVE = 'react-native',
   BROWSER = 'browser',
+  REACT = 'react',
   ELECTRON = 'electron',
 }
 

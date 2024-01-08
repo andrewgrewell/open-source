@@ -15,6 +15,10 @@ const mockReadFileAsync = readFileAsync as jest.Mock;
 const mockWriteFileAsync = writeFileAsync as jest.Mock;
 
 describe('jestPrettierFix', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should add prettier-2 to jest.config.json', async () => {
     const jestConfigContents = `/* eslint-disable */
     export default {
@@ -36,7 +40,7 @@ describe('jestPrettierFix', () => {
     expect(mockWriteFileAsync.mock.calls[0][1]).toMatchInlineSnapshot(`
       "/* eslint-disable */
           export default {
-              prettierPath: require.resolve('prettier-2'),
+            prettierPath: require.resolve('prettier-2'),
         displayName: 'repo',
             preset: '../../jest.preset.js',
             transform: {

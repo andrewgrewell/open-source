@@ -1,1 +1,1 @@
-export * from './update-project-files';
+export * from './update-project-paths';

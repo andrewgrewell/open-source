@@ -7,9 +7,9 @@ import { updatePathToRepoRoot } from './utils/update-path-to-repo-root';
 import { ProjectConfig } from '../../types';
 import { verboseLogger } from '@ag-oss/logging';
 
-export function updateProjectFiles(options: ProjectConfig) {
+export function updateProjectPaths(options: ProjectConfig) {
   return createTask({
-    name: 'Update project files',
+    name: 'Update project paths in root files',
     runner: async () => {
       await getFileTree(options.fullProjectPath, {
         fileVisitor: async (file) => {

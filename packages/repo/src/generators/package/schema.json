@@ -12,6 +12,18 @@
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
+    },
+    "context": {
+      "type": "string",
+      "description": "The ExecutionContext the package will run in."
+    },
+    "domain": {
+      "type": "string",
+      "description": "The parent domain(s) of the package."
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Whether to output verbose logging."
     }
   },
   "required": ["name"]
