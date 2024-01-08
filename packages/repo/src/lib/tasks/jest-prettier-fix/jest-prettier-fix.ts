@@ -8,7 +8,7 @@ export interface JestPrettierFixOptions {
 export function jestPrettierFix(options: JestPrettierFixOptions) {
   const { jestConfigPath } = options;
   return createTask({
-    name: 'Add prettier-2 to jest.config.json',
+    name: 'Add prettier-2 to jest.config.ts',
     runner: async () => {
       const file = await readFileAsync(jestConfigPath, 'utf-8');
       if (file.includes('prettierPath')) {
@@ -16,7 +16,7 @@ export function jestPrettierFix(options: JestPrettierFixOptions) {
       }
       const updatedFile = insertPrettierPathDisplayName(file);
       await writeFileAsync(jestConfigPath, updatedFile);
-      return 'Prettier-2 added to jest.config.json';
+      return 'Prettier-2 added to jest.config.ts';
     },
   });
 }
@@ -30,7 +30,7 @@ function insertPrettierPathDisplayName(jestConfigContents: string): string {
 
   const firstPart = jestConfigContents.substring(0, displayNameIndex);
   const secondPart = jestConfigContents.substring(displayNameIndex);
-  const lineToAdd = "  prettierPath: require.resolve('prettier-2'),\n  ";
+  const lineToAdd = "prettierPath: require.resolve('prettier-2'),\n  ";
 
   return firstPart + lineToAdd + secondPart;
 }

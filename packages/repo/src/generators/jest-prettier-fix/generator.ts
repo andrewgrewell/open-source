@@ -14,13 +14,13 @@ export async function jestPrettierFixGenerator(
 
   const { projectName } = options || {};
   const projects = getProjects(tree);
-  const jestConfigPath = 'jest.config.json';
+  const jestConfigPath = 'jest.config.ts';
 
   const getProjectConfig = (projectName: string) =>
     nxGetProjectConfig(tree, projects.get(projectName));
 
-  if (options.projectName) {
-    const project = projects[projectName];
+  if (projectName) {
+    const project = projects.get(projectName);
 
     if (!project) {
       throw new Error(`Project not found: ${projectName}`);
