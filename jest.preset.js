@@ -55,7 +55,7 @@ module.exports = merge(
     coverageReporters: ['text', 'json', 'json-summary'],
     coverageThreshold: {
       global: {
-        branches: 55,
+        branches: 75,
         functions: 94,
         lines: 94,
         statements: 94,
