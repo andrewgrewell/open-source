@@ -1,22 +1,54 @@
-# Product Development Lifecycle
+# Product Development
+A high level foundation to building products.
+
+## Table of Contents
+- [Core Principles](#core-principles)
+- [Product Development Lifecycle](#product-development-lifecycle)
+  - [High Level flow](#high-level-flow)
+  - [Completion](#completion)
+  - [Estimation](#estimation)
+  - [Roles](#roles)
+    - [Product Owner(s)](#product-owners)
+    - [Technical Lead(s)](#technical-leads)
+    - [Developer(s)](#developers)
+- [NPM Audit Log](#npm-audit-log)
+- [Tech Debt](#tech-debt)
+- [Testing](#testing)
+- [TS Reference](#ts-reference)
+    
+---
+
+## Core Principles
+
+- Focus on delivering value each iteration.
+- Focus on the entire product and don't get tunnel vision.
+- Spend the time to define small, achievable goals.
+- Perfection is unattainable, but we can always improve **over time**
+- Trust automated quality checks to catch most issues, if/when things break, rely on your observability efforts and quickly resolve issues.
+- Own your goals, if something is preventing you from achieving your goals, speak up.
+- Product development is all about identifying boundaries, without boundaries there is too much ambiguity. Reduce the negative effects of boundaries by defining the inputs and outputs of the boundary.
+
+---
+
+## Product Development Lifecycle
 The product development lifecycle is a process for developing a product.
 It's important all members of the team understand the process and their role in it.
-The aim is to be Agile, and while the process often follows Scrum, it is not dogmatic. 
+The aim is to be Agile, and while the process often follows Scrum, it is not dogmatic.
 The goal is to simplify and focus on the key roles and boundaries.
 
-## High Level flow
+### High Level flow
 - Work is identified that needs to be complete to further the organization's goals
 - High level requirements are recorded, either in project management software (Jira, Shortcut, etc) or in a document (Notion, Google Docs, etc)
 - High level requirements are reviewed and one iteration worth of work is identified
 - Development tickets are created for developers to work on
 - Iterate on the process until the work is deemed complete
 
-## Completion
+### Completion
 It's important the team is aligned on what the definition of done is for any single piece of work.
 Complete is often (incorrectly) used to mean "to the greatest extent or degree; total". The reality is a team will rarely
 have the time to complete work to the greatest extent possible, and instead it will be an iterative process of improving the product as a whole over time.
 
-## Estimation
+### Estimation
 Estimation is a very tricky topic. For the purposes of this document, we will have the following assumptions:
 - There is little reliable historical data to base estimates on
 - The team is small and does not have the time to dive deep into uncovering every single unknown around a feature
@@ -31,22 +63,23 @@ backwards from the deadline.
 Over time the team will get better at estimating, will have historical data, and will be able to accurately estimate delivery dates further in the future, but until that has been shown,
 it's much more important to focus on near term deliverables and work iteratively.
 
-## Roles
-### Product Owner(s)
-The Product Owner is responsible for determining the "what" and "why" of any feature work. 
+### Roles
+#### Product Owner(s)
+The Product Owner is responsible for determining the "what" and "why" of any feature work.
 The Product Owner will be responsible for establishing the high level priorities of what will be worked on.
 For any work the Product Owner wishes the development team to complete, they should create an artifact detailing the "what" and "why".
 
 
-### Technical Lead(s)
-The Technical Lead is responsible for determining/facilitating the "how" and "when" of any feature work. 
+#### Technical Lead(s)
+The Technical Lead is responsible for determining/facilitating the "how" and "when" of any feature work.
 The Technical Lead should take the Product Owner's high level requirements and break it into smaller chunks of work.
 When breaking up work, the Technical Lead should consider the following:
 - Dependencies between work items
 - The smallest possible unit of work that can be completed and delivered (it may not work, but it logically makes sense in the code)
 - Parallel work and reducing conflicts between branches
 
-### Developer(s)
+#### Developer(s)
 The Developer is responsible for implementing the actual work. A developer has control over the process for how they deliver work.
 Meaning, if they do not agree with how the work has been broken up, they should discuss with the Technical Lead how they see the work
 being completed, while still meeting the requirement of being small and reducing conflicts.
+

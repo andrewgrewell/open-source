@@ -14,17 +14,29 @@ If you are reading this you have discovered this pretty early so please keep in 
 
 ## Table of Contents
 - [Usage](#usage)
-- [Development](#development)
-  - [Core Principles](docs/product-development/core-principles.md)
-  - [Product Development Lifecycle](docs/product-development/product-development-lifecycle.md)
-  - [Modules / Projects](#modules--projects)
-  - [File Structure](docs/monorepo/file-structure.md)
-  - [Module boundaries](#module-boundaries)
-  - [File Generators](docs/monorepo/generators.md)
-  - [Creating Applications](#creating-applications)
-    - [Browser](#browser)
-    - [Mobile](#mobile)
-    - [Desktop](#desktop)
+- [Monorepo](docs/monorepo.md)
+  - [File Structure](docs/monorepo.md#file-structure)
+    - [Key Principles](docs/monorepo.md#key-principles) 
+    - [Apps](docs/monorepo.md#apps)
+    - [Packages](docs/monorepo.md#packages)
+    - [Module boundaries](docs/monorepo.md#module-boundaries)
+      - [Enforcing module boundaries](docs/monorepo.md#enforcing-module-boundaries)
+    - [Generators](docs/monorepo.md#generators)
+      - [Creating Custom Nx Generators](docs/monorepo.md#creating-custom-nx-generators)]
+- [Development](docs/development.md)
+  - [Core Principles](docs/development.md#core-principles)
+  - [Product Development Lifecycle](docs/development.md#product-development-lifecycle)
+    - [High Level flow](docs/development.md#high-level-flow)
+    - [Completion](docs/development.md#completion)
+    - [Estimation](docs/development.md#estimation)
+    - [Roles](docs/development.md#roles)
+      - [Product Owner(s)](docs/development.md#product-owners)
+      - [Technical Lead(s)](docs/development.md#technical-leads)
+      - [Developer(s)](docs/development.md#developers)
+  - [NPM Audit Log](docs/npm-audit-log.md)
+  - [Tech Debt](docs/tech-debt.md)
+  - [Testing](docs/testing.md)
+  - [TS Reference](docs/ts-reference.md)
 
 ## Usage
 
@@ -33,34 +45,3 @@ If you are reading this you have discovered this pretty early so please keep in 
 **2. Install global dependencies**
 - `npm install --g git-conventional-commits`
 - `npm install --g nx`
-
-
-## Development
-
-### Module boundaries
-Module boundaries are defined in the `project.json` under `tags`, and enforced by the
-`@nx/enforce-module-boundaries` eslint rule. see [Enforce Module Boundaries](https://nx.dev/core-features/enforce-module-boundaries) for more info.
-
-All open source projects have the `as-oss` tag, if the tag is not present in the project.json it is assumed to not be published.
-`ag-oss` can only depend on other `ag-oss` projects as well as the module boundaries defined in the eslint.json. Internal packages follow the module boundaries defined in the `eslint.json`.
-
-### Creating Applications
-
-#### Browser
-```bash
-nx g @nx/next:app <app-name> --directory=apps/{app-name}/clients/browser
-```
-
-#### Mobile
-```bash
-nx g @nx/react-native:app <app-name> --directory=apps/{app-name}/clients/mobile
-```
-
-#### Desktop
-*Note: A Desktop app UI is assumed to be driven by a browser app*
-```bash
-nx g nx-electron:app <app-name> --frontendProject=<browser-app-name> --directory=apps/{app-name}/clients/desktop
-```
-
----
-
