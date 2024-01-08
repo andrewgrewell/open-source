@@ -109,14 +109,11 @@ describe('getFileTree', () => {
     `);
   });
 
-  it.each([undefined, { maxDepth: -1 }])(
-    'should use a depth of 0 if options.maxDepth is not provided or negative',
-    async (options) => {
-      const result = await getFileTree(DEFAULT_ROOT_PATH, options);
-      const children = result?.children.map((item) => item.name);
-      expect(children).toEqual(['file1.md', 'file2.md']);
-    },
-  );
+  it('should use a depth of 0 if options.maxDepth is negative', async () => {
+    const result = await getFileTree(DEFAULT_ROOT_PATH, { maxDepth: -1 });
+    const children = result?.children.map((item) => item.name);
+    expect(children).toEqual(['file1.md', 'file2.md']);
+  });
 
   it('should exclude files in options.exclude list', async () => {
     const result = await getFileTree(DEFAULT_ROOT_PATH, { exclude: [/file2\.md/] });

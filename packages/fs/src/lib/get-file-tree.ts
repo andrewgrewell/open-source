@@ -10,15 +10,26 @@ export async function getFileTree(rootPath: string, options: GetFileTreeOptions 
 
 async function parseDirectory(
   currentPath: string,
-  options: GetFileTreeOptions = {},
-  depthCount = 0,
+  options: GetFileTreeOptions,
+  depthCount: number,
 ): Promise<FileNode | undefined> {
-  const { include: includeList, excludeDirectories, excludeFiles, fileVisitor } = options;
-  const maxDepth = Math.max(options.maxDepth ?? 0, 0);
-  if (depthCount > maxDepth) {
+  const {
+    include: includeList,
+    excludeDirectories,
+    excludeFiles,
+    fileVisitor,
+    maxDepth,
+  } = options;
+
+  if (maxDepth != null && depthCount > Math.max(maxDepth, 0)) {
     return;
   }
+
+  const parseSubDirectory = (itemPath: string) =>
+    parseDirectory(itemPath, options, depthCount + 1);
+
   const contents = await readDirAsync(currentPath, { withFileTypes: true });
+
   return {
     children: await reduceAsync(
       contents,
@@ -42,7 +53,7 @@ async function parseDirectory(
           acc.push(node);
         };
         const addDirectory = async () => {
-          const dirContents = await parseDirectory(itemPath, options, depthCount + 1);
+          const dirContents = await parseSubDirectory(itemPath);
           if (dirContents) {
             return addFile(dirContents.children);
           }

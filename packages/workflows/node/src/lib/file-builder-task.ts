@@ -2,7 +2,7 @@ import { createTask, FileBuilderMap } from '@ag-oss/workflows-js';
 import { existsAsync, mkdirAsync, writeFileAsync } from '@ag-oss/fs';
 import { join, sep as pathSeparator } from 'path';
 
-export interface FileBuilderTaskOptions<TBuilderConfig = Record<string, unknown>> {
+export interface FileBuilderTaskOptions<TBuilderConfig = Record<PropertyKey, unknown>> {
   taskName: string;
   basePath: string;
   builderMap: FileBuilderMap<TBuilderConfig>;
@@ -14,7 +14,7 @@ export function fileBuilderTask<TBuilderConfig = Record<any, unknown>>(
 ) {
   return createTask({
     name: options.taskName,
-    runner: async (_, sendUpdate) => {
+    runner: async ({ sendUpdate }) => {
       const { basePath, builderMap, builderData } = options;
 
       // ensure the base path exists

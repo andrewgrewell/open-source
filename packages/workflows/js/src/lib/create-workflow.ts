@@ -1,5 +1,10 @@
-import { CreateWorkflowOptions, TaskWorkflow } from './types';
-import { forkJoin, lastValueFrom, Observable, ObservableInput } from 'rxjs';
+import {
+  CreateWorkflowOptions,
+  DefaultWorkflowResult,
+  DefaultWorkflowRunOptions,
+  Workflow,
+} from './types';
+import { forkJoin, lastValueFrom, Observable } from 'rxjs';
 import { merge } from 'lodash';
 
 /**
@@ -7,28 +12,20 @@ import { merge } from 'lodash';
  * @param options
  */
 export function createWorkflow<
-  TWorkflowOptions extends Record<string, unknown> = Record<string, unknown>,
-  TWorkflowResult extends Record<string, ObservableInput<any>> = Record<
-    string,
-    ObservableInput<any>
-  >,
->(
-  options: CreateWorkflowOptions<TWorkflowResult>,
-): TaskWorkflow<TWorkflowOptions, TWorkflowResult> {
-  const { name, tasks, baseTaskOptions } = options;
-  const taskOutputs = tasks.reduce(
-    (acc, task, i) => {
-      acc[i] = task.output;
-      return acc;
-    },
-    {} as Record<string, ObservableInput<any>>,
-  );
+  TWorkflowResult extends DefaultWorkflowResult = DefaultWorkflowResult,
+  TRunOptions extends DefaultWorkflowRunOptions = DefaultWorkflowRunOptions,
+>(options: CreateWorkflowOptions<TRunOptions>): Workflow<TWorkflowResult, TRunOptions> {
+  const { name, tasks, runOptions } = options;
+  const taskOutputs = tasks.reduce((acc, task) => {
+    acc[task.name] = task.output;
+    return acc;
+  }, {} as DefaultWorkflowResult);
   const taskResults = forkJoin(taskOutputs) as Observable<TWorkflowResult>;
 
   return {
     name,
     run: (options) => {
-      const mergedOptions = merge({}, baseTaskOptions, options);
+      const mergedOptions = merge({}, runOptions, options);
       const startTasks = async () => {
         for (let i = 0; i < tasks.length; i++) {
           const task = tasks[i];

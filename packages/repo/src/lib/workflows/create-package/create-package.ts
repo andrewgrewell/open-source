@@ -1,4 +1,4 @@
-import { createWorkflow, TaskWorkflow } from '@ag-oss/workflows-js';
+import { createWorkflow, Workflow } from '@ag-oss/workflows-js';
 import { fileBuilderTask } from '@ag-oss/workflows-node';
 import { join } from 'path';
 import { getFileBuilderMap } from './file-builders';
@@ -11,15 +11,15 @@ export type CreatePackageOptions = ProjectConfig;
 
 export function createPackage(
   options: CreatePackageOptions,
-): TaskWorkflow<CreatePackageOptions> {
+): Workflow<CreatePackageOptions> {
   const { projectPath, fullProjectPath } = options;
 
   const fileBuilderMap = getFileBuilderMap(options);
   verboseLogger.verbose('Using file builder map:', fileBuilderMap);
 
   return createWorkflow({
-    baseTaskOptions: options,
     name: `Create package '${projectPath}' at path '${fullProjectPath}'`,
+    runOptions: options,
     tasks: [
       fileBuilderTask({
         basePath: fullProjectPath,
@@ -32,5 +32,5 @@ export function createPackage(
         tsConfigPath: join(options.repoPath, TSCONFIG_BASE_NAME),
       }),
     ],
-  }) as unknown as TaskWorkflow<CreatePackageOptions>;
+  }) as unknown as Workflow<CreatePackageOptions>;
 }

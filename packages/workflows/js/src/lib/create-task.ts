@@ -1,15 +1,29 @@
 import { BehaviorSubject, EMPTY, from, Observable, of, Subject } from 'rxjs';
-import { CreateTaskOptions, Task, TaskProgressUpdate, TaskStatus } from './types';
+import {
+  CreateTaskOptions,
+  DefaultTaskResultData,
+  DefaultTaskRunnerOptions,
+  DefaultTaskUpdateData,
+  Task,
+  TaskProgressUpdate,
+  TaskStatus,
+} from './types';
 
-export function createTask<TRunnerOptions = unknown, TRunnerOutput = unknown>(
-  options: CreateTaskOptions<TRunnerOptions, TRunnerOutput>,
-): Task<TRunnerOptions, TRunnerOutput> {
+export function createTask<
+  TTaskResultData extends DefaultTaskResultData = DefaultTaskResultData,
+  TTaskRunnerOptions extends DefaultTaskRunnerOptions = DefaultTaskRunnerOptions,
+  TTaskUpdateData extends DefaultTaskUpdateData = DefaultTaskUpdateData,
+>(
+  options: CreateTaskOptions<TTaskResultData, TTaskRunnerOptions, TTaskUpdateData>,
+): Task<TTaskResultData, TTaskRunnerOptions, TTaskUpdateData> {
   const { runner, name } = options;
-  const progress = new BehaviorSubject<TaskProgressUpdate>({ completePercent: 0 });
+  const progress = new BehaviorSubject<TaskProgressUpdate<TTaskUpdateData>>({
+    completePercent: 0,
+  });
   const status = new BehaviorSubject<TaskStatus>(undefined);
-  const output = new Subject<TRunnerOutput>();
+  const output = new Subject<TTaskResultData>();
 
-  function completeStreams(data?: TRunnerOutput) {
+  function completeStreams(data?: TTaskResultData) {
     if (data) {
       output.next(data);
     }
@@ -27,7 +41,7 @@ export function createTask<TRunnerOptions = unknown, TRunnerOutput = unknown>(
     output.error(err);
   }
 
-  function promiseTask(runnerResult: Promise<TRunnerOutput>) {
+  function promiseTask(runnerResult: Promise<TTaskResultData>) {
     runnerResult
       .then((data) => {
         completeStreams(data);
@@ -38,7 +52,7 @@ export function createTask<TRunnerOptions = unknown, TRunnerOutput = unknown>(
     return from(runnerResult);
   }
 
-  function observableTask(runnerResult: Observable<TRunnerOutput>) {
+  function observableTask(runnerResult: Observable<TTaskResultData>) {
     runnerResult.subscribe({
       complete: () => {
         completeStreams();
@@ -54,15 +68,20 @@ export function createTask<TRunnerOptions = unknown, TRunnerOutput = unknown>(
     return runnerResult;
   }
 
-  function syncTask(runnerResult: TRunnerOutput) {
+  function syncTask(runnerResult: TTaskResultData) {
     completeStreams(runnerResult);
     return of(runnerResult);
   }
 
-  const run = (runOptions: TRunnerOptions) => {
+  const run: Task<TTaskResultData, TTaskRunnerOptions>['run'] = (runOptions) => {
     status.next('started');
     try {
-      const runnerResult = runner(runOptions, (update) => progress.next(update));
+      const runnerResult = runner({
+        options: runOptions,
+        sendUpdate: (update) => {
+          progress.next(update);
+        },
+      });
       if (runnerResult instanceof Promise) {
         return promiseTask(runnerResult);
       } else if (runnerResult instanceof Observable) {
@@ -78,9 +97,9 @@ export function createTask<TRunnerOptions = unknown, TRunnerOutput = unknown>(
 
   return {
     name,
-    output,
-    progress,
+    output: output.asObservable(),
+    progress: progress.asObservable(),
     run,
-    status,
+    status: status.asObservable(),
   };
 }

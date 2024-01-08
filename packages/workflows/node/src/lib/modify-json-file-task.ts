@@ -11,7 +11,7 @@ export function modifyJsonFileTask<TJson = Record<any, unknown>>(
   options: ModifyJsonFileTaskOptions<TJson>,
 ) {
   const { taskName, filePath, modifyJson } = options;
-  return createTask<void>({
+  return createTask<string>({
     name: taskName,
     runner: async () => {
       verboseLogger.verbose('Reading JSON file at path: ', filePath);

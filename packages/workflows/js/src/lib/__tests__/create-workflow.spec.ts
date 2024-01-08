@@ -2,6 +2,7 @@ import { createWorkflow } from '../create-workflow';
 import { createTask } from '../create-task';
 import { skip } from 'rxjs';
 import { mockConsole } from '@ag-oss/logging';
+import { DefaultWorkflowResult } from '../types';
 
 describe('createWorkflow', () => {
   const consoleMock = mockConsole(console);
@@ -21,18 +22,19 @@ describe('createWorkflow', () => {
 
   it('should run all tasks and expose results', () => {
     return new Promise((resolve, reject) => {
-      const taskData = ['Data1', 'Data2'];
-      type TaskData = { data: typeof taskData };
-      const workflow = createWorkflow<TaskData>({
+      const taskData = ['Data1', 'Data2'] as const;
+      type TaskOptions = { data: typeof taskData };
+      type WorkflowResult = { 'Task 1': string; 'Task 2': string };
+      const workflow = createWorkflow<WorkflowResult>({
         name: 'Test Workflow',
         tasks: [
-          createTask<TaskData>({
+          createTask<string, TaskOptions>({
             name: 'Task 1',
-            runner: (options) => `${options.data[0]} - Task 1`,
+            runner: ({ options }) => `${options.data[0]} - Task 1`,
           }),
-          createTask<TaskData>({
+          createTask<string, TaskOptions>({
             name: 'Task 2',
-            runner: (options) => `${options.data[1]} - Task 2`,
+            runner: ({ options }) => `${options.data[1]} - Task 2`,
           }),
         ],
       });
@@ -55,16 +57,19 @@ describe('createWorkflow', () => {
 
   it('should merge base options and run options', () => {
     return new Promise((resolve, reject) => {
-      const baseOptions = { baseData: 'Base Data', runData: undefined };
-      const runOptions = { baseData: undefined, runData: 'Run Data' };
-      type WorkflowData = { baseData: string | undefined; runData: string | undefined };
-      const workflow = createWorkflow<WorkflowData>({
-        baseTaskOptions: baseOptions,
+      type WorkflowOptions = {
+        baseData: string | undefined;
+        runData: string | undefined;
+      };
+      const baseOptions: WorkflowOptions = { baseData: 'Base Data', runData: undefined };
+      const runOptions: WorkflowOptions = { baseData: undefined, runData: 'Run Data' };
+      const workflow = createWorkflow<DefaultWorkflowResult, WorkflowOptions>({
         name: 'Test Workflow',
+        runOptions: baseOptions,
         tasks: [
-          createTask<WorkflowData>({
+          createTask<string, WorkflowOptions>({
             name: 'Task 1',
-            runner: (options) =>
+            runner: ({ options }) =>
               Promise.resolve(`${options.baseData}|${options.runData} - Task 1`),
           }),
         ],

@@ -1,6 +1,8 @@
 import { createTask } from '../create-task';
 import { Subject } from 'rxjs';
 
+type StringTaskOptions = { taskInput: string };
+
 describe('createTask', () => {
   describe('Common Functionality', () => {
     it('should set the name of the task', () => {
@@ -17,7 +19,7 @@ describe('createTask', () => {
       const update = { completePercent: 0.5, message: 'Calibrating the GigaSpanner' };
       const task = createTask<void>({
         name,
-        runner: (_, sendUpdate) => {
+        runner: ({ sendUpdate }) => {
           sendUpdate(update);
         },
       });
@@ -31,29 +33,29 @@ describe('createTask', () => {
   describe('Synchronous Task Runner', () => {
     it('should emit task result on run observable', () => {
       const taskInput = 'test';
-      const task = createTask<string>({
+      const task = createTask<string, StringTaskOptions>({
         name: 'Test Task',
-        runner: (value) => value,
+        runner: ({ options }) => options.taskInput,
       });
       const spy = jest.fn();
-      task.run(taskInput).subscribe(spy);
-      expect(spy).toHaveBeenCalledWith(taskInput);
+      task.run({ taskInput }).subscribe(spy);
+      expect(spy).toHaveBeenCalledWith('test');
     });
 
     it('should emit task result on output observable', () => {
-      const taskInput = 'test';
-      const task = createTask<string>({
+      const taskInput = 'testing123';
+      const task = createTask<string, StringTaskOptions>({
         name: 'Test Task',
-        runner: (value) => value,
+        runner: ({ options }) => options.taskInput,
       });
       const spy = jest.fn();
       task.output.subscribe(spy);
-      task.run(taskInput);
+      task.run({ taskInput });
       expect(spy).toHaveBeenCalledWith(taskInput);
     });
 
     it('should emit expected status after calling run', () => {
-      const task = createTask<void>({
+      const task = createTask<void, void>({
         name: 'Test Task',
         runner: () => undefined,
       });
@@ -85,10 +87,10 @@ describe('createTask', () => {
     });
 
     it('should complete all streams when complete', () => {
-      const taskInput = 'test';
-      const task = createTask<string>({
+      const taskInput = 'testing123';
+      const task = createTask<string, StringTaskOptions>({
         name: 'Test Task',
-        runner: (value) => value,
+        runner: ({ options }) => options.taskInput,
       });
       const statusSpy = jest.fn();
       const outputSpy = jest.fn();
@@ -96,7 +98,7 @@ describe('createTask', () => {
       task.status.subscribe({ complete: statusSpy });
       task.output.subscribe({ complete: outputSpy });
       task.progress.subscribe({ complete: progressSpy });
-      task.run(taskInput);
+      task.run({ taskInput });
       expect(statusSpy).toHaveBeenCalled();
       expect(outputSpy).toHaveBeenCalled();
       expect(progressSpy).toHaveBeenCalled();
@@ -107,7 +109,7 @@ describe('createTask', () => {
     it('should emit task result on run observable', async () => {
       const taskOutput = 'test';
       const taskPromise = Promise.resolve(taskOutput);
-      const task = createTask<void>({
+      const task = createTask<string>({
         name: 'Test Task',
         runner: () => taskPromise,
       });
@@ -120,7 +122,7 @@ describe('createTask', () => {
     it('should emit task result on output observable', async () => {
       const taskOutput = 'test';
       const taskPromise = Promise.resolve(taskOutput);
-      const task = createTask<void>({
+      const task = createTask<string>({
         name: 'Test Task',
         runner: () => taskPromise,
       });
@@ -195,22 +197,22 @@ describe('createTask', () => {
 
   describe('Observable Task Runner', () => {
     it('should emit task result on run observable', async () => {
-      const taskOutput = new Subject<string>();
-      const task = createTask<void>({
+      const taskOutput = new Subject<number>();
+      const task = createTask<number>({
         name: 'Test Task',
         runner: () => taskOutput,
       });
       const spy = jest.fn();
       task.run().subscribe(spy);
-      taskOutput.next('first');
-      taskOutput.next('second');
-      expect(spy).toHaveBeenNthCalledWith(1, 'first');
-      expect(spy).toHaveBeenNthCalledWith(2, 'second');
+      taskOutput.next(1);
+      taskOutput.next(2);
+      expect(spy).toHaveBeenNthCalledWith(1, 1);
+      expect(spy).toHaveBeenNthCalledWith(2, 2);
     });
 
     it('should emit task result on output observable', async () => {
       const taskOutput = new Subject<string>();
-      const task = createTask<void>({
+      const task = createTask<string>({
         name: 'Test Task',
         runner: () => taskOutput,
       });
@@ -225,7 +227,7 @@ describe('createTask', () => {
 
     it('should emit expected status after calling run', async () => {
       const taskOutput = new Subject<string>();
-      const task = createTask<void>({
+      const task = createTask<string>({
         name: 'Test Task',
         runner: () => taskOutput,
       });
@@ -241,7 +243,7 @@ describe('createTask', () => {
 
     it('should emit "failed" status if error', async () => {
       const taskOutput = new Subject<string>();
-      const task = createTask<void>({
+      const task = createTask<string>({
         name: 'Test Task',
         runner: () => taskOutput,
       });
@@ -259,7 +261,7 @@ describe('createTask', () => {
 
     it('should complete all streams when complete', async () => {
       const taskOutput = new Subject<string>();
-      const task = createTask<void>({
+      const task = createTask<string>({
         name: 'Test Task',
         runner: () => taskOutput,
       });

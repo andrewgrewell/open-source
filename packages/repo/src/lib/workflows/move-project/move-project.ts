@@ -1,4 +1,4 @@
-import { createWorkflow, TaskWorkflow } from '@ag-oss/workflows-js';
+import { createWorkflow, Workflow } from '@ag-oss/workflows-js';
 import { fileMoverTask } from '@ag-oss/workflows-node';
 import { join } from 'path';
 import { ProjectConfig } from '../../types';
@@ -14,16 +14,12 @@ export interface MoveProjectOptions extends ProjectConfig {
   toPath: string;
 }
 
-type WorkflowType = MoveProjectOptions & Record<string, unknown>;
-
-export function moveProject(
-  options: MoveProjectOptions,
-): TaskWorkflow<MoveProjectOptions> {
+export function moveProject(options: MoveProjectOptions): Workflow {
   const projectParentPath = getProjectParentPath(options, options.projectType);
   const fromPath = join(options.repoPath, projectParentPath, options.projectPath);
-  return createWorkflow<WorkflowType>({
-    baseTaskOptions: options,
+  return createWorkflow({
     name: `Move '${options.projectPath}' to '${options.toPath}'`,
+    runOptions: options,
     tasks: [
       fileMoverTask({
         fromPath,

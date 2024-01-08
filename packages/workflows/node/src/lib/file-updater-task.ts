@@ -4,7 +4,7 @@ import { join } from 'path';
 
 export type FileUpdater = (fileContents: string) => string;
 
-export type FileUpdaterMap = Record<string, FileUpdater>;
+export type FileUpdaterMap = Record<PropertyKey, FileUpdater>;
 
 export interface FileUpdaterTaskOptions {
   taskName: string;
@@ -15,7 +15,7 @@ export interface FileUpdaterTaskOptions {
 export function fileUpdaterTask(options: FileUpdaterTaskOptions) {
   return createTask({
     name: options.taskName,
-    runner: async (_, sendUpdate) => {
+    runner: async ({ sendUpdate }) => {
       const { basePath, updaterMap } = options;
       const updateTuple = Object.entries(updaterMap);
       const totalFiles = updateTuple.length;

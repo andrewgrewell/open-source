@@ -1,5 +1,5 @@
 import { AppClientType, AppServiceType, AppType, ProjectConfig } from '../../types';
-import { createWorkflow, TaskWorkflow } from '@ag-oss/workflows-js';
+import { createWorkflow, Workflow } from '@ag-oss/workflows-js';
 import { fileBuilderTask } from '@ag-oss/workflows-node';
 import { getFileBuilderMap } from './file-builders';
 
@@ -9,15 +9,15 @@ export interface CreateAppOptions extends ProjectConfig {
   appServiceType?: AppServiceType;
 }
 
-export function createApp(options: CreateAppOptions): TaskWorkflow<CreateAppOptions> {
+export function createApp(options: CreateAppOptions): Workflow<CreateAppOptions> {
   const { fullProjectPath } = options;
 
   const fileBuilderMap = getFileBuilderMap(options);
 
   // If the app type is a desktop client
   return createWorkflow({
-    baseTaskOptions: options,
     name: `Create app`,
+    runOptions: options,
     tasks: [
       fileBuilderTask<CreateAppOptions>({
         basePath: fullProjectPath,
