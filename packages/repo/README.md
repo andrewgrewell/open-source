@@ -7,10 +7,10 @@ Utilities for use managing an Nx monorepo.
 
 **Create a new generator**
 ```bash
-nx generate @nx/plugin:generator {name} --project=repo --directory=reop/src/generators/{name}
+nx generate @nx/plugin:generator {name} --directory=packages/repo/src/generators/{name}
 ```
 
 **Crate a new executor**
 ```bash
-nx generate @nx/plugin:executor {name} --project=repo --directory=reop/src/executors/{name}
+nx generate @nx/plugin:executor {name} --directory=packages/repo/src/executors/{name}
 ```

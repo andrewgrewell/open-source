@@ -4,6 +4,11 @@
       "factory": "./src/generators/remove-jsonc/generator",
       "schema": "./src/generators/remove-jsonc/schema.json",
       "description": "removeJsonc generator"
+    },
+    "package": {
+      "factory": "./src/generators/package/generator",
+      "schema": "./src/generators/package/schema.json",
+      "description": "package generator"
     }
   }
 }

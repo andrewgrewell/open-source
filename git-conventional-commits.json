@@ -13,6 +13,7 @@
       "testing",
       "tools",
       "ci",
+      "repo",
       "release",
       "logging",
       "date-utils",
