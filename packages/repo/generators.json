@@ -9,6 +9,11 @@
       "factory": "./src/generators/package/generator",
       "schema": "./src/generators/package/schema.json",
       "description": "package generator"
+    },
+    "jest-prettier-fix": {
+      "factory": "./src/generators/jest-prettier-fix/generator",
+      "schema": "./src/generators/jest-prettier-fix/schema.json",
+      "description": "jest-prettier-fix generator"
     }
   }
 }
