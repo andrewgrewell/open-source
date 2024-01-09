@@ -21,6 +21,7 @@
       "@ag-oss/fs": ["packages/fs/src/index.ts"],
       "@ag-oss/logging": ["packages/logging/src/index.ts"],
       "@ag-oss/loops": ["packages/loops/src/index.ts"],
+      "@ag-oss/nx": ["packages/nx/src/index.ts"],
       "@ag-oss/objects": ["packages/objects/src/index.ts"],
       "@ag-oss/prompts": ["packages/prompts/src/index.ts"],
       "@ag-oss/repo": ["packages/repo/src/index.ts"],
