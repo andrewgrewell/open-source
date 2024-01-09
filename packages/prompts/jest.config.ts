@@ -1,5 +1,6 @@
 /* eslint-disable */
 export default {
+  prettierPath: require.resolve('prettier-2'),
   displayName: 'prompts',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',

@@ -68,7 +68,7 @@ New packages are created using the Nx generators and then the name of the plugin
 
 ##### JS (TSC)
 ```bash
-nx g @nx/js:lib {package-name} --simpleName --directory=packages/{domain/subdomain/package-name} --tags={execution-context, ag-oss if open source}
+nx g @nx/js:lib {package-name} --simpleName --directory=packages/{domain/subdomain/package-name} --tags={execution-context}
 ```
 
 #### Publishing

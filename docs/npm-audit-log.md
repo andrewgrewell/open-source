@@ -5,7 +5,7 @@ Often the issues are not easily fixable, or not a true vulnerability, but it is 
 in batches as part of tackling tech debt.
 
 <details>
-  <summary><b>Issues with @nx/expo and dependencies with vulnerabilities</b></summary>
+  <summary><b>Issues with @nx/expo and dependencies with vulnerabilities | 10 vulnerabilities (5 moderate, 5 high)</b></summary>
   <pre>
 
       dicer  *
