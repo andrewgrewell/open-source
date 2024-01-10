@@ -1,4 +1,4 @@
-import { ExecutionContext } from '../../lib/';
+import { ExecutionContext } from '@ag-oss/repo';
 
 export interface PackageGeneratorSchema {
   /**

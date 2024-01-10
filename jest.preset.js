@@ -50,8 +50,14 @@ module.exports = merge(
       '!**/__mocks__/**',
       '!**/.next/**',
       '!**/repo/**',
+      '!**/nx/plugin/**',
     ],
-    coveragePathIgnorePatterns: ['/node_modules/', '/__fixtures__/', '/repo/'],
+    coveragePathIgnorePatterns: [
+      '/node_modules/',
+      '/__fixtures__/',
+      '/repo/',
+      '/nx/plugin/',
+    ],
     coverageReporters: ['text', 'json', 'json-summary'],
     coverageThreshold: {
       global: {

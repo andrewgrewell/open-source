@@ -8,8 +8,8 @@ import {
   NPM_SCOPE,
   PACKAGES_PATH,
   promptForExecutionContext,
-} from '../../lib';
-import { getPackageDomainName } from '../../lib/utils/get-package-domain-name';
+  getPackageDomainName,
+} from '@ag-oss/repo';
 import { join } from 'path';
 import { verboseLogger as log } from '@ag-oss/logging';
 

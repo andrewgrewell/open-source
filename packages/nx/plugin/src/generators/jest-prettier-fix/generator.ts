@@ -4,7 +4,7 @@ import { verboseLogger } from '@ag-oss/logging';
 import { promisifyObservable } from '@ag-oss/rxjs';
 import { createWorkflow } from '@ag-oss/workflows-js';
 import { join } from 'path';
-import { jestPrettierFix, nxGetProjectConfig } from '../../lib';
+import { jestPrettierFix, nxGetProjectConfig } from '@ag-oss/repo';
 
 export async function jestPrettierFixGenerator(
   tree: Tree,
