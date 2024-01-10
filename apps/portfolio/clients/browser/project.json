@@ -1,0 +1,55 @@
+{
+  "name": "portfolio-browser",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/portfolio/clients/browser",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/portfolio/clients/browser",
+        "outputPath": "dist/apps/portfolio/clients/browser"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/portfolio/clients/browser"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "portfolio-browser:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "portfolio-browser:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "portfolio-browser:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "portfolio-browser:build:production"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/portfolio/clients/browser/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": ["@portfolio", "next"]
+}

@@ -18,7 +18,8 @@
       "logging",
       "date-utils",
       "string-utils",
-      "nx"
+      "nx",
+      "portfolio"
     ],
     "releaseTagGlobPattern": "[a-z-][0-9].*",
     "issueRegexPattern": "[A-Z]{3,}-\\d+"

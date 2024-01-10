@@ -1,0 +1,29 @@
+---
+title: Reactive App Outline
+subheading: Recording thoughts on patterns and best practice when building a Reactive app
+tags: ['rxjs', 'design-patterns', 'architecture']
+---
+
+# Reactive App Outline
+
+## Introduction
+A Reactive app is an application where the core functionality and data layer strictly follows reactive principles.
+This means that the data is streams of data that are transformed by operators, and core functionality is contained
+in Services which consume and expose observable data.
+
+## Patterns
+- Because applications are inherently asynchronous, embrace that fact and do not couple any Service
+to its dependencies. In effect this is inversion of control, where the dependencies are injected into the functionality.
+But instead of using a traditional DI framework, observables provide all the mechanisms needed to achieve this.
+
+### Anti-patterns
+- All dependencies should be exposed on RxServices. It can be tempting to fallback to
+providing options to a service, but generally if this is happening you have to ask yourself
+if it is something that needs to be provided rather than an inner detail, why is it not an observable?
+For example take a PointerService which reads from pointer move events, and exposes those as observable data.
+The service also captures pointer button events, which means on browsers it needs to prevent the default behavior of
+the "secondary" mouse button. Because of this functionality it's reasonable that the sample rate of mouse events
+as well as the disabling of the default browser context menu should be able to be configured.
+It's temping to pass in a `throttleTime` and `preventContextMenu` options to the service at creation,
+but it's better to expose these as observables that can be configured by the consumer. This way the consumer
+can have flexibility on when to configure these values, and they will also be able to be changed at any time.
