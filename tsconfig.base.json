@@ -16,6 +16,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
+      "@ag-oss/blog": ["packages/blog/src/index.ts"],
       "@ag-oss/child-process": ["packages/child-process/src/index.ts"],
       "@ag-oss/dates": ["packages/dates/src/index.ts"],
       "@ag-oss/fs": ["packages/fs/src/index.ts"],

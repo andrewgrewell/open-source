@@ -21,6 +21,7 @@ module.exports = merge(
       '!**/.github/**',
       '!**/.storybook/**',
       '!**/.vscode/**',
+      '!**/apps/**',
       '!**/coverage/**',
       '!**/dist/**',
       '!**/docs/**',
@@ -57,6 +58,7 @@ module.exports = merge(
       '/__fixtures__/',
       '/repo/',
       '/nx/plugin/',
+      '/apps/',
     ],
     coverageReporters: ['text', 'json', 'json-summary'],
     coverageThreshold: {
