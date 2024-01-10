@@ -20,12 +20,6 @@
     },
     "release": {
       "command": "nx release"
-    },
-    "example": {
-      "executor": "@ag-oss/repo:example",
-      "options": {
-        "number": 123
-      }
     }
   }
 }

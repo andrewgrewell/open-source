@@ -1,7 +1,6 @@
 import { getProjects, Tree } from '@nx/devkit';
 import { RemoveJsoncGeneratorSchema } from './schema';
-import { removeJsonc } from '../../lib/tasks';
-import { nxGetProjectConfig } from '../../lib/utils/nx/nx-get-project-config';
+import { removeJsonc, nxGetProjectConfig } from '@ag-oss/repo';
 import { createWorkflow } from '@ag-oss/workflows-js';
 import { promisifyObservable } from '@ag-oss/rxjs';
 import { verboseLogger } from '@ag-oss/logging';

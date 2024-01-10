@@ -8,8 +8,8 @@ import {
   NPM_SCOPE,
   PACKAGES_PATH,
   promptForExecutionContext,
-} from '../../lib';
-import { getPackageDomainName } from '../../lib/utils/get-package-domain-name';
+  getPackageDomainName,
+} from '@ag-oss/repo';
 import { join } from 'path';
 import { verboseLogger as log } from '@ag-oss/logging';
 
@@ -26,6 +26,7 @@ export async function packageGenerator(tree: Tree, options: PackageGeneratorSche
     projectNameAndRootFormat: 'as-provided',
     publishable: true,
     simpleName: true,
+    skipTsConfig: false,
     tags,
     testEnvironment,
     unitTestRunner: 'jest',
@@ -68,12 +69,14 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
     log.verbose(`Checking for existing domain at ${pathToCheck}`);
     if (tree.exists(pathToCheck)) {
       log.verbose(`Found existing domain at ${pathToCheck}`);
-      finalParentPath = pathToCheck;
-      nameParts.shift();
+    } else if (part === argsDomain) {
+      log.verbose(`Creating new domain at ${pathToCheck}`);
     } else {
       log.verbose(`No existing domain found at ${pathToCheck}`);
       break;
     }
+    finalParentPath = pathToCheck;
+    nameParts.shift();
   }
 
   const packageBaseName = nameParts.join('-');

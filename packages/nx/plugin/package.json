@@ -1,5 +1,5 @@
 {
-  "name": "@ag-oss/repo",
+  "name": "@ag-oss/nx-plugin",
   "version": "0.0.1",
   "dependencies": {
     "@nx/devkit": "17.2.8",
@@ -7,5 +7,7 @@
   },
   "type": "commonjs",
   "main": "./src/index.js",
-  "typings": "./src/index.d.ts"
+  "typings": "./src/index.d.ts",
+  "generators": "./generators.json",
+  "executors": "./executors.json"
 }
