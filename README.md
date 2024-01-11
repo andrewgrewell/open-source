@@ -9,7 +9,7 @@ This project will serve as a place where I can share the code, patterns, and phi
 If you are reading this you have discovered this pretty early so please keep in mind I'm in the process of transferring over my projects to this repo, and refining the structure.
 
 <a href="https://sly-cafe-100.notion.site/AG-Open-Source-151a005fc3844585bebece333a9d385c">
-    <img src="https://github.com/andrewgrewell/open-source/assets/8173965/aa147b6e-5125-4b7d-a82a-aa4b508c7de2" alt="AG Open Source" title="AG Open Source" height="300" />
+    <img src="https://github.com/andrewgrewell/open-source/assets/8173965/aa147b6e-5125-4b7d-a82a-aa4b508c7de2" alt="AG Open Source" title="AG Open Source" style="width: 100%; height: auto;" />
 </a>
 
 ## Table of Contents
