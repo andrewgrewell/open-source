@@ -83,6 +83,8 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@swc/helpers": "~0.5.2",
+    "@vercel/analytics": "^1.1.1",
+    "@vercel/speed-insights": "^1.0.2",
     "date-fns": "^3.0.6",
     "lodash": "^4.17.21",
     "next-mdx-remote": "^4.4.1",

@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { SITE_TITLE } from '../constants';
 import styled from '@emotion/styled';
 import { GlobalStyles } from '../styles/global-styles';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 const AppContainer = styled.main`
   width: 100%;
@@ -18,6 +20,8 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>{SITE_TITLE}</title>
       </Head>
       <GlobalStyles />
+      <SpeedInsights />
+      <Analytics />
       <AppContainer>
         {/*<RootNav />*/}
         <Component {...pageProps} />
