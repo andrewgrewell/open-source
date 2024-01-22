@@ -1,3 +1,3 @@
-import { GreetingTestId } from '../../../browser/pages';
+import { GreetingTestId } from '@starwars/test-utils-browser';
 
 export const getGreeting = () => cy.getByTestId(GreetingTestId);

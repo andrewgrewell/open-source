@@ -95,14 +95,14 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
   const publishable = defaultPublishablePackages.includes(scopeInName);
   if (!publishable) {
     log.verbose(
-      `Defaulting to publish=false because the package scope "${npmScope}" is not in the list of publishable packages (${defaultPublishablePackages.join(
+      `Defaulting to publish=false because the package scope "${npmScope}" is not in the list of publishable packages ([${defaultPublishablePackages.join(
         ', ',
-      )}).`,
+      )}]).`,
     );
   }
   const directory = contextInName
     ? join(
-        finalParentPath,
+        finalParentPath.replace(scopeInName, npmScope),
         packageBaseName.replace(`-${contextInName}`, ''),
         contextInName,
       )

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { GreetingTestId, PageContainerTestId } from '@starwars/test-utils-browser';
 
 const PageContainer = styled.div`
   display: flex;
@@ -8,9 +9,6 @@ const PageContainer = styled.div`
   height: 100%;
   padding: 16px;
 `;
-
-export const PageContainerTestId = 'page-container';
-export const GreetingTestId = 'greeting-text';
 
 export default function App() {
   return (

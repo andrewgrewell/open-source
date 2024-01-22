@@ -5,6 +5,6 @@ describe('starwars-browser-e2e', () => {
 
   it('should display welcome message', () => {
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains(/Welcome/);
+    getGreeting().contains(/Hello, StarWars!/);
   });
 });

@@ -19,7 +19,8 @@
       "date-utils",
       "string-utils",
       "nx",
-      "portfolio"
+      "portfolio",
+      "starwars"
     ],
     "releaseTagGlobPattern": "[a-z-][0-9].*",
     "issueRegexPattern": "[A-Z]{3,}-\\d+"
