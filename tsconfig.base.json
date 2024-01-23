@@ -33,8 +33,8 @@
       "@ag-oss/workflows-node": ["packages/workflows/node/src/index.ts"],
       "@starwars/components-react": ["packages/@starwars/components/react/src/index.ts"],
       "@starwars/e2e-browser": ["packages/@starwars/e2e/browser/src/index.ts"],
-      "@starwars/test-utils-browser": [
-        "packages/@starwars/test-utils/browser/src/index.ts"
+      "@starwars/test-utils": [
+        "packages/@starwars/test-utils/src/index.ts"
       ]
     }
   },
