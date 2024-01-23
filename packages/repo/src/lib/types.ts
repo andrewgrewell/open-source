@@ -61,6 +61,7 @@ export enum ExecutionContext {
   BROWSER = 'browser',
   REACT = 'react',
   ELECTRON = 'electron',
+  NEXT = 'next',
 }
 
 export type ProjectFileBuilder = FileBuilder<ProjectConfig>;

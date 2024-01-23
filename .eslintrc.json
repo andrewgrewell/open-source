@@ -129,17 +129,6 @@
                 ]
               },
               {
-                "sourceTag": "desktop",
-                "onlyDependOnLibsWithTags": [
-                  "desktop",
-                  "electron",
-                  "browser",
-                  "node",
-                  "react",
-                  "js"
-                ]
-              },
-              {
                 "sourceTag": "mobile",
                 "onlyDependOnLibsWithTags": [
                   "mobile",
