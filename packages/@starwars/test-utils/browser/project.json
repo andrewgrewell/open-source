@@ -1,0 +1,30 @@
+{
+  "name": "starwars-test-utils-browser",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@starwars/test-utils/browser/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@starwars/test-utils/browser",
+        "main": "packages/@starwars/test-utils/browser/src/index.ts",
+        "tsConfig": "packages/@starwars/test-utils/browser/tsconfig.lib.json",
+        "assets": ["packages/@starwars/test-utils/browser/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@starwars/test-utils/browser/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["browser"]
+}

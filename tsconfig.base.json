@@ -30,7 +30,11 @@
       "@ag-oss/rxjs": ["packages/rxjs/src/index.ts"],
       "@ag-oss/strings": ["packages/strings/src/index.ts"],
       "@ag-oss/workflows-js": ["packages/workflows/js/src/index.ts"],
-      "@ag-oss/workflows-node": ["packages/workflows/node/src/index.ts"]
+      "@ag-oss/workflows-node": ["packages/workflows/node/src/index.ts"],
+      "@starwars/e2e-browser": ["packages/@starwars/e2e/browser/src/index.ts"],
+      "@starwars/test-utils-browser": [
+        "packages/@starwars/test-utils/browser/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

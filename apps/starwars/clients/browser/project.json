@@ -1,0 +1,58 @@
+{
+  "name": "starwars-browser",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/starwars/clients/browser",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/starwars/clients/browser"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/starwars/clients/browser"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "starwars-browser:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "starwars-browser:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "starwars-browser:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "starwars-browser:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/starwars/clients/browser/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": ["browser"]
+}

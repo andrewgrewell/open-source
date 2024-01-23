@@ -3,25 +3,24 @@
   "targetDefaults": {
     "build": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "lint": {
       "cache": true
+    },
+    "e2e": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
-      "default"
+      "default",
+      "!{projectRoot}/cypress/**/*",
+      "!{projectRoot}/**/*.cy.[jt]s?(x)",
+      "!{projectRoot}/cypress.config.[jt]s"
     ],
     "sharedGlobals": []
   },
@@ -31,7 +30,7 @@
     "releaseTagPattern": "{projectName}@{version}",
     "changelog": {
       "createRelease": false,
-      "workspaceChangelog":  false,
+      "workspaceChangelog": false,
       "projectChangelogs": {
         "createRelease": "github"
       }
@@ -48,5 +47,18 @@
       }
     }
   },
-  "nxCloudAccessToken": "NDFlYjAwODktYWM4NC00N2IyLTk2NDQtODQzYjk4ZjRkMjA5fHJlYWQ="
+  "nxCloudAccessToken": "NDFlYjAwODktYWM4NC00N2IyLTk2NDQtODQzYjk4ZjRkMjA5fHJlYWQ=",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nx/next": {
+      "application": {
+        "style": "@emotion/styled",
+        "linter": "eslint"
+      }
+    }
+  }
 }
