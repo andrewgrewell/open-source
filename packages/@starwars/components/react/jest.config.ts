@@ -1,12 +1,11 @@
 /* eslint-disable */
 export default {
-  prettierPath: require.resolve('prettier-2'),
-  displayName: 'starwars-components-react',
+  displayName: '@starwars/components-react',
   preset: '../../../../jest.preset.js',
-  testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
+    '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],
   },
-  moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/packages/@starwars/components/react',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  coverageDirectory: '../../../../coverage/@starwars/components/react',
 };
