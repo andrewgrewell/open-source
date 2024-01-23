@@ -1,7 +1,9 @@
 import { PackageGeneratorSchema } from './schema';
 import { libraryGenerator as jsLibraryGenerator } from '@nx/js';
+import type { Schema as ReactLibOptions } from '@nx/react/src/generators/library/schema';
+import { libraryGenerator as reactLibraryGenerator } from '@nx/react';
 import { Tree } from '@nx/devkit';
-import { LibraryGeneratorSchema } from '@nx/js/src/utils/schema';
+import { LibraryGeneratorSchema as JsLibOptions } from '@nx/js/src/utils/schema';
 import {
   ExecutionContext,
   getExecutionContextFromList,
@@ -18,10 +20,23 @@ import { verboseLogger as log } from '@ag-oss/logging';
 const defaultPublishablePackages = [NPM_SCOPE];
 
 export async function packageGenerator(tree: Tree, options: PackageGeneratorSchema) {
-  const { name, tags, importPath, directory, testEnvironment, publishable } =
-    await parseOptions(tree, options);
+  const parsedOptions = await parseOptions(tree, options);
 
-  const jsOptions: LibraryGeneratorSchema = {
+  const { tags } = parsedOptions;
+
+  // TODO support other package types
+  if (tags.includes(ExecutionContext.REACT)) {
+    log.verbose('Generating React package.');
+    await generateReactPackage(tree, options);
+  } else {
+    log.verbose('Generating JS package.');
+    await generateJsPackage(tree, options);
+  }
+}
+
+function generateJsPackage(tree: Tree, options: Partial<JsLibOptions>) {
+  const { directory, importPath, name, publishable, tags, testEnvironment } = options;
+  const jsOptions: JsLibOptions = {
     buildable: true,
     bundler: 'tsc',
     compiler: 'tsc',
@@ -36,7 +51,22 @@ export async function packageGenerator(tree: Tree, options: PackageGeneratorSche
     testEnvironment,
     unitTestRunner: 'jest',
   };
-  await jsLibraryGenerator(tree, jsOptions);
+  return jsLibraryGenerator(tree, jsOptions);
+}
+
+function generateReactPackage(tree: Tree, options: Partial<ReactLibOptions>) {
+  const reactOptions = {
+    buildable: true,
+    bundler: 'rollup',
+    linter: 'eslint',
+    projectNameAndRootFormat: 'as-provided',
+    simpleName: true,
+    skipTsConfig: false,
+    style: '@emotion/styled',
+    unitTestRunner: 'jest',
+    ...options,
+  };
+  return reactLibraryGenerator(tree, reactOptions as ReactLibOptions);
 }
 
 async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
@@ -114,7 +144,7 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
     name: fullProjectName,
     publishable,
     tags: executionContext || (await promptForExecutionContext()),
-    testEnvironment: executionContext === ExecutionContext.BROWSER ? 'jsdom' : 'node',
+    testEnvironment: getTestEnvironment(executionContext),
   } as const;
   log.verbose('Creating package with options: ', parsedOptions);
   return parsedOptions;
@@ -122,6 +152,16 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
 
 function isValidContext(context: string) {
   return !!getExecutionContextFromList([context]);
+}
+
+function getTestEnvironment(context: ExecutionContext) {
+  switch (context) {
+    case ExecutionContext.BROWSER:
+    case ExecutionContext.REACT:
+      return 'jsdom';
+    default:
+      return 'node';
+  }
 }
 
 export default packageGenerator;
