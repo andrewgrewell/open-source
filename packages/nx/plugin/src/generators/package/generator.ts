@@ -27,10 +27,10 @@ export async function packageGenerator(tree: Tree, options: PackageGeneratorSche
   // TODO support other package types
   if (tags.includes(ExecutionContext.REACT)) {
     log.verbose('Generating React package.');
-    await generateReactPackage(tree, options);
+    await generateReactPackage(tree, parsedOptions);
   } else {
     log.verbose('Generating JS package.');
-    await generateJsPackage(tree, options);
+    await generateJsPackage(tree, parsedOptions);
   }
 }
 
