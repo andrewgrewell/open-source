@@ -120,9 +120,9 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
   }
 
   const packageBaseName = nameParts.join('-');
-  const npmScope = `@${scopeInName}` || NPM_SCOPE;
+  const npmScope = scopeInName ? `@${scopeInName}` : NPM_SCOPE;
   const importPath = `${npmScope}/${fullProjectName.replace(`${scopeInName}-`, '')}`;
-  const publishable = defaultPublishablePackages.includes(scopeInName);
+  const publishable = defaultPublishablePackages.includes(npmScope);
   if (!publishable) {
     log.verbose(
       `Defaulting to publish=false because the package scope "${npmScope}" is not in the list of publishable packages ([${defaultPublishablePackages.join(

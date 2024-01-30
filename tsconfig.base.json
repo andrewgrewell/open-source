@@ -19,6 +19,7 @@
       "@ag-oss/blog": ["packages/blog/src/index.ts"],
       "@ag-oss/child-process": ["packages/child-process/src/index.ts"],
       "@ag-oss/dates": ["packages/dates/src/index.ts"],
+      "@ag-oss/dynamodb": ["dynamodb/src/index.ts"],
       "@ag-oss/fs": ["packages/fs/src/index.ts"],
       "@ag-oss/logging": ["packages/logging/src/index.ts"],
       "@ag-oss/loops": ["packages/loops/src/index.ts"],
