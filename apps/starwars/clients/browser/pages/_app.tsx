@@ -3,6 +3,7 @@ import Head from 'next/head';
 import styled from '@emotion/styled';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
+import { StarWarsReactBootstrap } from '@starwars/components-react';
 
 const AppContainer = styled.main`
   width: 100%;
@@ -20,8 +21,10 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <SpeedInsights />
       <Analytics />
       <AppContainer>
-        {/*<RootNav />*/}
-        <Component {...pageProps} />
+        <StarWarsReactBootstrap>
+          {/*<RootNav />*/}
+          <Component {...pageProps} />
+        </StarWarsReactBootstrap>
       </AppContainer>
     </>
   );

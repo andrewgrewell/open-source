@@ -184,6 +184,12 @@
           true
         ]
       }
+    },
+    {
+      // or whatever matches stories specified in .storybook/main.js
+      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+      "rules": {
+      }
     }
   ]
 }

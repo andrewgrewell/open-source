@@ -1,1 +1,1 @@
-export * from './lib/starwars-components-react';
+export * from './lib/bootstrap/starwars-react-bootstrap';
