@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { GreetingTestId, PageContainerTestId } from '@starwars/test-utils-browser';
+import { GreetingTestId, PageContainerTestId } from '@starwars/test-utils';
 
 const PageContainer = styled.div`
   display: flex;

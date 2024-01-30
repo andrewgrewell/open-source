@@ -54,3 +54,32 @@ in batches as part of tackling tech debt.
       10 vulnerabilities (5 moderate, 5 high)
   </pre>
 </details>
+
+<details>
+  <summary><b>Audit after running nx storybook generator | 3 vulnerabilities (1 low, 5 moderate)</b></summary>
+  <pre>
+
+      next  0.9.9 - 13.5.4-canary.11
+      Severity: moderate
+      Next.js missing cache-control header may lead to CDN caching empty reply - https://github.com/advisories/GHSA-c59h-r6p8-q9wc
+      Depends on vulnerable versions of postcss
+      Depends on vulnerable versions of zod
+      fix available via `npm audit fix --force`
+      Will install next@13.5.6, which is outside the stated dependency range
+      node_modules/next
+      
+      postcss  <8.4.31
+      Severity: moderate
+      PostCSS line return parsing error - https://github.com/advisories/GHSA-7fh5-64p2-3v2j
+      fix available via `npm audit fix --force`
+      Will install next@13.5.6, which is outside the stated dependency range
+      node_modules/next/node_modules/postcss
+      
+      zod  <=3.22.2
+      Zod denial of service vulnerability - https://github.com/advisories/GHSA-m95q-7qp3-xv42
+      fix available via `npm audit fix --force`
+      Will install next@13.5.6, which is outside the stated dependency range
+      node_modules/zod
+
+  </pre>
+</details>

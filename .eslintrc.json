@@ -129,17 +129,6 @@
                 ]
               },
               {
-                "sourceTag": "desktop",
-                "onlyDependOnLibsWithTags": [
-                  "desktop",
-                  "electron",
-                  "browser",
-                  "node",
-                  "react",
-                  "js"
-                ]
-              },
-              {
                 "sourceTag": "mobile",
                 "onlyDependOnLibsWithTags": [
                   "mobile",
@@ -194,6 +183,12 @@
           "^[a-z-.]+[a-z0-9-.]*$",
           true
         ]
+      }
+    },
+    {
+      // or whatever matches stories specified in .storybook/main.js
+      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+      "rules": {
       }
     }
   ]
