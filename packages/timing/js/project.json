@@ -1,0 +1,34 @@
+{
+  "name": "timing-js",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/timing/js/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/timing/js",
+        "main": "packages/timing/js/src/index.ts",
+        "tsConfig": "packages/timing/js/tsconfig.lib.json",
+        "assets": ["packages/timing/js/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs timing-js {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/timing/js/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["js"]
+}
