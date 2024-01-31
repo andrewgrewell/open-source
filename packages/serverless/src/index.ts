@@ -1,1 +1,1 @@
-export * from './lib/serverless';
+export * from './lib';

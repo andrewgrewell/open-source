@@ -136,7 +136,7 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
         packageBaseName.replace(`-${contextInName}`, ''),
         contextInName,
       )
-    : join(finalParentPath, packageBaseName);
+    : join(finalParentPath.replace(scopeInName, npmScope), packageBaseName);
 
   const parsedOptions = {
     directory,

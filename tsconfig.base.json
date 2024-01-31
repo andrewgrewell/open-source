@@ -22,6 +22,7 @@
       "@ag-oss/dates": ["packages/dates/src/index.ts"],
       "@ag-oss/docker": ["packages/docker/src/index.ts"],
       "@ag-oss/dynamodb": ["packages/dynamodb/src/index.ts"],
+      "@ag-oss/env-js": ["packages/env/js/src/index.ts"],
       "@ag-oss/fs": ["packages/fs/src/index.ts"],
       "@ag-oss/logging": ["packages/logging/src/index.ts"],
       "@ag-oss/loops": ["packages/loops/src/index.ts"],
@@ -38,6 +39,7 @@
       "@ag-oss/workflows-js": ["packages/workflows/js/src/index.ts"],
       "@ag-oss/workflows-node": ["packages/workflows/node/src/index.ts"],
       "@starwars/components-react": ["packages/@starwars/components/react/src/index.ts"],
+      "@starwars/config": ["packages/@starwars/config/src/index.ts"],
       "@starwars/e2e-browser": ["packages/@starwars/e2e/browser/src/index.ts"],
       "@starwars/test-utils": ["packages/@starwars/test-utils/src/index.ts"]
     }
