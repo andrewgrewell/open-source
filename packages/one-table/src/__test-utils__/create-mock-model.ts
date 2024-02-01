@@ -12,7 +12,7 @@ export const MODEL_METHOD_NAMES = [
   'update',
 ] as const;
 
-export type MockModelMethodName = typeof MODEL_METHOD_NAMES[number];
+export type MockModelMethodName = (typeof MODEL_METHOD_NAMES)[number];
 
 export type MockModel<MockType extends MockableFunction = jest.Mock> = Record<
   MockModelMethodName,

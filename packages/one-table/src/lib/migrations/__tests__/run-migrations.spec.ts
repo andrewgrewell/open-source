@@ -4,7 +4,7 @@ import { createMockTable } from '../../../__test-utils__/create-mock-table';
 import { createOneTable } from '../../utils';
 import { MigrationsController } from '../migrations-controller';
 import { runMigrations } from '../run-migrations';
-import { createLocalClientConfig } from '@bridge/node-dynamodb';
+import { createLocalClientConfig } from '@ag-oss/dynamodb';
 import prompts from 'prompts';
 
 const mockSpinner = {
@@ -14,16 +14,16 @@ const mockSpinner = {
 };
 jest.mock('../migrations-controller');
 jest.mock('../../utils/create-one-table');
-jest.mock('@bridge/node-utils', () => {
-  const actual = jest.requireActual('@bridge/node-utils');
+jest.mock('@ag-oss/console-ui', () => {
+  const actual = jest.requireActual('@ag-oss/console-ui');
   return {
     ...actual,
     withPrettyOutput: jest.fn((fn) => fn({ spinner: mockSpinner })),
   };
 });
 jest.mock('prompts');
-jest.mock('@bridge/node-dynamodb', () => {
-  const actual = jest.requireActual('@bridge/node-dynamodb');
+jest.mock('@ag-oss/dynamodb', () => {
+  const actual = jest.requireActual('@ag-oss/dynamodb');
   return {
     ...actual,
     createDynamodbClient: jest.fn(),

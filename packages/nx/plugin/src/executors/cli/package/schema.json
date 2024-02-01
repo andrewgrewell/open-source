@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "cli": "nx",
+  "title": "Build executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "entry": {
+      "type": "string",
+      "description": "Transpiled file for the cli"
+    },
+    "scripts": {
+      "type": "array",
+      "description": "Path or glob pattern for scripts to include"
+    },
+    "assets": {
+      "type": "array",
+      "description": "Path or glob pattern for assets to include"
+    },
+    "targets": {
+      "type": "array",
+      "description": "Target platforms to package for",
+      "default": ["node14-macos-x64"]
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "Where to write binaries to",
+      "default": "dist/bin/cli"
+    },
+    "public": {
+      "type": "boolean",
+      "description": "Speed up and disclose the sources of top-level project",
+      "default": true
+    }
+  },
+  "required": []
+}

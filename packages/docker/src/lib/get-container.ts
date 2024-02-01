@@ -23,7 +23,9 @@ export async function getAllContainers(): Promise<Container[]> {
     const containers = stdout
       ?.match(/\{"Command".+}[\r\n\s]/g)
       ?.map((line) => JSON.parse(line));
-    return Array.isArray(containers) ? containers : [containers];
+    return (Array.isArray(containers) ? containers : [containers]).filter(
+      Boolean,
+    ) as Container[];
   } catch (e) {
     log.verbose('Failed to parse docker ps output: ', e);
     return [];

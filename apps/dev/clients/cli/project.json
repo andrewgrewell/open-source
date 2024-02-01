@@ -12,11 +12,11 @@
       }
     },
     "package": {
-      "executor": "repo-tools:cli-package",
+      "executor": "@ag-oss/nx-plugin:cli-package",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/dev/clients/cli",
-        "entry": "dist/apps/dev/clients/cli/main.js"
+        "entry": "dist/apps/dev/clients/cli/build/index.js"
       },
       "dependsOn": [
         {

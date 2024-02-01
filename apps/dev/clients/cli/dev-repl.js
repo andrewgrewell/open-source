@@ -102,6 +102,8 @@ const promptForCommand = async () => {
   return promptForCommand();
 };
 
+let runningCommand = false;
+
 async function getUserInput() {
   return new Promise((resolve) => {
     let currentInput = '';
@@ -135,14 +137,20 @@ async function getUserInput() {
       rl.off('line', handleLine);
       process.stdin.off('keypress', handleKeyPress);
       rl.pause();
+      process.stdin.setRawMode(false);
       resolve(currentInput);
     }
+
     rl.on('line', handleLine);
+
     readline.emitKeypressEvents(process.stdin, rl);
+
     if (process.stdin.setRawMode != null) {
       process.stdin.setRawMode(true);
     }
+
     process.stdin.on('keypress', handleKeyPress);
+
     initializeUserPrompt();
   });
 }

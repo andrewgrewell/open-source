@@ -1,7 +1,8 @@
 import { migrationConfigFixture } from '../../../__fixtures__/migration-config.fixture';
 import { createMockTable } from '../../../__test-utils__/create-mock-table';
 import { createMigration } from '../create-migration';
-import { createMockObject, TestConsole } from '@bridge/js-test-utils';
+import { createMockObject } from '@ag-oss/test-utils-js';
+import { mockConsole } from '@ag-oss/logging';
 
 jest.mock('../../utils/create-dry-run-db', () => ({
   createDryRunDb: jest.fn((db) => db),
@@ -12,6 +13,7 @@ interface SetupConfig {
 }
 
 describe('createMigration', () => {
+  const consoleMock = mockConsole(console);
   const setup = (config?: SetupConfig) => {
     const db = createMockTable();
     const migrate = createMockObject();
@@ -131,6 +133,6 @@ describe('createMigration', () => {
       },
     });
     await result.up(createMockTable(), createMockObject(), { dry: true });
-    expect(TestConsole.spies.log).toHaveBeenCalledWith('test');
+    expect(consoleMock.spies.log).toHaveBeenCalledWith('test');
   });
 });

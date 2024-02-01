@@ -6,30 +6,30 @@ import {
   MigrationImplementation,
 } from '../types';
 import { createDryRunDb } from '../utils';
-import { verboseLogger } from '@bridge/node-utils';
+import { verboseLogger as log } from '@ag-oss/logging';
 
 export function createMigration<TableType>(
   config: CreateMigrationConfig<TableType>,
 ): MigrationConfig<TableType> {
-  verboseLogger.log('Config: ', config);
+  log.verbose('Config: ', config);
   return {
     description: config.description,
-    async down(db, migrate, params) {
+    down(db, migrate, params) {
       if (!config.down) {
         // TODO support no down migration.
         //  this should be wrapping the modals in a proxy which calls the opposite
         //  of the methods called in the up runner.
         //  This would not be reliable but would work for most cases and be a good QoL feature.
       }
-      await runMigration<TableType>(config.down, {
+      return runMigration<TableType>(config.down, {
         db,
         migrate,
         params,
       });
     },
     schema: config.schema,
-    async up(db, migrate, params) {
-      await runMigration<TableType>(config.up, {
+    up(db, migrate, params) {
+      return runMigration<TableType>(config.up, {
         db,
         migrate,
         params,
