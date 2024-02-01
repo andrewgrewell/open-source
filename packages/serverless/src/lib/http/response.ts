@@ -1,5 +1,6 @@
 import { APIGatewayProxyResult } from 'aws-lambda';
 
+// TODO setup SORS
 const defaultCorsHeaders = {
   'Access-Control-Allow-Headers': '*',
   'Access-Control-Allow-Origin': '*',

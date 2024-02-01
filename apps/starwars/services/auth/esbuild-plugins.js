@@ -1,5 +1,10 @@
 const { readFileSync } = require('fs');
 
+/**
+ * This is required in order to make sure the env specific config file is available
+ * in the runtime.
+ * @type {{name: string, setup(*): void}}
+ */
 const envPlugin = {
   name: 'env',
   setup(build) {

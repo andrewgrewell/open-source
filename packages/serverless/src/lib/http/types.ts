@@ -30,12 +30,18 @@ export type Handler<P extends EventParams, isProtected extends boolean = true> =
     pathParameters: P extends PathParams ? P['pathParameters'] : null;
     queryStringParameters: P extends QueryParams ? P['queryStringParameters'] : null;
   },
-  context: isProtected extends true ? Context & UserContext : Context,
+  context: isProtected extends true ? Context & AuthContext : Context,
   callback: Callback<APIGatewayProxyResult>,
 ) => void | Promise<APIGatewayProxyResult>;
 
-export type UserContext = {
-  user: {
-    id: string;
-  };
+export type AuthPayload = {
+  iat: number;
+  aud: string;
+  iss: string;
+  sub: string;
+  jti: string;
+};
+
+export type AuthContext = Context & {
+  auth: AuthPayload;
 };

@@ -5,9 +5,9 @@ import { commonConfig } from './config.common';
 export const config: ServiceConfig = merge({}, commonConfig, {
   dynamo: {
     endpoint: 'http://localhost:4566',
-    tableName: `local-StarWarsAuthTable`,
+    tableName: `dev-StarWarsAuthTable`,
   },
-  env: ServiceEnv.Local,
+  env: ServiceEnv.Development,
   jwtSecret: process.env.JWT_SECRET,
   profile: AwsProfile.Default,
   region: AwsRegion.UsWest1,

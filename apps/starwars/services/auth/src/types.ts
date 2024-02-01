@@ -21,6 +21,7 @@ export interface DynamoConfig {
 }
 
 export interface ServiceConfig {
+  apiVersion?: number;
   region: AwsRegion;
   profile: AwsProfile;
   dynamo: DynamoConfig;

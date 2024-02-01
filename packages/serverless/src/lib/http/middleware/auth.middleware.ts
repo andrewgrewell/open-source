@@ -2,7 +2,7 @@ import middy from '@middy/core';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import jwt from 'jsonwebtoken';
 import { httpError } from '../response';
-import { Handler, UserContext } from '../types';
+import { Handler, AuthContext, AuthPayload } from '../types';
 
 export interface AuthMiddlewareOptions {
   secret?: string;
@@ -15,6 +15,10 @@ export function authMiddleware(
   const before: middy.MiddlewareFn<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
     request,
   ) => {
+    if (!secret) {
+      // TODO log.error('Missing JWT secret in auth middleware');
+      return httpError('Service unavailable', { statusCode: 500 });
+    }
     const authHeader = request.event.headers['Authorization'];
 
     if (authHeader) {
@@ -22,7 +26,7 @@ export function authMiddleware(
 
       try {
         const data = jwt.verify(token, secret);
-        (request.context as unknown as UserContext).user = data as UserContext['user'];
+        (request.context as AuthContext).auth = data as AuthPayload;
 
         return Promise.resolve();
       } catch (error) {

@@ -1,7 +1,7 @@
 import { ServiceEnv } from './src/types';
 import { config } from './src/config';
 
-console.log('Using config:', config.env);
+console.log(`Using config env: "${config.env}" with API version: "${config.apiVersion}"`);
 
 const { env, dynamo, profile, region } = config;
 
@@ -22,7 +22,6 @@ module.exports = {
     },
   },
   frameworkVersion: '3',
-  // TODO build this from parsing the files in src/handlers
   functions: {
     echo: {
       description: 'Debug handler for validating setup',
@@ -43,17 +42,6 @@ module.exports = {
   },
   plugins: ['serverless-dotenv-plugin', 'serverless-esbuild', 'serverless-offline'],
   provider: {
-    // apiGateway: {
-    //   minimumCompressionSize: 1024,
-    //   // @ts-expect-error - type thinks only strings are allowed
-    //   restApiId: {
-    //     'Fn::ImportValue': `${env.name}-AppApiGW-restApiId`,
-    //   },
-    //   // @ts-expect-error - type thinks only strings are allowed
-    //   restApiRootResourceId: {
-    //     'Fn::ImportValue': `${env.name}-AppApiGW-rootResourceId`,
-    //   },
-    // },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_ENV: env,
