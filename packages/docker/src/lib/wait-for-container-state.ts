@@ -1,5 +1,5 @@
 import { getContainer } from './get-container';
-import { waitFor } from '@bridge/js-utils';
+import { waitFor } from '@ag-oss/timing-js';
 
 export type ContainerState =
   | 'Created'

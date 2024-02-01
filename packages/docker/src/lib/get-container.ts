@@ -1,5 +1,5 @@
-import { verboseLogger } from '../logging';
-import { execAsync } from '../process';
+import { verboseLogger as log } from '@ag-oss/logging';
+import { execAsync } from '@ag-oss/child-process';
 
 export interface Container {
   Command: string;
@@ -25,7 +25,7 @@ export async function getAllContainers(): Promise<Container[]> {
       ?.map((line) => JSON.parse(line));
     return Array.isArray(containers) ? containers : [containers];
   } catch (e) {
-    verboseLogger.error('Failed to parse docker ps output: ', e);
+    log.verbose('Failed to parse docker ps output: ', e);
     return [];
   }
 }

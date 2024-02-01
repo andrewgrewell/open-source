@@ -1,4 +1,4 @@
-import { execAsync } from '../process';
+import { execAsync } from '@ag-oss/child-process';
 import { getContainer } from './get-container';
 
 export interface ContainerPorts {

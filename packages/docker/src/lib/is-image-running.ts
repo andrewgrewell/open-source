@@ -1,4 +1,4 @@
-import { execAsync } from '../process';
+import { execAsync } from '@ag-oss/child-process';
 
 export async function isImageRunning(imageName: string) {
   try {

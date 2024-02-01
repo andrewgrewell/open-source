@@ -80,6 +80,10 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
     throw new Error(`Invalid context provided: ${argsContext}!`);
   }
   const scopeInName = getPackageScope(argsName);
+  const isNpmScoped = scopeInName?.includes('@');
+  if (isNpmScoped) {
+    log.verbose(`Found NPM scoped package scope "${scopeInName}" in name.`);
+  }
   const fullProjectName = getPackageDomainName(argsName, domainsFromArgs);
   log.verbose(`Full package domain name: ${fullProjectName}`);
   const nameParts = fullProjectName.split('-');
@@ -120,8 +124,8 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
   }
 
   const packageBaseName = nameParts.join('-');
-  const npmScope = scopeInName ? `@${scopeInName}` : NPM_SCOPE;
-  const importPath = `${npmScope}/${fullProjectName.replace(`${scopeInName}-`, '')}`;
+  const npmScope = isNpmScoped ? `${scopeInName}` : NPM_SCOPE;
+  const importPath = `${npmScope}/${fullProjectName.replace(`${npmScope}-`, '')}`;
   const publishable = defaultPublishablePackages.includes(npmScope);
   if (!publishable) {
     log.verbose(
@@ -132,11 +136,11 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
   }
   const directory = contextInName
     ? join(
-        finalParentPath.replace(scopeInName, npmScope),
+        finalParentPath,
         packageBaseName.replace(`-${contextInName}`, ''),
         contextInName,
       )
-    : join(finalParentPath.replace(scopeInName, npmScope), packageBaseName);
+    : join(finalParentPath, packageBaseName);
 
   const parsedOptions = {
     directory,
