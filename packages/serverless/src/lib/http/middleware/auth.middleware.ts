@@ -5,13 +5,13 @@ import { httpError } from '../response';
 import { Handler, UserContext } from '../types';
 
 export interface AuthMiddlewareOptions {
-  secret: string;
+  secret?: string;
 }
 
 export function authMiddleware(
-  options: AuthMiddlewareOptions,
+  options?: AuthMiddlewareOptions,
 ): middy.MiddlewareObj<Parameters<Handler<any>>[0], APIGatewayProxyResult> {
-  const { secret } = options;
+  const { secret = process?.env?.JWT_SECRET } = options || {};
   const before: middy.MiddlewareFn<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
     request,
   ) => {

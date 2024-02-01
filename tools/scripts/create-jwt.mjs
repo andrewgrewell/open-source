@@ -20,7 +20,7 @@ const options = {
   jwtid: nanoid(),
   subject: username || 'localhost',
 };
-console.debug('Creating JWT with options: ', options);
+console.debug(`Creating JWT with options: ${JSON.stringify(options)} using secret: "${jwtSecret}"`);
 
 const token = jwt.sign(
   {

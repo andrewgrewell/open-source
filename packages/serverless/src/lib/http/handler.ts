@@ -10,12 +10,12 @@ export function createHandler<P extends EventParams, isProtected extends boolean
 }
 
 export interface ProtectedHandlerOptions {
-  secret: string;
+  secret?: string;
 }
 
 export function createProtectedHandler<P extends EventParams>(
   handler: Handler<P>,
-  options: ProtectedHandlerOptions,
+  options?: ProtectedHandlerOptions,
 ) {
   return createHandler(handler).use(authMiddleware(options));
 }

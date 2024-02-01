@@ -93,6 +93,7 @@
     "prettier": "^3.1.1",
     "prettier-2": "npm:prettier@^2",
     "serverless": "^3.38.0",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.50.2",
     "serverless-offline": "^13.3.3",
     "serverless-plugin-typescript": "^2.1.5",

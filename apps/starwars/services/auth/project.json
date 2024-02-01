@@ -17,7 +17,16 @@
       "options": {
         "cwd": "apps/starwars/services/auth",
         "color": true,
-        "command": "sls offline start"
+        "command": "sls offline start",
+        "envFile": "apps/starwars/services/auth/.env.local"
+      }
+    },
+    "local-token": {
+      "executor": "nx:run-commands",
+      "options": {
+        "color": true,
+        "command": "node tools/scripts/create-jwt.mjs --secret=$JWT_SECRET",
+        "envFile": "apps/starwars/services/auth/.env.local"
       }
     },
     "deploy": {

@@ -1,79 +1,28 @@
-import type { Serverless } from 'serverless/aws';
+import { ServiceEnv } from './src/types';
+import { config } from './src/config';
 
-console.log('READING SERVERLESS TS', {
-  cwd: process.cwd(),
-  dir: __dirname,
-});
+console.log('Using config:', config.env);
 
-export const env = {
-  dynamo: {
-    endpoint: 'http://localhost:4566',
-    tableName: `local-StarWarsAuthTable`,
-  },
-  jwtSecret: 'secret',
-  name: 'dev',
-  profile: 'local',
-  region: 'us-west-1',
-};
+const { env, dynamo, profile, region } = config;
 
-export const tableResource = `arn:aws:dynamodb:${env.region}:*:table/${env.dynamo.tableName}`;
-
-export const baseServerlessConfigProvider: Serverless['provider'] = {
-  environment: {
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-    NODE_ENV: 'local',
-  },
-  memorySize: 128,
-  name: 'aws',
-  profile: env.profile,
-  region: env.region,
-  runtime: 'nodejs20.x',
-  stage: env.name,
-};
-
-const baseServerlessConfig: Partial<Serverless> = {
+module.exports = {
   custom: {
     esbuild: {
       bundle: true,
       define: { 'require.resolve': undefined },
-      minify: env.name !== 'local',
-      sourcemap: env.name !== 'local',
+      minify: env !== ServiceEnv.Local,
+      plugins: './esbuild-plugins.js',
+      sourcemap: env !== ServiceEnv.Local,
       sourcesContent: false,
       target: ['es2020'],
     },
-  },
-  frameworkVersion: '3',
-  package: {
-    excludeDevDependencies: true,
-    individually: true,
-  },
-  plugins: ['serverless-esbuild', 'serverless-offline'],
-  provider: {
-    ...baseServerlessConfigProvider,
-    // apiGateway: {
-    //   minimumCompressionSize: 1024,
-    //   // @ts-expect-error - type thinks only strings are allowed
-    //   restApiId: {
-    //     'Fn::ImportValue': `${env.name}-AppApiGW-restApiId`,
-    //   },
-    //   // @ts-expect-error - type thinks only strings are allowed
-    //   restApiRootResourceId: {
-    //     'Fn::ImportValue': `${env.name}-AppApiGW-rootResourceId`,
-    //   },
-    // },
-  },
-  service: 'base',
-};
-
-const config = {
-  ...baseServerlessConfig,
-  custom: {
-    ...baseServerlessConfig.custom,
     'serverless-offline': {
       httpPort: 3010,
       lambdaPort: 3011,
     },
   },
+  frameworkVersion: '3',
+  // TODO build this from parsing the files in src/handlers
   functions: {
     echo: {
       description: 'Debug handler for validating setup',
@@ -88,8 +37,27 @@ const config = {
       handler: './src/handlers/echo.handler',
     },
   },
+  package: {
+    excludeDevDependencies: true,
+    individually: true,
+  },
+  plugins: ['serverless-dotenv-plugin', 'serverless-esbuild', 'serverless-offline'],
   provider: {
-    ...baseServerlessConfig.provider,
+    // apiGateway: {
+    //   minimumCompressionSize: 1024,
+    //   // @ts-expect-error - type thinks only strings are allowed
+    //   restApiId: {
+    //     'Fn::ImportValue': `${env.name}-AppApiGW-restApiId`,
+    //   },
+    //   // @ts-expect-error - type thinks only strings are allowed
+    //   restApiRootResourceId: {
+    //     'Fn::ImportValue': `${env.name}-AppApiGW-rootResourceId`,
+    //   },
+    // },
+    environment: {
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      NODE_ENV: env,
+    },
     iam: {
       role: {
         statements: [
@@ -101,13 +69,17 @@ const config = {
               'dynamodb:UpdateItem',
             ],
             Effect: 'Allow',
-            Resource: tableResource,
+            Resource: `arn:aws:dynamodb:${region}:*:table/${dynamo.tableName}`,
           },
         ],
       },
     },
+    memorySize: 128,
+    name: 'aws',
+    profile,
+    region,
+    runtime: 'nodejs20.x',
+    stage: env,
   },
   service: `starwars-auth`,
 };
-
-module.exports = config;
