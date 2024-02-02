@@ -1,4 +1,4 @@
-import { jestPrettierFix } from '../../../../../repo/src/lib/tasks/jest-prettier-fix/jest-prettier-fix';
+import { jestPrettierFix } from './jest-prettier-fix';
 import { readFileAsync, writeFileAsync } from '@ag-oss/fs';
 import { promisifyObservable } from '@ag-oss/rxjs';
 

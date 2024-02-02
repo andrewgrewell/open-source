@@ -1,5 +1,6 @@
 /* eslint-disable */
 export default {
+  prettierPath: require.resolve('prettier-2'),
   displayName: '@starwars/components-react',
   preset: '../../../../jest.preset.js',
   transform: {

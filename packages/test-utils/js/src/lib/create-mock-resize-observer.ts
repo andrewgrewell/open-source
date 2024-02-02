@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export interface MockResizeObserver {
   disconnect: jest.Mock;
   observe: jest.Mock;

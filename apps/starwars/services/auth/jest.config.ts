@@ -1,11 +1,11 @@
 module.exports = {
+  coverageDirectory: '../../../../coverage/starwars/services/auth',
   displayName: 'starwars-auth',
-  preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
+  preset: '../../../../jest.preset.js',
   testEnvironment: 'node',
-  coverageDirectory: '../../../../coverage/starwars/services/auth',
 };

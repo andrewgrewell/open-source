@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export type LocalStorageMethod = 'getItem' | 'setItem' | 'removeItem' | 'clear';
 
 export type SpyImpl = (...args: any[]) => string | null;

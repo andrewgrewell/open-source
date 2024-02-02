@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export function createMockHtmlElement() {
   const rect = {
     bottom: 0,

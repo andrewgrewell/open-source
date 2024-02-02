@@ -1,6 +1,6 @@
 {
   "generators": {
-    "removeJsonc": {
+    "remove-jsonc": {
       "factory": "./src/generators/remove-jsonc/generator",
       "schema": "./src/generators/remove-jsonc/schema.json",
       "description": "removeJsonc generator"

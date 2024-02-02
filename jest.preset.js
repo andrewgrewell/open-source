@@ -59,6 +59,8 @@ module.exports = merge(
       '/repo/',
       '/nx/plugin/',
       '/apps/',
+      '/test-utils/',
+      '/__test-utils--/',
     ],
     coverageReporters: ['text', 'json', 'json-summary'],
     coverageThreshold: {
