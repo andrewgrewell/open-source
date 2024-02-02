@@ -1,0 +1,23 @@
+{
+  "name": "dev",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "scripts": {
+    "start": "ts-node dev-repl.js",
+    "dev": "npm run start",
+    "dev:debug": "npm run start -- --inspect-brk"
+  },
+  "bin": {
+    "dev": "../../../../dist/apps/dev/clients/cli/build/index.js"
+  },
+  "pkg": {
+    "scripts": [],
+    "assets": [
+      "../../../../dist/apps/dev/clients/cli/build/**/*"
+    ],
+    "outputPath": "dist/apps/dev/clients/cli/_",
+    "targets": [
+      "node18-macos-x64"
+    ]
+  }
+}

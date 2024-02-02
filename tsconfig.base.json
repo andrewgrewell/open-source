@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "resolveJsonModule": true,
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
@@ -18,21 +19,29 @@
     "paths": {
       "@ag-oss/blog": ["packages/blog/src/index.ts"],
       "@ag-oss/child-process": ["packages/child-process/src/index.ts"],
+      "@ag-oss/console-ui": ["packages/console-ui/src/index.ts"],
       "@ag-oss/dates": ["packages/dates/src/index.ts"],
+      "@ag-oss/docker": ["packages/docker/src/index.ts"],
+      "@ag-oss/dynamodb": ["packages/dynamodb/src/index.ts"],
+      "@ag-oss/env-js": ["packages/env/js/src/index.ts"],
       "@ag-oss/fs": ["packages/fs/src/index.ts"],
       "@ag-oss/logging": ["packages/logging/src/index.ts"],
       "@ag-oss/loops": ["packages/loops/src/index.ts"],
       "@ag-oss/nx-plugin": ["packages/nx/plugin/src/index.ts"],
       "@ag-oss/nx-workflows": ["packages/nx/workflows/src/index.ts"],
       "@ag-oss/objects": ["packages/objects/src/index.ts"],
+      "@ag-oss/one-table": ["packages/one-table/src/index.ts"],
       "@ag-oss/prompts": ["packages/prompts/src/index.ts"],
       "@ag-oss/repo": ["packages/repo/src/index.ts"],
       "@ag-oss/rxjs": ["packages/rxjs/src/index.ts"],
+      "@ag-oss/serverless": ["packages/serverless/src/index.ts"],
       "@ag-oss/strings": ["packages/strings/src/index.ts"],
+      "@ag-oss/test-utils-js": ["packages/test-utils/js/src/index.ts"],
+      "@ag-oss/timing-js": ["packages/timing/js/src/index.ts"],
       "@ag-oss/workflows-js": ["packages/workflows/js/src/index.ts"],
       "@ag-oss/workflows-node": ["packages/workflows/node/src/index.ts"],
       "@starwars/components-react": ["packages/@starwars/components/react/src/index.ts"],
-      "@starwars/e2e-browser": ["packages/@starwars/e2e/browser/src/index.ts"],
+      "@starwars/config": ["packages/@starwars/config/src/index.ts"],
       "@starwars/test-utils": ["packages/@starwars/test-utils/src/index.ts"]
     }
   },

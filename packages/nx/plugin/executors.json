@@ -1,5 +1,10 @@
 {
   "executors": {
+    "cli-package": {
+      "implementation": "./src/executors/cli/package/executor",
+      "schema": "./src/executors/cli/package/schema.json",
+      "description": "Package CLI applications using Pkg"
+    },
     "example": {
       "implementation": "./src/executors/example/executor",
       "schema": "./src/executors/example/schema.json",

@@ -1,5 +1,6 @@
 /* eslint-disable */
 export default {
+  prettierPath: require.resolve('prettier-2'),
   displayName: 'starwars-browser',
   preset: '../../../../jest.preset.js',
   transform: {

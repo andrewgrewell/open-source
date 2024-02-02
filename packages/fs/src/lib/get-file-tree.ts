@@ -4,6 +4,7 @@ import * as path from 'path';
 import { join } from 'path';
 import { FileNode, GetFileTreeOptions } from './fs-util.types';
 
+// TODO: this should to be updated to return directories when maxDepth is reached, or at least make it an option
 export async function getFileTree(rootPath: string, options: GetFileTreeOptions = {}) {
   return parseDirectory(rootPath, options, 0);
 }

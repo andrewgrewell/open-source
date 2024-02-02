@@ -1,0 +1,30 @@
+{
+  "name": "starwars-config",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@starwars/config/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@starwars/config",
+        "main": "packages/@starwars/config/src/index.ts",
+        "tsConfig": "packages/@starwars/config/tsconfig.lib.json",
+        "assets": ["packages/@starwars/config/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@starwars/config/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["js"]
+}
