@@ -12,6 +12,8 @@ import {
   promptForExecutionContext,
   getPackageDomainName,
   getPackageScope,
+  getProjectDirectoryFromName,
+  getProjectImportPathFromName,
 } from '@ag-oss/repo';
 import { join } from 'path';
 import { verboseLogger as log } from '@ag-oss/logging';
@@ -129,7 +131,23 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
 
   const packageBaseName = nameParts.join('-');
   const npmScope = isNpmScoped ? `${scopeInName}` : NPM_SCOPE;
-  const importPath = `${npmScope}/${fullProjectName.replace(`${nameParts[0]}-`, '')}`;
+
+  log.verbose('Building import and directory path', {
+    contextInName,
+    finalParentPath,
+    isNpmScoped,
+    nameParts,
+    npmScope,
+    packageBaseName,
+    scopeInName,
+  });
+
+  const importPath = getProjectImportPathFromName(fullProjectName, npmScope);
+  const directory = join(
+    finalParentPath,
+    getProjectDirectoryFromName(packageBaseName, scopeInName, executionContext),
+  );
+
   const publishable = defaultPublishablePackages.includes(npmScope);
   if (!publishable) {
     log.verbose(
@@ -138,15 +156,6 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
       )}]).`,
     );
   }
-  const directory = contextInName
-    ? join(
-        finalParentPath,
-        packageBaseName.replace(`-${contextInName}`, ''),
-        contextInName,
-      )
-    : isNpmScoped
-      ? join(finalParentPath, npmScope, nameParts.slice(1).join('-'))
-      : join(finalParentPath, packageBaseName);
 
   const parsedOptions = {
     directory,
