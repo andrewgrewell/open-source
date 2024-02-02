@@ -11,12 +11,12 @@ export interface JestPrettierFixOptions {
 export function jestPrettierFix(tree: Tree, options: JestPrettierFixOptions) {
   const { jestConfigPath } = options;
   log.verbose(`Running jest-prettier-fix on file ${jestConfigPath}`);
-  const file = tree.read('jest.config.json', 'utf-8');
+  const file = tree.read(jestConfigPath, 'utf-8');
   if (file.includes('prettierPath')) {
     return;
   }
   const updatedFile = insertPrettierPathDisplayName(file);
-  tree.write('jest.config.json', updatedFile);
+  tree.write(jestConfigPath, updatedFile);
   log.info('Prettier-2 added to jest.config.ts');
 }
 

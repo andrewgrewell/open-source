@@ -29,7 +29,7 @@ export interface MigrationImplContext<TableType> {
 
 export type MigrationImplementation<TableType> = (
   context: MigrationImplContext<TableType>,
-) => void;
+) => Promise<void> | void;
 
 export interface CreateMigrationConfig<TableType>
   extends Omit<MigrationConfig<TableType>, 'up' | 'down'> {

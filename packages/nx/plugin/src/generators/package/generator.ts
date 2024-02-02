@@ -115,7 +115,7 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
       log.verbose(`Checking for existing domain at ${pathToCheck}.`);
       if (tree.exists(pathToCheck)) {
         log.verbose(`Found existing domain at ${pathToCheck}.`);
-      } else if (domainsFromArgs.includes(part)) {
+      } else if (domainsFromArgs?.includes(part)) {
         log.verbose(`Creating new domain at ${pathToCheck}.`);
       } else {
         log.verbose(`No existing domain found at ${pathToCheck}.`);
@@ -129,7 +129,7 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
 
   const packageBaseName = nameParts.join('-');
   const npmScope = isNpmScoped ? `${scopeInName}` : NPM_SCOPE;
-  const importPath = `${npmScope}/${fullProjectName.replace(`${npmScope}-`, '')}`;
+  const importPath = `${npmScope}/${fullProjectName.replace(`${nameParts[0]}-`, '')}`;
   const publishable = defaultPublishablePackages.includes(npmScope);
   if (!publishable) {
     log.verbose(
@@ -144,7 +144,9 @@ async function parseOptions(tree: Tree, options: PackageGeneratorSchema) {
         packageBaseName.replace(`-${contextInName}`, ''),
         contextInName,
       )
-    : join(finalParentPath, packageBaseName);
+    : isNpmScoped
+      ? join(finalParentPath, npmScope, nameParts.slice(1).join('-'))
+      : join(finalParentPath, packageBaseName);
 
   const parsedOptions = {
     directory,
