@@ -1,4 +1,4 @@
-import { createMethodTrap } from '@bridge/js-utils';
+import { createMethodTrap } from '@ag-oss/objects';
 
 export function createDryRunDb(db: any) {
   return new Proxy(db, {

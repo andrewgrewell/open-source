@@ -1,4 +1,4 @@
 export interface JestPrettierFixGeneratorSchema {
-  projectName: string;
+  projectName?: string;
   verbose?: boolean;
 }

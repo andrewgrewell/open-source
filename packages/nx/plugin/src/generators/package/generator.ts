@@ -15,6 +15,8 @@ import {
 } from '@ag-oss/repo';
 import { join } from 'path';
 import { verboseLogger as log } from '@ag-oss/logging';
+import { jestPrettierFix } from '../../utils/jest-prettier-fix';
+import { removeEslintJsonc } from '../../utils/remove-eslint-jsonc';
 
 // Add any package scopes you wish to be publishable by default;
 const defaultPublishablePackages = [NPM_SCOPE];
@@ -22,7 +24,7 @@ const defaultPublishablePackages = [NPM_SCOPE];
 export async function packageGenerator(tree: Tree, options: PackageGeneratorSchema) {
   const parsedOptions = await parseOptions(tree, options);
 
-  const { tags } = parsedOptions;
+  const { tags, directory } = parsedOptions;
 
   // TODO support other package types
   if (tags.includes(ExecutionContext.REACT)) {
@@ -32,6 +34,8 @@ export async function packageGenerator(tree: Tree, options: PackageGeneratorSche
     log.verbose('Generating JS package.');
     await generateJsPackage(tree, parsedOptions);
   }
+  jestPrettierFix(tree, { jestConfigPath: join(directory, 'jest.config.ts') });
+  removeEslintJsonc(tree, { eslintPath: join(directory, '.eslintrc.json') });
 }
 
 function generateJsPackage(tree: Tree, options: Partial<JsLibOptions>) {
