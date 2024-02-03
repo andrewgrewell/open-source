@@ -1,4 +1,4 @@
-import { TableModelsMap } from '../../types';
+import { TableModelsMap } from '../types';
 
 export const getUserForOrgById = {
   executor: async (userId: string, orgId: string, { User }: TableModelsMap) => {

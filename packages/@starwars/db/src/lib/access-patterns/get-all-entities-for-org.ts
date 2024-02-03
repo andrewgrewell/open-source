@@ -1,4 +1,4 @@
-import { TableModelName, TableModelsMap } from '../../types';
+import { TableModelName, TableModelsMap } from '../types';
 
 export const getAllEntitiesForOrg = {
   executor: async (orgId: string, { table }: TableModelsMap) => {

@@ -1,4 +1,4 @@
-import { TableModelsMap } from '../../../types';
+import { TableModelsMap } from '../../types';
 import { getAllEntitiesForOrg } from '../get-all-entities-for-org';
 
 describe('getAllEntitiesForOrg', () => {

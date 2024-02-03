@@ -1,8 +1,8 @@
-import { defaultDbFixture } from '../../../../__fixtures__/default-db.fixture';
-import { defaultOrgFixture } from '../../../../__fixtures__/default-org.fixture';
-import { defaultUserFixture } from '../../../../__fixtures__/default-user.fixture';
-import { createMockModelMap, createMockTable } from '../../../../__test-utils__';
-import { TableModelsMap } from '../../../types';
+import { defaultDbFixture } from '../../../__fixtures__/default-db.fixture';
+import { defaultOrgFixture } from '../../../__fixtures__/default-org.fixture';
+import { defaultUserFixture } from '../../../__fixtures__/default-user.fixture';
+import { createMockModelMap, createMockTable } from '../../../__test-utils__';
+import { TableModelsMap } from '../../types';
 import { createNewUser } from '../create-new-user';
 
 describe('createNewUser', function () {

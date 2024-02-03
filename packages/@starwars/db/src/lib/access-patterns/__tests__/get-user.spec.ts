@@ -1,6 +1,6 @@
-import { defaultDbFixture } from '../../../../__fixtures__/default-db.fixture';
-import { createMockModelMap, createMockTable } from '../../../../__test-utils__';
-import { TableModelsMap } from '../../../types';
+import { defaultDbFixture } from '../../../__fixtures__/default-db.fixture';
+import { createMockModelMap, createMockTable } from '../../../__test-utils__';
+import { TableModelsMap } from '../../types';
 import { getUserForOrgById } from '../get-user';
 
 describe('getUser', () => {
