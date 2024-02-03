@@ -1,4 +1,4 @@
-import { TableModelsMap } from '../types';
+import { TableModelsMap } from '../../types';
 import { verboseLogger as log } from '@ag-oss/logging';
 import { kebabCase } from 'lodash';
 

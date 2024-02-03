@@ -7,17 +7,6 @@ import {
 
 type Params = BodyParams<{ title: string }>;
 
-export const description = 'Debug handler for validating setup';
-
-export const events = [
-  {
-    http: {
-      method: 'POST',
-      path: 'echo',
-    },
-  },
-];
-
 export const handler = createProtectedHandler<Params>(async (event, context) => {
   try {
     return httpResponse({

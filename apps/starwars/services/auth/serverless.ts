@@ -5,6 +5,33 @@ console.log(`Using config env: "${config.env}" with API version: "${config.apiVe
 
 const { env, dynamo, profile, region } = config;
 
+const functions = {
+  echo: {
+    description: 'Debug handler for validating setup',
+    events: [
+      {
+        http: {
+          method: 'POST',
+          path: 'echo',
+        },
+      },
+    ],
+    handler: './src/handlers/echo.handler',
+  },
+  migrate: {
+    description: 'Run DB migrations',
+    events: [
+      {
+        http: {
+          method: 'POST',
+          path: 'migrate',
+        },
+      },
+    ],
+    handler: './src/handlers/migrate.handler',
+  },
+};
+
 module.exports = {
   custom: {
     esbuild: {
@@ -22,20 +49,7 @@ module.exports = {
     },
   },
   frameworkVersion: '3',
-  functions: {
-    echo: {
-      description: 'Debug handler for validating setup',
-      events: [
-        {
-          http: {
-            method: 'POST',
-            path: 'echo',
-          },
-        },
-      ],
-      handler: './src/handlers/echo.handler',
-    },
-  },
+  functions,
   package: {
     excludeDevDependencies: true,
     individually: true,

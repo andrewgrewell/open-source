@@ -12,6 +12,11 @@ export class MigrationsController<TableType> {
 
   constructor(config: MigrationsControllerConfig<TableType> & { client: object }) {
     const { migrations, tableName, client } = config;
+    if (!oneTableCrypto.primary.password || !oneTableCrypto.primary.cipher) {
+      throw new Error(
+        'oneTableCrypto not initialized, ensure the primary password and cipher are set on the environment.',
+      );
+    }
     this.oneTableParams = {
       client: client,
       crypto: oneTableCrypto,
@@ -97,7 +102,7 @@ export class MigrationsController<TableType> {
     await migrate.apply(1, targetVersion, { dry: !apply });
   }
 
-  async applyLatest(apply?: boolean) {
+  async applyLatest(apply?: boolean): Promise<number> {
     const migrate = await createMigrateInstance(
       this.migrations,
       this.oneTableParams,
@@ -105,8 +110,12 @@ export class MigrationsController<TableType> {
     );
     const outstandingMigrations = await this.getOutstandingMigrations(migrate);
     log.verbose('outstandingMigrations', outstandingMigrations);
+    if (!outstandingMigrations?.length) {
+      return 0;
+    }
     for (const migration of outstandingMigrations) {
       await migrate.apply(1, migration.version, { dry: !apply });
     }
+    return outstandingMigrations.length;
   }
 }

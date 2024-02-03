@@ -33,12 +33,12 @@ export const handler = async (args: Args) => {
     handleProcessExit(() => {
       spinner.stop();
       void stopDynamodbLocal();
-      log.info('DynamoDB Local stopped');
+      log.info('Process exiting... DynamoDB Local stopped');
     });
     await running;
   } catch (e) {
     log.error('Unable to start DynamoDB Local.');
-    log.error(e);
+    e && log.error(e);
     process.exit(1);
   }
 };

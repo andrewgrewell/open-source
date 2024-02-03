@@ -31,7 +31,7 @@ export function httpError(
   },
 ): APIGatewayProxyResult {
   return {
-    body: JSON.stringify({ error }),
+    body: JSON.stringify({ errorMessage: (error as Error).message }),
     statusCode,
     ...rest,
     headers: {

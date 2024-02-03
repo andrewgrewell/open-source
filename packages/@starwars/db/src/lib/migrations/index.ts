@@ -1,4 +1,4 @@
-import { createNewUser } from '../access-patterns';
+import { createNewUser } from '../access-patterns/admin';
 import { starWarsSchema } from '../schema';
 import { StarWarsTable, TableName } from '../types';
 import { createStarWarsModels } from '../utils/create-star-wars-models';
