@@ -25,7 +25,9 @@ export interface JwtConfig {
     aud: string;
     iss: string;
   };
+  adminKey: string;
   accessKey: string;
+  idKey: string;
   refreshKey: string;
 }
 export interface ServiceConfig {

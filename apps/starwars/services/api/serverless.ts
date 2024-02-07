@@ -8,6 +8,18 @@ const { env, dynamo, profile, region } = config;
 export const serviceName = 'starwars-api';
 
 export const functions = {
+  health: {
+    description: 'Health check',
+    events: [
+      {
+        http: {
+          method: 'GET',
+          path: 'admin/health',
+        },
+      },
+    ],
+    handler: './src/handlers/admin/health.handler',
+  },
   migrate: {
     description: 'Run DB migrations',
     events: [
@@ -20,6 +32,18 @@ export const functions = {
     ],
     handler: './src/handlers/admin/migrate.handler',
   },
+  refreshToken: {
+    description: 'Refresh authentication token',
+    events: [
+      {
+        http: {
+          method: 'POST',
+          path: 'auth/refresh-token',
+        },
+      },
+    ],
+    handler: './src/handlers/auth/refresh-token.handler',
+  },
   signIn: {
     description: 'Sign in using account info',
     events: [
@@ -31,6 +55,18 @@ export const functions = {
       },
     ],
     handler: './src/handlers/auth/sign-in.handler',
+  },
+  verifyEmail: {
+    description: 'Verify email using code',
+    events: [
+      {
+        http: {
+          method: 'POST',
+          path: 'auth/verify-email',
+        },
+      },
+    ],
+    handler: './src/handlers/auth/verify-email.handler',
   },
 };
 

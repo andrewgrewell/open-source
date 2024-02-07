@@ -14,10 +14,12 @@ export const commonConfig: ServiceConfig = {
   env: ServiceEnv.Production,
   jwt: {
     accessKey: process.env.JWT_ACCESS_KEY,
+    adminKey: process.env.ADMIN_JWT_KEY,
     claims: {
       aud: process.env.JWT_AUDIENCE,
       iss: null,
     },
+    idKey: process.env.JWT_ID_KEY,
     refreshKey: process.env.JWT_REFRESH_KEY,
   },
   profile: AwsProfile.Default,

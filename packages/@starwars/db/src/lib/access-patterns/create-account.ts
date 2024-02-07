@@ -11,7 +11,7 @@ async function createAccountExecutor(
   models: TableModelsMap,
 ) {
   const { email, password } = config;
-
+  log.verbose(`Creating account for email ${email}`);
   const { Account } = models;
   const account = await Account.create({
     email,

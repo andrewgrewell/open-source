@@ -12,6 +12,7 @@ async function createAccountTokenExecutor(
   models: TableModelsMap,
 ) {
   const { accountId, email, token } = config;
+  log.verbose(`Creating account token for account ${email}`);
   const { AccountToken } = models;
   const accountToken = await AccountToken.create(
     {
@@ -21,7 +22,7 @@ async function createAccountTokenExecutor(
     },
     { exists: null },
   );
-  log.verbose(`AccountToken created with for account ${email}`);
+  log.verbose(`AccountToken created for account ${email}`);
   return accountToken;
 }
 

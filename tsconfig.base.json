@@ -25,6 +25,7 @@
       "@ag-oss/dynamodb": ["packages/dynamodb/src/index.ts"],
       "@ag-oss/env-js": ["packages/env/js/src/index.ts"],
       "@ag-oss/fs": ["packages/fs/src/index.ts"],
+      "@ag-oss/jwt": ["packages/jwt/src/index.ts"],
       "@ag-oss/logging": ["packages/logging/src/index.ts"],
       "@ag-oss/loops": ["packages/loops/src/index.ts"],
       "@ag-oss/nx-plugin": ["packages/nx/plugin/src/index.ts"],

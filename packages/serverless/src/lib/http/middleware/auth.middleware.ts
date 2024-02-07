@@ -11,7 +11,7 @@ export interface AuthMiddlewareOptions {
 export function authMiddleware(
   options?: AuthMiddlewareOptions,
 ): middy.MiddlewareObj<Parameters<Handler<any>>[0], APIGatewayProxyResult> {
-  const { secret = process?.env?.AUTH_JWT_KEY } = options || {};
+  const { secret = process?.env?.ADMIN_JWT_KEY } = options || {};
   const before: middy.MiddlewareFn<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
     request,
   ) => {

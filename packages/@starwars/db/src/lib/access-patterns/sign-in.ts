@@ -1,37 +1,37 @@
-import { TableModelsMap } from '../types';
+import { StarWarsTokenService, TableModelsMap } from '../types';
 import { getAccount } from './get-account';
-import { createAccountToken } from './create-account-token';
+import { createUserTokens } from '../utils';
+import { verboseLogger as log } from '@ag-oss/logging';
 
 export interface SignInOptions {
   email: string;
   password: string;
-  tokenProvider: (options: { sub: string }) => {
-    accessToken: string;
-    refreshToken: string;
-  };
+  tokenService: StarWarsTokenService;
 }
 
 export const signIn = {
-  executor: async (options: SignInOptions, modelsMaps: TableModelsMap) => {
-    const { email, password, tokenProvider } = options;
-    if (!tokenProvider) {
-      throw new Error('Token provider is required');
+  executor: async (options: SignInOptions, dataModels: TableModelsMap) => {
+    const { email, password, tokenService } = options;
+    if (!tokenService) {
+      throw new Error('tokenService is required.');
     }
-    console.log(`Getting account for email: "${email}"`);
-    const account = await getAccount.executor({ email }, modelsMaps);
+    log.verbose(`Getting account for email: "${email}"...`);
+    const account = await getAccount.executor({ email }, dataModels);
     if (!account) {
-      throw new Error(`No account found for account "${email}"`);
+      throw new Error(`No account found for account "${email}".`);
     }
-    console.log(`Found account with email: "${account.email}". Validating password...`);
+    log.verbose(`Found account with email: "${account.email}". Validating password...`);
     if (account.password !== password) {
-      throw new Error('Password is incorrect');
+      throw new Error('Password is incorrect.');
     }
-    console.log(`Password is correct. Creating tokens...`);
-    const tokens = tokenProvider({ sub: account.id });
-    await createAccountToken.executor(
-      { accountId: account.id, email: account.email, token: tokens.refreshToken },
-      modelsMaps,
-    );
+    log.verbose(`Password is correct. Creating tokens...`);
+    const tokens = await createUserTokens({
+      accountId: account.id,
+      dataModels,
+      email: account.email,
+      tokenService,
+    });
+    log.verbose('Returning tokens to caller.');
     return tokens;
   },
   params: [

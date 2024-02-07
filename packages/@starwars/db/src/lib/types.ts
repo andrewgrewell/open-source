@@ -2,6 +2,7 @@ import { starWarsSchema } from './schema';
 import { accountSchema } from './schema/account.schema';
 import { Entity, Model, Table } from 'dynamodb-onetable';
 import { accountTokenSchema } from './schema/account-token.schema';
+import { JwtService } from '@ag-oss/jwt';
 
 export interface CreateTableOptions {
   client?: object;
@@ -29,3 +30,26 @@ export enum UserRoles {
   Admin = 'admin',
   User = 'user',
 }
+
+export interface AccessTokenPayload {
+  [key: string]: unknown;
+  sub: string;
+}
+
+export interface IdTokenPayload {
+  [key: string]: unknown;
+  accountId: string;
+  email: string;
+}
+
+export interface RefreshTokenPayload {
+  [key: string]: unknown;
+  accountId: string;
+  email: string;
+}
+
+export type StarWarsTokenService = JwtService<
+  AccessTokenPayload,
+  IdTokenPayload,
+  RefreshTokenPayload
+>;

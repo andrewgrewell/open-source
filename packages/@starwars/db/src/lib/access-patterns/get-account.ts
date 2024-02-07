@@ -1,4 +1,5 @@
 import { TableModelsMap } from '../types';
+import { verboseLogger as log } from '@ag-oss/logging';
 
 export interface GetAccountOptions {
   email: string;
@@ -7,6 +8,7 @@ export interface GetAccountOptions {
 export const getAccount = {
   executor: async (options: GetAccountOptions, { Account }: TableModelsMap) => {
     const { email } = options;
+    log.verbose(`Getting account for email: "${email}"...`);
     return Account.get({ email }, { follow: true, index: 'gs1' });
   },
   params: [

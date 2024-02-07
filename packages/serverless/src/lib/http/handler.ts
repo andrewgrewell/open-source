@@ -6,7 +6,7 @@ import { authMiddleware } from './middleware';
 export function createHandler<P extends EventParams, isProtected extends boolean = false>(
   handler: Handler<P, isProtected>,
 ) {
-  return middy(handler).use(middyJsonBodyParser());
+  return middy(handler).use(middyJsonBodyParser({ disableContentTypeError: true }));
 }
 
 export interface ProtectedHandlerOptions {
