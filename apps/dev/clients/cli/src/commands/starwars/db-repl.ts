@@ -1,6 +1,6 @@
 import { CommandBuilder } from '../../types';
 import {
-  starWarsTableDef,
+  starWarsTableDefLocal,
   starWarsAccessPatterns,
   initializeStarWarsDb,
 } from '@starwars/db';
@@ -17,7 +17,7 @@ export const builder: CommandBuilder = {};
 
 export const handler = async () => {
   await withPrettyOutput(async ({ spinner }) => {
-    const { clientConfig } = starWarsTableDef;
+    const { clientConfig } = starWarsTableDefLocal;
     log.verbose(`clientConfig: ${JSON.stringify(clientConfig)}`);
     try {
       const containerRunning = await isContainerRunning('dynamodb-local');

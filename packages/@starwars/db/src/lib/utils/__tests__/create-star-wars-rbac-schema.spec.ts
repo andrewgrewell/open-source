@@ -12,22 +12,19 @@ const mockCreateRbacSchema = createRbacSchema as jest.MockedFunction<
 
 describe('createStarWarsRbacSchema', () => {
   it('should create rbac schema', () => {
-    createStarWarsRbacSchema([TableModelName.User], ['id', 'firstName']);
+    createStarWarsRbacSchema([TableModelName.Account], ['id', 'email']);
     expect(mockCreateRbacSchema.mock.calls[0]).toMatchInlineSnapshot(`
       [
         [
-          "internalAdmin",
-          "internalSupport",
-          "orgAdmin",
-          "orgSupport",
-          "orgMember",
+          "admin",
+          "user",
         ],
         [
-          "User",
+          "Account",
         ],
         [
           "id",
-          "firstName",
+          "email",
         ],
       ]
     `);

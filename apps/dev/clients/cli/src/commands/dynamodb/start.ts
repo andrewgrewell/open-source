@@ -31,14 +31,22 @@ export const handler = async (args: Args) => {
       ? spinner.start(`DynamoDB Local started on port ${port}. Press Ctrl+C to stop`)
       : Signale.start('Starting DynamoDB Local');
     handleProcessExit(() => {
+      if (detached) {
+        return;
+      }
       spinner.stop();
       void stopDynamodbLocal();
       log.info('Process exiting... DynamoDB Local stopped');
     });
     await running;
+    if (detached) {
+      Signale.success(`DynamoDB Local started on port ${port}`);
+    } else {
+      spinner.stop();
+    }
   } catch (e) {
-    log.error('Unable to start DynamoDB Local.');
+    spinner.stop();
     e && log.error(e);
-    process.exit(1);
+    process.exit(0);
   }
 };

@@ -35,113 +35,7 @@ describe('createStarWarsTable', () => {
               },
             },
             "models": {
-              "Org": {
-                "code": {
-                  "required": true,
-                  "type": [Function],
-                  "validate": /\\^\\[a-z\\]\\+\\(-\\[a-z\\]\\+\\)\\*\\$/,
-                },
-                "gs1pk": {
-                  "type": [Function],
-                  "value": "org#",
-                },
-                "gs1sk": {
-                  "type": [Function],
-                  "value": "org#\${id}",
-                },
-                "id": {
-                  "generate": "ulid",
-                  "required": true,
-                  "type": [Function],
-                  "validate": /\\^\\[0123456789ABCDEFGHJKMNPQRSTVWXYZ\\]\\{26\\}\\$/,
-                },
-                "name": {
-                  "required": true,
-                  "type": [Function],
-                  "validate": /\\^\\[a-z0-9 ,\\.'-\\]\\+\\$/i,
-                },
-                "ownerId": {
-                  "type": [Function],
-                },
-                "pk": {
-                  "type": [Function],
-                  "value": "org#\${id}",
-                },
-                "sk": {
-                  "type": [Function],
-                  "value": "org#",
-                },
-              },
-              "OrgAccess": {
-                "action": {
-                  "enum": [
-                    "create:any",
-                    "create:own",
-                    "read:any",
-                    "read:own",
-                    "update:any",
-                    "update:own",
-                    "delete:any",
-                    "delete:own",
-                  ],
-                  "require": true,
-                  "type": [Function],
-                },
-                "attributes": {
-                  "enum": [
-                    "code",
-                    "gs1pk",
-                    "gs1sk",
-                    "name",
-                    "ownerId",
-                    "pk",
-                    "sk",
-                    "*",
-                  ],
-                  "required": true,
-                  "type": [Function],
-                },
-                "gs1pk": {
-                  "type": [Function],
-                  "value": "rbac#",
-                },
-                "gs1sk": {
-                  "type": [Function],
-                  "value": "rbac#\${resource}#\${action}",
-                },
-                "pk": {
-                  "type": [Function],
-                  "value": "rbac#\${role}",
-                },
-                "resource": {
-                  "enum": [
-                    "Org",
-                  ],
-                  "required": true,
-                  "type": [Function],
-                },
-                "role": {
-                  "enum": [
-                    "internalAdmin",
-                    "internalSupport",
-                    "orgAdmin",
-                    "orgSupport",
-                    "orgMember",
-                  ],
-                  "required": true,
-                  "type": [Function],
-                },
-                "sk": {
-                  "type": [Function],
-                  "value": "rbac#\${resource}#\${action}",
-                },
-              },
-              "User": {
-                "displayName": {
-                  "required": true,
-                  "type": [Function],
-                  "validate": /\\^\\[a-z0-9 ,\\.'-\\]\\+\\$/i,
-                },
+              "Account": {
                 "email": {
                   "crypt": true,
                   "required": true,
@@ -150,21 +44,17 @@ describe('createStarWarsTable', () => {
                 },
                 "gs1pk": {
                   "type": [Function],
-                  "value": "user#",
+                  "value": "account#\${email}",
                 },
                 "gs1sk": {
                   "type": [Function],
-                  "value": "user#\${id}",
+                  "value": "account#",
                 },
                 "id": {
                   "generate": "ulid",
                   "required": true,
                   "type": [Function],
                   "validate": /\\^\\[0123456789ABCDEFGHJKMNPQRSTVWXYZ\\]\\{26\\}\\$/,
-                },
-                "orgId": {
-                  "required": true,
-                  "type": [Function],
                 },
                 "password": {
                   "crypt": true,
@@ -174,32 +64,17 @@ describe('createStarWarsTable', () => {
                 },
                 "pk": {
                   "type": [Function],
-                  "value": "org#\${orgId}",
+                  "value": "account#\${id}",
                 },
                 "sk": {
                   "type": [Function],
-                  "value": "user#\${email}",
+                  "value": "account#",
                 },
-                "stats": {
-                  "default": {},
-                  "schema": {
-                    "location": {
-                      "type": [Function],
-                    },
-                    "totalPlayTime": {
-                      "type": [Function],
-                    },
-                    "totalPurchaseCount": {
-                      "type": [Function],
-                    },
-                    "totalSpent": {
-                      "type": [Function],
-                    },
-                  },
+                "verifiedEmail": {
                   "type": [Function],
                 },
               },
-              "UserAccess": {
+              "AccountAccess": {
                 "action": {
                   "enum": [
                     "create:any",
@@ -216,16 +91,14 @@ describe('createStarWarsTable', () => {
                 },
                 "attributes": {
                   "enum": [
-                    "displayName",
+                    "id",
                     "email",
                     "gs1pk",
                     "gs1sk",
-                    "id",
-                    "orgId",
                     "password",
                     "pk",
                     "sk",
-                    "stats",
+                    "verifiedEmail",
                     "*",
                   ],
                   "required": true,
@@ -245,18 +118,15 @@ describe('createStarWarsTable', () => {
                 },
                 "resource": {
                   "enum": [
-                    "User",
+                    "Account",
                   ],
                   "required": true,
                   "type": [Function],
                 },
                 "role": {
                   "enum": [
-                    "internalAdmin",
-                    "internalSupport",
-                    "orgAdmin",
-                    "orgSupport",
-                    "orgMember",
+                    "admin",
+                    "user",
                   ],
                   "required": true,
                   "type": [Function],
@@ -264,6 +134,31 @@ describe('createStarWarsTable', () => {
                 "sk": {
                   "type": [Function],
                   "value": "rbac#\${resource}#\${action}",
+                },
+              },
+              "AccountToken": {
+                "accountId": {
+                  "required": true,
+                  "type": [Function],
+                },
+                "email": {
+                  "crypt": true,
+                  "required": true,
+                  "type": [Function],
+                  "validate": /\\^\\(\\(\\[\\^<>\\(\\)\\[\\\\\\]\\\\\\\\\\.,;:\\\\s@"\\]\\+\\(\\\\\\.\\[\\^<>\\(\\)\\[\\\\\\]\\\\\\\\\\.,;:\\\\s@"\\]\\+\\)\\*\\)\\|\\("\\.\\+"\\)\\)@\\(\\(\\\\\\[\\[0-9\\]\\{1,3\\}\\\\\\.\\[0-9\\]\\{1,3\\}\\\\\\.\\[0-9\\]\\{1,3\\}\\\\\\.\\[0-9\\]\\{1,3\\}\\]\\)\\|\\(\\(\\[a-zA-Z\\\\-0-9\\]\\+\\\\\\.\\)\\+\\[a-zA-Z\\]\\{2,\\}\\)\\)\\$/,
+                },
+                "pk": {
+                  "type": [Function],
+                  "value": "account#\${accountId}",
+                },
+                "sk": {
+                  "type": [Function],
+                  "value": "token#\${email}",
+                },
+                "token": {
+                  "crypt": true,
+                  "required": true,
+                  "type": [Function],
                 },
               },
             },

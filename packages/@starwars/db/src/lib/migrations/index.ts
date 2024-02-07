@@ -1,4 +1,4 @@
-import { createNewUser } from '../access-patterns/admin';
+import { createAccount } from '../access-patterns';
 import { starWarsSchema } from '../schema';
 import { StarWarsTable, TableName } from '../types';
 import { createStarWarsModels } from '../utils/create-star-wars-models';
@@ -14,9 +14,8 @@ export const starWarsMigrationsConfig: MigrationsControllerConfig<StarWarsTable>
       schema: starWarsSchema,
       up: async ({ db }) => {
         const tableModels = createStarWarsModels(db);
-        await createNewUser.executor(
+        await createAccount.executor(
           {
-            displayName: 'StarWars Admin',
             email: process.env.ADMIN_EMAIL,
             password: process.env.ADMIN_PASSWORD,
           },

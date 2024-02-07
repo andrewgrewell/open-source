@@ -27,7 +27,11 @@ export function schemaValidator<P extends EventParams>(schema: {
 
       return Promise.resolve();
     } catch (e) {
-      return httpError(e instanceof ValidationError ? e.errors : []);
+      const errorMessage =
+        e instanceof ValidationError
+          ? 'Validation error: ' + e.errors.map((err) => err).join(', ')
+          : 'Validation error';
+      return httpError(errorMessage);
     }
   };
 

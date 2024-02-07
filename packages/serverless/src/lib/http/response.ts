@@ -25,13 +25,15 @@ export function httpResponse(
 }
 
 export function httpError(
-  error: unknown,
+  error: Error | string,
   { statusCode = 400, ...rest }: Omit<APIGatewayProxyResult, 'body'> = {
     statusCode: 200,
   },
 ): APIGatewayProxyResult {
   return {
-    body: JSON.stringify({ errorMessage: (error as Error).message }),
+    body: JSON.stringify({
+      errorMessage: typeof error === 'string' ? error : (error as Error).message,
+    }),
     statusCode,
     ...rest,
     headers: {

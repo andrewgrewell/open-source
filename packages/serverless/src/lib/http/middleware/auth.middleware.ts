@@ -11,12 +11,12 @@ export interface AuthMiddlewareOptions {
 export function authMiddleware(
   options?: AuthMiddlewareOptions,
 ): middy.MiddlewareObj<Parameters<Handler<any>>[0], APIGatewayProxyResult> {
-  const { secret = process?.env?.JWT_SECRET } = options || {};
+  const { secret = process?.env?.AUTH_JWT_KEY } = options || {};
   const before: middy.MiddlewareFn<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
     request,
   ) => {
     if (!secret) {
-      // TODO log.error('Missing JWT secret in auth middleware');
+      console.error('AUTH_JWT_KEY is not set');
       return httpError('Service unavailable', { statusCode: 500 });
     }
     const authHeader = request.event.headers['Authorization'];

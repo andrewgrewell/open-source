@@ -21,16 +21,25 @@ export function createMockTable(dbFixture?: DbFixture) {
       throw new Error('Table already exists');
     } else {
       mockDbRef.current = {
-        Org: [],
-        User: [],
+        Account: [],
       };
     }
     return table;
   });
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+  table.deleteTable.mockImplementation(async () => {
+    if (mockDbRef.current) {
+      mockDbRef.current = undefined;
+    } else {
+      throw new Error('Table does not exist');
+    }
+    return table;
+  });
+  // @ts-expect-error - adding properties to mock
+  table.__modelMap = modelMap;
+  // @ts-expect-error - adding properties to mock
   table.__mockDbRef = mockDbRef;
   return table as ReturnType<typeof createMockOneTable> & {
     __mockDbRef: typeof mockDbRef;
+    __modelMap: typeof modelMap;
   };
 }

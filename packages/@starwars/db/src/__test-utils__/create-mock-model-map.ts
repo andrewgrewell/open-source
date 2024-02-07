@@ -1,14 +1,16 @@
 import { DbFixture } from '../__fixtures__/default-db.fixture';
-import { TableModelName } from '../lib/types';
+import { IAccount, IAccountToken, TableModelName, TableModelsMap } from '../lib/types';
 import { createMockModel, createMockTable } from '@ag-oss/one-table';
+import { Model } from 'dynamodb-onetable';
 
 type Table = ReturnType<typeof createMockTable>;
 type MockDbRef = { current?: DbFixture };
 
-export function createMockModelMap(mockDbRef: MockDbRef, table: Table) {
-  const modelMap = {
-    Org: setupMockOrg(mockDbRef),
-    User: setupMockUser(mockDbRef),
+export function createMockModelMap(mockDbRef: MockDbRef, table: Table): TableModelsMap {
+  const modelMap: Omit<TableModelsMap, 'table'> = {
+    Account: setupMockAccount(mockDbRef) as never as Model<IAccount>,
+    // TODO: create this mock and test the account token flow
+    AccountToken: {} as never as Model<IAccountToken>,
   };
   table.getModel.mockImplementation((modelName: TableModelName) => {
     return modelMap[modelName];
@@ -16,92 +18,59 @@ export function createMockModelMap(mockDbRef: MockDbRef, table: Table) {
   return {
     ...modelMap,
     table,
-  };
+  } as never as TableModelsMap;
 }
 
-function setupMockOrg(dbRef: MockDbRef) {
+function setupMockAccount(dbRef: MockDbRef) {
   // create mock model
-  const Org = createMockModel();
-  let orgCount = dbRef.current?.Org?.length || 0;
-  Org.create.mockImplementation((orgCreate) => {
+  const Account = createMockModel();
+  let accountCount = dbRef.current?.Account?.length || 0;
+  Account.create.mockImplementation((accountCreate) => {
     if (!dbRef.current) {
       throw new Error('Table does not exist');
     }
-    const orgs = dbRef.current?.Org ?? [];
-    orgCount += 1;
-    const orgId = `org-id-${orgCount}`;
-    const newOrg = {
-      ...orgCreate,
-      id: orgId,
-      pk: `org#${orgId}`,
+    const accounts = dbRef.current?.Account ?? [];
+    accountCount += 1;
+    const accountId = `account-id-${accountCount}`;
+    const newAcc = {
+      ...accountCreate,
+      id: accountId,
+      pk: `account#${accountId}`,
+      sk: `account#${accountCreate.email}#${accountCreate.name}`,
     };
-    const exists = orgs.find((org) => org.pk === newOrg.pk);
+    const exists = accounts.find((acc) => acc.sk === newAcc.sk);
     if (exists) {
-      throw new Error('Org already exists');
+      throw new Error('Account already exists');
     }
-    dbRef.current.Org = [...orgs, newOrg];
-    return newOrg;
+    dbRef.current.Account = [...accounts, newAcc];
+    return newAcc;
   });
-  Org.get.mockImplementation((orgId) => {
+  Account.get.mockImplementation((orgId) => {
     if (!dbRef.current) {
       throw new Error('Table does not exist');
     }
-    const orgs = dbRef.current?.Org ?? [];
-    const org = orgs.find((org) => org.id === orgId);
-    if (!org) {
+    const accounts = dbRef.current?.Account ?? [];
+    const account = accounts.find((org) => org.id === orgId);
+    if (!account) {
       return undefined;
     }
-    return org;
+    return account;
   });
-  Org.update.mockImplementation((orgUpdate) => {
+  Account.update.mockImplementation((accUpdate) => {
     if (!dbRef.current) {
       throw new Error('Table does not exist');
     }
-    const orgs = dbRef.current?.Org ?? [];
-    const org = orgs.find((org) => org.pk === orgUpdate.pk);
-    if (!org) {
-      throw new Error('Org does not exist');
+    const accounts = dbRef.current?.Account ?? [];
+    const account = accounts.find((acc) => acc.pk === accUpdate.pk);
+    if (!account) {
+      throw new Error('Account does not exist');
     }
-    const update = { ...org, orgUpdate };
-    const index = orgs.findIndex((org) => org.pk === orgUpdate.pk);
-    dbRef.current.Org.splice(index, 1, update);
-    dbRef.current.Org = [...dbRef.current.Org];
-    return org;
+    const update = { ...account, accUpdate };
+    const index = accounts.findIndex((acc) => acc.pk === accUpdate.pk);
+    dbRef.current.Account.splice(index, 1, update);
+    dbRef.current.Account = [...dbRef.current.Account];
+    return account;
   });
-  return Org;
-}
 
-function setupMockUser(dbRef: MockDbRef) {
-  const User = createMockModel();
-  let userCount = dbRef.current?.User?.length || 0;
-  User.create.mockImplementation((userCreate) => {
-    if (!dbRef.current) {
-      throw new Error('Table does not exist');
-    }
-    const users = dbRef.current?.User ?? [];
-    userCount += 1;
-    const newUser = {
-      ...userCreate,
-      id: `user-id-${userCount}`,
-      pk: `user#${userCreate.email}`,
-    };
-    const exists = users.find((user) => user.email === newUser.email);
-    if (exists) {
-      throw new Error('User already exists');
-    }
-    dbRef.current.User = [...users, newUser];
-    return newUser;
-  });
-  User.get.mockImplementation((userGet) => {
-    if (!dbRef.current) {
-      throw new Error('Table does not exist');
-    }
-    const users = dbRef.current?.User ?? [];
-    const user = users.find((user) => user.pk === userGet.pk);
-    if (!user) {
-      return undefined;
-    }
-    return user;
-  });
-  return User;
+  return Account;
 }

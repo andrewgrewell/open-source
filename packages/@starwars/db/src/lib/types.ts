@@ -1,7 +1,7 @@
 import { starWarsSchema } from './schema';
-import { orgSchema } from './schema/org.schema';
-import { userSchema } from './schema/user.schema';
+import { accountSchema } from './schema/account.schema';
 import { Entity, Model, Table } from 'dynamodb-onetable';
+import { accountTokenSchema } from './schema/account-token.schema';
 
 export interface CreateTableOptions {
   client?: object;
@@ -10,25 +10,22 @@ export interface CreateTableOptions {
 
 export type StarWarsTable = Table<typeof starWarsSchema>;
 
-export type IOrg = Entity<typeof orgSchema.Org>;
-export type IUser = Entity<typeof userSchema.User>;
+export type IAccount = Entity<typeof accountSchema.Account>;
+export type IAccountToken = Entity<typeof accountTokenSchema.AccountToken>;
 
 export const TableName = 'StarWarsTable';
 
 export enum TableModelName {
-  Org = 'Org',
-  User = 'User',
+  Account = 'Account',
+  AccountToken = 'AccountToken',
 }
 export interface TableModelsMap {
   table: StarWarsTable;
-  [TableModelName.Org]: Model<IOrg>;
-  [TableModelName.User]: Model<IUser>;
+  [TableModelName.Account]: Model<IAccount>;
+  [TableModelName.AccountToken]: Model<IAccountToken>;
 }
 
 export enum UserRoles {
-  InternalAdmin = 'internalAdmin',
-  InternalSupport = 'internalSupport',
-  OrgOwner = 'orgAdmin',
-  OrgAdmin = 'orgSupport',
-  OrgMember = 'orgMember',
+  Admin = 'admin',
+  User = 'user',
 }

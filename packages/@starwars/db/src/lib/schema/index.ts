@@ -1,6 +1,6 @@
-import { orgSchema } from './org.schema';
-import { userSchema } from './user.schema';
 import { OneSchema } from 'dynamodb-onetable';
+import { accountSchema } from './account.schema';
+import { accountTokenSchema } from './account-token.schema';
 
 export const starWarsSchema: OneSchema = {
   indexes: {
@@ -8,8 +8,8 @@ export const starWarsSchema: OneSchema = {
     primary: { hash: 'pk', sort: 'sk' },
   },
   models: {
-    ...orgSchema,
-    ...userSchema,
+    ...accountSchema,
+    ...accountTokenSchema,
   } as const,
   params: {
     isoDates: true,

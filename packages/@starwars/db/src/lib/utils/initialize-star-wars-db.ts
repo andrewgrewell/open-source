@@ -1,4 +1,4 @@
-import { starWarsTableDef } from '../starwars.table-def';
+import { starWarsTableDefLocal } from '../star-wars-table-def.local';
 import { createStarWarsModels } from './create-star-wars-models';
 import { createStarWarsTable } from './create-star-wars-table';
 import { CreateDynamodbClientConfig } from '@ag-oss/dynamodb';
@@ -13,7 +13,7 @@ export interface InitializeDbResult {
 export async function initializeStarWarsDb(clientConfig?: CreateDynamodbClientConfig) {
   return withPrettyOutput<InitializeDbResult>(async ({ spinner }) => {
     const table = createStarWarsTable({
-      client: createOneTableClient(clientConfig || starWarsTableDef.clientConfig),
+      client: createOneTableClient(clientConfig || starWarsTableDefLocal.clientConfig),
     });
     if (!(await table.exists())) {
       spinner.start('Creating table');

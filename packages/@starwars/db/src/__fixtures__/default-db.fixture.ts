@@ -1,9 +1,7 @@
-import { defaultOrgFixture } from './default-org.fixture';
-import { defaultUserFixture } from './default-user.fixture';
+import { defaultAccountFixture } from './default-account.fixture';
 
 export const defaultDbFixture = {
-  Org: [defaultOrgFixture],
-  User: [defaultUserFixture],
+  Account: [defaultAccountFixture],
 };
 
 export type DbFixture = typeof defaultDbFixture;

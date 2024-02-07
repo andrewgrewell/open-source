@@ -7,7 +7,7 @@ const commonAttributes = {
 export const withCommonAttributes =
   createSharedAttributesProvider<typeof commonAttributes>(commonAttributes);
 
-export const asOrgItem = createSharedAttributesProvider({
-  orgId: { required: true, type: String },
-  pk: { type: String, value: 'org#${orgId}' },
+export const asAccountItem = createSharedAttributesProvider({
+  accountId: { required: true, type: String },
+  pk: { type: String, value: 'account#${accountId}' },
 });

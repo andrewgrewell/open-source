@@ -13,7 +13,6 @@
   "pkg": {
     "scripts": [],
     "assets": [
-      ".env",
       "../../../../dist/apps/dev/clients/cli/build/**/*"
     ],
     "outputPath": "dist/apps/dev/clients/cli/_",

@@ -1,9 +1,9 @@
-import { StarWarsTable, IOrg, IUser, TableModelsMap } from '../types';
+import { StarWarsTable, TableModelsMap, IAccount, IAccountToken } from '../types';
 
 export function createStarWarsModels(table: StarWarsTable): TableModelsMap {
   return {
-    Org: table.getModel<IOrg>('Org'),
-    User: table.getModel<IUser>('User'),
+    Account: table.getModel<IAccount>('Account'),
+    AccountToken: table.getModel<IAccountToken>('AccountToken'),
     table,
   };
 }

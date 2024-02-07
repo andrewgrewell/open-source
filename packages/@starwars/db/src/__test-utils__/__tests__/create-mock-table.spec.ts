@@ -15,7 +15,7 @@ describe('createMockTable', function () {
   });
 
   describe('getModel', function () {
-    it.each(['Org', 'User'])('should return a mock model for %s', function (modelName) {
+    it.each(['Account'])('should return a mock model for %s', function (modelName) {
       const table = createMockTable();
       expect(table.getModel(modelName)).toBeDefined();
     });
@@ -36,11 +36,15 @@ describe('createMockTable', function () {
     it('should persist a mock db in memory', async function () {
       const table = createMockTable();
       await table.createTable();
-      const testOrg = table.getModel('Org');
-      const testOrgCreate = { code: 'test-org', name: 'Test Org' };
-      await testOrg.create(testOrgCreate);
-      expect(table.__mockDbRef.current?.Org[0]).toEqual(
-        expect.objectContaining(testOrgCreate),
+      const testAccount = table.getModel('Account');
+      const testAccountCreate = {
+        email: 'test@email.com',
+        name: 'test',
+        password: 'password',
+      };
+      await testAccount.create(testAccountCreate);
+      expect(table.__mockDbRef.current?.Account[0]).toEqual(
+        expect.objectContaining(testAccountCreate),
       );
     });
   });

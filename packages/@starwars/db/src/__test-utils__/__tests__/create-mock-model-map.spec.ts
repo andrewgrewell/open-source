@@ -1,14 +1,13 @@
 import { DbFixture, defaultDbFixture } from '../../__fixtures__/default-db.fixture';
-import { defaultUserFixture } from '../../__fixtures__/default-user.fixture';
 import { createMockModelMap } from '../create-mock-model-map';
 import { createMockTable } from '../create-mock-table';
+import { defaultAccountFixture } from '../../__fixtures__/default-account.fixture';
 
 describe('createMockModelMap', function () {
   const setup = (mockDb?: DbFixture) => {
     const dbRef = {
       current: mockDb || {
-        Org: [],
-        User: [],
+        Account: [],
       },
     };
     return {
@@ -22,25 +21,30 @@ describe('createMockModelMap', function () {
     expect(modelMap).toBeDefined();
   });
 
-  describe('User', function () {
-    it('should create a user', async function () {
+  describe('Account', function () {
+    it('should create an account', async function () {
       const { dbRef, table } = setup();
       const modelMap = createMockModelMap(dbRef, table);
-      const user = await modelMap.User.create({
-        displayName: 'Test User',
+      const account = await modelMap.Account.create({
         email: 'test-user@email.com',
+        name: 'testuser',
         password: 'P@ssw0rd!',
       });
-      expect(user).toBeDefined();
-      expect(dbRef.current.User[0]).toEqual(user);
+      expect(account).toBeDefined();
+      expect(dbRef.current.Account[0]).toEqual(account);
     });
 
-    it('should throw an error if user already exists', function () {
+    it('should throw an error if account already exists', function () {
       const { dbRef, table } = setup(defaultDbFixture);
       const modelMap = createMockModelMap(dbRef, table);
       return expect(
-        async () => await modelMap.User.create(defaultUserFixture),
-      ).rejects.toThrow('User already exists');
+        async () =>
+          await modelMap.Account.create({
+            email: defaultAccountFixture.email,
+            name: defaultAccountFixture.name,
+            password: defaultAccountFixture.password,
+          }),
+      ).rejects.toThrow('Account already exists');
     });
   });
 });
