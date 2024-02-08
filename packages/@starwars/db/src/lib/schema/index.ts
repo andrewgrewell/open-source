@@ -1,6 +1,7 @@
 import { OneSchema } from 'dynamodb-onetable';
 import { accountSchema } from './account.schema';
 import { accountTokenSchema } from './account-token.schema';
+import { accountVerifyCodeSchema } from './account-verify-code.schema';
 
 export const starWarsSchema: OneSchema = {
   indexes: {
@@ -10,6 +11,7 @@ export const starWarsSchema: OneSchema = {
   models: {
     ...accountSchema,
     ...accountTokenSchema,
+    ...accountVerifyCodeSchema,
   } as const,
   params: {
     isoDates: true,

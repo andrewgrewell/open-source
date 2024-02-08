@@ -7,7 +7,32 @@ const { env, dynamo, profile, region } = config;
 
 export const serviceName = 'starwars-api';
 
+// TODO: Add support for routing in handlers, to share global context between invocations
 export const functions = {
+  createAccount: {
+    description: 'Create account with email and password',
+    events: [
+      {
+        http: {
+          method: 'POST',
+          path: 'auth/account',
+        },
+      },
+    ],
+    handler: './src/handlers/auth/create-account.handler',
+  },
+  getAccount: {
+    description: 'Get account info',
+    events: [
+      {
+        http: {
+          method: 'GET',
+          path: 'auth/account',
+        },
+      },
+    ],
+    handler: './src/handlers/auth/get-account.handler',
+  },
   health: {
     description: 'Health check',
     events: [

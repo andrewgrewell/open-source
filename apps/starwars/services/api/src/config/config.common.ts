@@ -11,6 +11,11 @@ export const commonConfig: ServiceConfig = {
     endpoint: null,
     tableName: null,
   },
+  email: {
+    domain: process.env.EMAIL_SENDER_DOMAIN,
+    password: process.env.EMAIL_SENDER_PASSWORD,
+    username: process.env.EMAIL_SENDER_USERNAME,
+  },
   env: ServiceEnv.Production,
   jwt: {
     accessKey: process.env.JWT_ACCESS_KEY,

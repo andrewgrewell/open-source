@@ -4,3 +4,4 @@ export * from './get-account';
 export * from './get-account-token';
 export * from './refresh-token';
 export * from './sign-in';
+export * from './verify-email';

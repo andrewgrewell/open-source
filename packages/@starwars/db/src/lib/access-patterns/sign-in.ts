@@ -1,6 +1,5 @@
-import { StarWarsTokenService, TableModelsMap } from '../types';
+import { IAccount, StarWarsTokenService, TableModelsMap } from '../types';
 import { getAccount } from './get-account';
-import { createUserTokens } from '../utils';
 import { verboseLogger as log } from '@ag-oss/logging';
 
 export interface SignInOptions {
@@ -10,7 +9,10 @@ export interface SignInOptions {
 }
 
 export const signIn = {
-  executor: async (options: SignInOptions, dataModels: TableModelsMap) => {
+  executor: async (
+    options: SignInOptions,
+    dataModels: TableModelsMap,
+  ): Promise<IAccount> => {
     const { email, password, tokenService } = options;
     if (!tokenService) {
       throw new Error('tokenService is required.');
@@ -24,15 +26,8 @@ export const signIn = {
     if (account.password !== password) {
       throw new Error('Password is incorrect.');
     }
-    log.verbose(`Password is correct. Creating tokens...`);
-    const tokens = await createUserTokens({
-      accountId: account.id,
-      dataModels,
-      email: account.email,
-      tokenService,
-    });
-    log.verbose('Returning tokens to caller.');
-    return tokens;
+    log.verbose('Password is correct.');
+    return account;
   },
   params: [
     {

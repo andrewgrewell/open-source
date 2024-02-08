@@ -1,5 +1,11 @@
 import { DbFixture } from '../__fixtures__/default-db.fixture';
-import { IAccount, IAccountToken, TableModelName, TableModelsMap } from '../lib/types';
+import {
+  IAccount,
+  IAccountToken,
+  IAccountVerifyCode,
+  TableModelName,
+  TableModelsMap,
+} from '../lib/types';
 import { createMockModel, createMockTable } from '@ag-oss/one-table';
 import { Model } from 'dynamodb-onetable';
 
@@ -11,6 +17,7 @@ export function createMockModelMap(mockDbRef: MockDbRef, table: Table): TableMod
     Account: setupMockAccount(mockDbRef) as never as Model<IAccount>,
     // TODO: create this mock and test the account token flow
     AccountToken: {} as never as Model<IAccountToken>,
+    AccountVerifyCode: {} as never as Model<IAccountVerifyCode>,
   };
   table.getModel.mockImplementation((modelName: TableModelName) => {
     return modelMap[modelName];

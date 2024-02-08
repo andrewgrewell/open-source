@@ -1,5 +1,6 @@
 import { TableModelsMap } from '../types';
 import { verboseLogger as log } from '@ag-oss/logging';
+import { createRandomCode } from '../utils';
 
 export interface CreateAccountConfig {
   email: string;
@@ -12,13 +13,19 @@ async function createAccountExecutor(
 ) {
   const { email, password } = config;
   log.verbose(`Creating account for email ${email}`);
-  const { Account } = models;
+  const { Account, AccountVerifyCode } = models;
   const account = await Account.create({
     email,
     password,
   });
+  const passcode = createRandomCode(6);
+  await AccountVerifyCode.create({
+    accountId: account.id,
+    code: passcode,
+    email: account.email,
+  });
   log.verbose(`Account created with id ${account.id}`);
-  return account;
+  return { account, passcode };
 }
 
 export const createAccount = {

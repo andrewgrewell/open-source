@@ -35,6 +35,9 @@ export type Handler<P extends EventParams, isProtected extends boolean = true> =
 ) => void | Promise<APIGatewayProxyResult>;
 
 export type AuthPayload = {
+  accountId: string;
+  email: string;
+  // TODO: add roles
   iat: number;
   aud: string;
   iss: string;

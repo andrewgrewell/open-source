@@ -30,8 +30,16 @@ export interface JwtConfig {
   idKey: string;
   refreshKey: string;
 }
+
+export interface EmailConfig {
+  domain: string;
+  username: string;
+  password: string;
+}
+
 export interface ServiceConfig {
   apiVersion?: number;
+  email: EmailConfig;
   region: AwsRegion;
   profile: AwsProfile;
   dynamo: DynamoConfig;
