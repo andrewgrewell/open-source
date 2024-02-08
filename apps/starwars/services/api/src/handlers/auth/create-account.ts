@@ -1,12 +1,13 @@
 import { createAccount, createUserTokens } from '@starwars/db';
-import { BodyParams, createHandler, httpError, httpResponse } from '@ag-oss/serverless';
 import { dataModels } from '../../db';
 import { sendVerifyEmail } from '../../email';
 import { tokenService } from '../../jwt';
+import { createPublicHandler } from '../../utils/create-public-handler';
+import { httpErrorResponse, BodyParams, httpSuccessResponse } from '@ez-api/lambda';
 
 type Body = BodyParams<{ email: string; password: string }>;
 
-export const handler = createHandler<Body>(async (event) => {
+export const handler = createPublicHandler<Body>(async (event) => {
   const { email, password } = event.body;
   try {
     console.log(`Attempting create account for email "${email}"...`);
@@ -25,10 +26,10 @@ export const handler = createHandler<Body>(async (event) => {
       tokenService,
     });
     console.log(`Account signed in.`);
-    return httpResponse({ ...tokens });
+    return httpSuccessResponse({ ...tokens });
   } catch (e) {
     console.log(`Failed to create account.`);
     console.log(e?.message);
-    return httpError('Unable to create account. Please try again.');
+    return httpErrorResponse('Unable to create account. Please try again.');
   }
 });

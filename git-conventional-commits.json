@@ -20,7 +20,8 @@
       "string-utils",
       "nx",
       "portfolio",
-      "starwars"
+      "starwars",
+      "ez-api"
     ],
     "releaseTagGlobPattern": "[a-z-][0-9].*",
     "issueRegexPattern": "[A-Z]{3,}-\\d+"

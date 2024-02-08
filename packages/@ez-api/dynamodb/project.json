@@ -1,0 +1,30 @@
+{
+  "name": "ez-api-dynamodb",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@ez-api/dynamodb/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@ez-api/dynamodb",
+        "main": "packages/@ez-api/dynamodb/src/index.ts",
+        "tsConfig": "packages/@ez-api/dynamodb/tsconfig.lib.json",
+        "assets": ["packages/@ez-api/dynamodb/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@ez-api/dynamodb/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["node"]
+}

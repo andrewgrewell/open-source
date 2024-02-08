@@ -17,5 +17,5 @@ export function createProtectedHandler<P extends EventParams>(
   handler: Handler<P>,
   options?: ProtectedHandlerOptions,
 ) {
-  return createHandler(handler).use(authMiddleware(options));
+  return createHandler<P, true>(handler).use(authMiddleware(options));
 }

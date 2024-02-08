@@ -1,10 +1,4 @@
-import { createProtectedHandler, httpResponse } from '@ag-oss/serverless';
+import { createAdminHandler } from '../../utils/create-admin-handler';
+import { httpSuccessResponse } from '@ez-api/lambda';
 
-import { config } from '../../config';
-
-export const handler = createProtectedHandler(
-  async (event) => {
-    return httpResponse({ message: 'OK' });
-  },
-  { secret: config.jwt.adminKey },
-);
+export const handler = createAdminHandler(async () => httpSuccessResponse());

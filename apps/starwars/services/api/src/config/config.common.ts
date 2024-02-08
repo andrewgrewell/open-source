@@ -6,7 +6,6 @@ import { AwsProfile, AwsRegion, ServiceConfig, ServiceEnv } from '../types';
  */
 export const commonConfig: ServiceConfig = {
   apiVersion: 1,
-  // the values below are for reference when extending this config
   dynamo: {
     endpoint: null,
     tableName: null,
@@ -19,7 +18,6 @@ export const commonConfig: ServiceConfig = {
   env: ServiceEnv.Production,
   jwt: {
     accessKey: process.env.JWT_ACCESS_KEY,
-    adminKey: process.env.ADMIN_JWT_KEY,
     claims: {
       aud: process.env.JWT_AUDIENCE,
       iss: null,

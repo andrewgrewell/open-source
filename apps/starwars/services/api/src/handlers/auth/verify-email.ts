@@ -1,29 +1,22 @@
-import {
-  BodyParams,
-  createProtectedHandler,
-  httpError,
-  httpResponse,
-} from '@ag-oss/serverless';
-import { config } from '../../config';
+import { BodyParams } from '@ag-oss/serverless';
 import { tokenService } from '../../jwt';
 import { verifyEmail } from '@starwars/db';
 import { dataModels } from '../../db';
+import { createUserHandler } from '../../utils/create-user-handler';
+import { httpErrorResponse, httpSuccessResponse } from '@ez-api/lambda';
 
 type Body = BodyParams<{ code: string; idToken: string }>;
 
-export const handler = createProtectedHandler<Body>(
-  async (event) => {
-    const { code, idToken } = event.body;
-    try {
-      const { email, accountId } = await tokenService.id.verify(idToken);
-      console.log(`Attempting to verify email "${email}" with code "${code}"...`);
-      await verifyEmail.executor({ accountId, code, email }, dataModels);
-      return httpResponse({ userMessage: `Verified email "${email}".` });
-    } catch (e) {
-      console.log(`Failed to verify email.`);
-      console.log(e?.message);
-      return httpError('Unable to verify email. Please try again.');
-    }
-  },
-  { secret: config.jwt.accessKey },
-);
+export const handler = createUserHandler<Body>(async (event) => {
+  const { code, idToken } = event.body;
+  try {
+    const { email, accountId } = await tokenService.id.verify(idToken);
+    console.log(`Attempting to verify email "${email}" with code "${code}"...`);
+    await verifyEmail.executor({ accountId, code, email }, dataModels);
+    return httpSuccessResponse({ userMessage: `Verified email "${email}".` });
+  } catch (e) {
+    console.log(`Failed to verify email.`);
+    console.log(e?.message);
+    return httpErrorResponse('Unable to verify email. Please try again.');
+  }
+});

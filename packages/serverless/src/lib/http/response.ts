@@ -1,6 +1,7 @@
 import { APIGatewayProxyResult } from 'aws-lambda';
+import StatusCode from 'status-code-enum';
 
-// TODO setup SORS
+// TODO setup CORS
 const defaultCorsHeaders = {
   'Access-Control-Allow-Headers': '*',
   'Access-Control-Allow-Origin': '*',
@@ -14,7 +15,7 @@ export function httpResponse(
   },
 ): APIGatewayProxyResult {
   return {
-    body: JSON.stringify({ data }),
+    body: JSON.stringify({ data, ok: true }),
     statusCode,
     ...rest,
     headers: {
@@ -24,20 +25,27 @@ export function httpResponse(
   };
 }
 
+export type HttpErrorOptions = Omit<APIGatewayProxyResult, 'body'> & {
+  statusCode: number;
+  data: Record<string, unknown>;
+};
+
 export function httpError(
   error: Error | string,
-  { statusCode = 400, ...rest }: Omit<APIGatewayProxyResult, 'body'> = {
-    statusCode: 200,
-  },
+  options: HttpErrorOptions,
 ): APIGatewayProxyResult {
+  const { data, statusCode, ...restOptions } = options || {
+    data: {},
+    statusCode: StatusCode.ServerErrorInternal,
+  };
+  const errorMessage = typeof error === 'string' ? error : (error as Error).message;
+  const errorObject = typeof error !== 'string' ? error : undefined;
   return {
-    body: JSON.stringify({
-      errorMessage: typeof error === 'string' ? error : (error as Error).message,
-    }),
+    body: JSON.stringify({ data, error: errorObject, errorMessage, ok: false }),
     statusCode,
-    ...rest,
+    ...restOptions,
     headers: {
-      ...rest.headers,
+      ...restOptions.headers,
       ...defaultCorsHeaders,
     },
   };
