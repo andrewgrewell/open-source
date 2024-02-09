@@ -35,7 +35,6 @@
       "@ag-oss/prompts": ["packages/prompts/src/index.ts"],
       "@ag-oss/repo": ["packages/repo/src/index.ts"],
       "@ag-oss/rxjs": ["packages/rxjs/src/index.ts"],
-      "@ag-oss/serverless": ["packages/serverless/src/index.ts"],
       "@ag-oss/strings": ["packages/strings/src/index.ts"],
       "@ag-oss/test-utils-js": ["packages/test-utils/js/src/index.ts"],
       "@ag-oss/timing-js": ["packages/timing/js/src/index.ts"],

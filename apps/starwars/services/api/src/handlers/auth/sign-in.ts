@@ -1,5 +1,5 @@
 import { createUserTokens, signIn } from '@starwars/db';
-import { BodyParams } from '@ag-oss/serverless';
+import { BodyParams } from '@ez-api/lambda';
 import { tokenService } from '../../jwt';
 import { dataModels } from '../../db';
 import { createPublicHandler } from '../../utils/create-public-handler';

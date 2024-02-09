@@ -9,6 +9,18 @@ export const serviceName = 'starwars-api';
 
 // TODO: Add support for routing in handlers, to share global context between invocations
 export const functions = {
+  admin: {
+    description: 'Admin routes',
+    events: [
+      {
+        http: {
+          method: 'ANY',
+          path: 'admin/{any+}',
+        },
+      },
+    ],
+    handler: './src/handlers/admin/index.handler',
+  },
   createAccount: {
     description: 'Create account with email and password',
     events: [
@@ -33,30 +45,30 @@ export const functions = {
     ],
     handler: './src/handlers/auth/get-account.handler',
   },
-  health: {
-    description: 'Health check',
-    events: [
-      {
-        http: {
-          method: 'GET',
-          path: 'admin/health',
-        },
-      },
-    ],
-    handler: './src/handlers/admin/health.handler',
-  },
-  migrate: {
-    description: 'Run DB migrations',
-    events: [
-      {
-        http: {
-          method: 'POST',
-          path: 'admin/migrate',
-        },
-      },
-    ],
-    handler: './src/handlers/admin/migrate.handler',
-  },
+  // health: {
+  //   description: 'Health check',
+  //   events: [
+  //     {
+  //       http: {
+  //         method: 'GET',
+  //         path: 'admin/health',
+  //       },
+  //     },
+  //   ],
+  //   handler: './src/handlers/admin/health.handler',
+  // },
+  // migrate: {
+  //   description: 'Run DB migrations',
+  //   events: [
+  //     {
+  //       http: {
+  //         method: 'POST',
+  //         path: 'admin/migrate',
+  //       },
+  //     },
+  //   ],
+  //   handler: './src/handlers/admin/migrate.handler',
+  // },
   refreshToken: {
     description: 'Refresh authentication token',
     events: [

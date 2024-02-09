@@ -5,6 +5,7 @@ import type {
   Context,
 } from 'aws-lambda';
 import { MiddlewareObj } from '@middy/core';
+import { Method, Route } from '@middy/http-router';
 
 export interface BodyParams<T extends Record<string, unknown> = Record<string, unknown>> {
   body: T;
@@ -51,3 +52,9 @@ export type AuthContext = Context & {
 };
 
 export type MiddyMiddleware = MiddlewareObj;
+export type MiddyRoute = Route<unknown>;
+export interface RouterRoute {
+  handler: Handler<any>;
+  method: Method;
+  path: string;
+}

@@ -1,4 +1,4 @@
-import { BodyParams } from '@ag-oss/serverless';
+import { BodyParams } from '@ez-api/lambda';
 import { tokenService } from '../../jwt';
 import { dataModels } from '../../db';
 import { refreshToken } from '@starwars/db';

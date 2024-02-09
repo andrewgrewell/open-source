@@ -6,6 +6,7 @@ export interface CommandBuilder {
     default?: string | boolean;
     describe?: string;
     type?: PositionalOptionsType;
+    required?: boolean;
   };
 }
 

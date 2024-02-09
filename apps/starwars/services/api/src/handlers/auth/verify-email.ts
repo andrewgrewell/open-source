@@ -1,9 +1,8 @@
-import { BodyParams } from '@ag-oss/serverless';
 import { tokenService } from '../../jwt';
 import { verifyEmail } from '@starwars/db';
 import { dataModels } from '../../db';
 import { createUserHandler } from '../../utils/create-user-handler';
-import { httpErrorResponse, httpSuccessResponse } from '@ez-api/lambda';
+import { BodyParams, httpErrorResponse, httpSuccessResponse } from '@ez-api/lambda';
 
 type Body = BodyParams<{ code: string; idToken: string }>;
 

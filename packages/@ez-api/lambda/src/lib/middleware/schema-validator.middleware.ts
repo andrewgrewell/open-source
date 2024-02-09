@@ -1,7 +1,7 @@
 import { BaseSchema, ValidationError } from 'yup';
 import middy from '@middy/core';
 import { APIGatewayProxyResult } from 'aws-lambda';
-import { httpError } from '../response';
+import { httpErrorResponse } from '../response';
 import { BodyParams, EventParams, Handler, QueryParams } from '../types';
 
 export function schemaValidator<P extends EventParams>(schema: {
@@ -31,7 +31,7 @@ export function schemaValidator<P extends EventParams>(schema: {
         e instanceof ValidationError
           ? 'Validation error: ' + e.errors.map((err) => err).join(', ')
           : 'Validation error';
-      return httpError(errorMessage);
+      return httpErrorResponse(errorMessage);
     }
   };
 

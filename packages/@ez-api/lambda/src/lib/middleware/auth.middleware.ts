@@ -31,7 +31,8 @@ export function authMiddleware(
       });
     }
     try {
-      const data = await verify(token, authKey);
+      console.log('Verifying with key', authKey);
+      const data = verify(token, authKey);
       if (allowedRoles.length > 0) {
         const roles = (data as AuthPayload).roles || [];
         const hasRole = allowedRoles.some((role) => roles.includes(role));
@@ -42,8 +43,9 @@ export function authMiddleware(
         }
       }
       (request.context as AuthContext).auth = data as AuthPayload;
+      return Promise.resolve();
     } catch (error) {
-      console.error('Unexpected error in authMiddleware', error);
+      console.log('Error verifying token', error);
       return httpErrorResponse('Unable to authenticate request', {
         statusCode: StatusCode.ClientErrorUnauthorized,
       });

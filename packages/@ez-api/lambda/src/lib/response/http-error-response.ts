@@ -13,6 +13,7 @@ export type HttpErrorOptions = Omit<APIGatewayProxyResult, 'statusCode' | 'body'
 };
 
 export function httpErrorResponse(
+  // TODO support array of errors and error messages
   error: Error | string,
   options?: HttpErrorOptions,
 ): APIGatewayProxyResult {
