@@ -1,6 +1,7 @@
 import { config } from '../config';
 import { createJwtService } from '@ag-oss/jwt';
 import { AccessTokenPayload, IdTokenPayload, RefreshTokenPayload } from '@starwars/db';
+import { EzApiBasicRole } from '@ez-api/core';
 
 export const tokenService = createJwtService<
   AccessTokenPayload,
@@ -11,6 +12,9 @@ export const tokenService = createJwtService<
     access: {
       expiresIn: '1hr',
       key: config.jwt.accessKey,
+      payload: {
+        roles: [EzApiBasicRole.User],
+      },
     },
     id: {
       expiresIn: '60d',

@@ -31,12 +31,12 @@ export function authMiddleware(
       });
     }
     try {
-      console.log('Verifying with key', authKey);
       const data = verify(token, authKey);
       if (allowedRoles.length > 0) {
         const roles = (data as AuthPayload).roles || [];
         const hasRole = allowedRoles.some((role) => roles.includes(role));
         if (!hasRole) {
+          console.log(`Account does not have allowed roles [${allowedRoles.join(',')}]`);
           return httpErrorResponse('Unauthorized', {
             statusCode: StatusCode.ClientErrorUnauthorized,
           });

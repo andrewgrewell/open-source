@@ -1,7 +1,7 @@
 export interface JwtCommonOptions {
   key: string;
   expiresIn: string;
-  payload?: any;
+  payload?: Record<string, unknown>;
 }
 
 export interface JwtAccessOptions extends JwtCommonOptions {}
