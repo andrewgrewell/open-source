@@ -10,7 +10,6 @@ export const serviceName = 'starwars-api';
 // TODO: Add support for routing in handlers, to share global context between invocations
 export const functions = {
   admin: {
-    description: 'Admin routes',
     events: [
       {
         http: {
@@ -21,30 +20,41 @@ export const functions = {
     ],
     handler: './src/handlers/admin/index.handler',
   },
-  createAccount: {
-    description: 'Create account with email and password',
+  auth: {
     events: [
       {
         http: {
-          method: 'POST',
-          path: 'auth/account',
+          method: 'ANY',
+          path: 'auth/{any+}',
         },
       },
     ],
-    handler: './src/handlers/auth/create-account.handler',
+    handler: './src/handlers/auth/index.handler',
   },
-  getAccount: {
-    description: 'Get account info',
-    events: [
-      {
-        http: {
-          method: 'GET',
-          path: 'auth/account',
-        },
-      },
-    ],
-    handler: './src/handlers/auth/get-account.handler',
-  },
+  // createAccount: {
+  //   description: 'Create account with email and password',
+  //   events: [
+  //     {
+  //       http: {
+  //         method: 'POST',
+  //         path: 'auth/account',
+  //       },
+  //     },
+  //   ],
+  //   handler: './src/handlers/auth/create-account.handler',
+  // },
+  // getAccount: {
+  //   description: 'Get account info',
+  //   events: [
+  //     {
+  //       http: {
+  //         method: 'GET',
+  //         path: 'auth/account',
+  //       },
+  //     },
+  //   ],
+  //   handler: './src/handlers/auth/get-account.handler',
+  // },
   // health: {
   //   description: 'Health check',
   //   events: [
@@ -69,42 +79,42 @@ export const functions = {
   //   ],
   //   handler: './src/handlers/admin/migrate.handler',
   // },
-  refreshToken: {
-    description: 'Refresh authentication token',
-    events: [
-      {
-        http: {
-          method: 'POST',
-          path: 'auth/refresh-token',
-        },
-      },
-    ],
-    handler: './src/handlers/auth/refresh-token.handler',
-  },
-  signIn: {
-    description: 'Sign in using account info',
-    events: [
-      {
-        http: {
-          method: 'POST',
-          path: 'auth/sign-in',
-        },
-      },
-    ],
-    handler: './src/handlers/auth/sign-in.handler',
-  },
-  verifyEmail: {
-    description: 'Verify email using code',
-    events: [
-      {
-        http: {
-          method: 'POST',
-          path: 'auth/verify-email',
-        },
-      },
-    ],
-    handler: './src/handlers/auth/verify-email.handler',
-  },
+  // refreshToken: {
+  //   description: 'Refresh authentication token',
+  //   events: [
+  //     {
+  //       http: {
+  //         method: 'POST',
+  //         path: 'auth/refresh-token',
+  //       },
+  //     },
+  //   ],
+  //   handler: './src/handlers/auth/refresh-token.handler',
+  // },
+  // signIn: {
+  //   description: 'Sign in using account info',
+  //   events: [
+  //     {
+  //       http: {
+  //         method: 'POST',
+  //         path: 'auth/sign-in',
+  //       },
+  //     },
+  //   ],
+  //   handler: './src/handlers/auth/sign-in.handler',
+  // },
+  // verifyEmail: {
+  //   description: 'Verify email using code',
+  //   events: [
+  //     {
+  //       http: {
+  //         method: 'POST',
+  //         path: 'auth/verify-email',
+  //       },
+  //     },
+  //   ],
+  //   handler: './src/handlers/auth/verify-email.handler',
+  // },
 };
 
 module.exports = {

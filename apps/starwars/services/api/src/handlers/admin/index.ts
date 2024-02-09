@@ -17,4 +17,4 @@ export const routes: RouterRoute[] = [
   },
 ];
 
-export const handler = createRouter({ basePath: '/admin', routes });
+export const handler = createRouter({ basePath, routes });
