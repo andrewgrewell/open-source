@@ -1,11 +1,7 @@
 import { runMigrations, RunMigrationsOptions } from '@ag-oss/one-table';
-import { Table } from './types';
 
-export type ApplyMigrationsOptions<TTable extends Table<any>> =
-  RunMigrationsOptions<TTable>;
+export type ApplyMigrationsOptions = RunMigrationsOptions;
 
-export function applyMigrations<TTable extends Table<any>>(
-  options: RunMigrationsOptions<TTable>,
-) {
+export function applyMigrations(options: RunMigrationsOptions) {
   return runMigrations(options);
 }

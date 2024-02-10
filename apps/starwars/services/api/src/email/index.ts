@@ -1,33 +1,25 @@
-import NodeMailer from 'nodemailer';
 import { config } from '../config';
-import { getVerifyEmailTemplate } from './verify-email.template';
+import {
+  sendVerifyEmail as _sendVerifyEmail,
+  SendVerifyEmailOptions,
+} from '@ez-api/auth';
+import { createMailgunTransporter } from '@ez-api/email';
 
-const transporter = NodeMailer.createTransport({
-  // Use Smtp Protocol to send Email
-  auth: {
-    pass: config.email.password,
-    user: config.email.username,
-  },
-  service: 'MailGun',
+const transporter = createMailgunTransporter({
+  password: config.email.password,
+  username: config.email.username,
 });
 
-export interface SendConfirmEmailOptions {
-  verifyCode: string;
-  email: string;
-}
-
-export async function sendVerifyEmail(options: SendConfirmEmailOptions) {
-  const { verifyCode, email } = options;
-  console.log('Sending email from domain: ', config.email.domain);
-  const mailOpt = {
+export function sendVerifyEmail(
+  options: Pick<SendVerifyEmailOptions, 'verifyCode' | 'email'>,
+) {
+  return _sendVerifyEmail({
     from: {
       address: config.email.username,
       name: 'StarWars App',
     },
-    html: getVerifyEmailTemplate({ verifyCode }),
-    subject: 'Verify your email with StarWars App',
-    text: 'Please confirm your email.',
-    to: email,
-  };
-  await transporter.sendMail(mailOpt);
+    productName: 'StarWars App',
+    transporter,
+    ...options,
+  });
 }

@@ -1,34 +1,7 @@
-import { DbFixture } from '../__fixtures__/default-db.fixture';
-import {
-  IAccount,
-  IAccountToken,
-  IAccountVerifyCode,
-  TableModelName,
-  TableModelsMap,
-} from '../lib/types';
-import { createMockModel, createMockTable } from '@ag-oss/one-table';
-import { Model } from 'dynamodb-onetable';
+import { createMockModel } from '@ag-oss/one-table';
+import { MockDbRef } from './types';
 
-type Table = ReturnType<typeof createMockTable>;
-type MockDbRef = { current?: DbFixture };
-
-export function createMockModelMap(mockDbRef: MockDbRef, table: Table): TableModelsMap {
-  const modelMap: Omit<TableModelsMap, 'table'> = {
-    Account: setupMockAccount(mockDbRef) as never as Model<IAccount>,
-    // TODO: create this mock and test the account token flow
-    AccountToken: {} as never as Model<IAccountToken>,
-    AccountVerifyCode: {} as never as Model<IAccountVerifyCode>,
-  };
-  table.getModel.mockImplementation((modelName: TableModelName) => {
-    return modelMap[modelName];
-  });
-  return {
-    ...modelMap,
-    table,
-  } as never as TableModelsMap;
-}
-
-function setupMockAccount(dbRef: MockDbRef) {
+export function createMockAccountModel(dbRef: MockDbRef) {
   // create mock model
   const Account = createMockModel();
   let accountCount = dbRef.current?.Account?.length || 0;
@@ -43,7 +16,7 @@ function setupMockAccount(dbRef: MockDbRef) {
       ...accountCreate,
       id: accountId,
       pk: `account#${accountId}`,
-      sk: `account#${accountCreate.email}#${accountCreate.name}`,
+      sk: `account#${accountCreate.email}`,
     };
     const exists = accounts.find((acc) => acc.sk === newAcc.sk);
     if (exists) {

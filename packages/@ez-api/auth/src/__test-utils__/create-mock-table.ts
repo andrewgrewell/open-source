@@ -1,8 +1,8 @@
 /// <reference types="jest" />
 import { DbFixture } from '../__fixtures__/default-db.fixture';
-import { TableModelName } from '../lib/types';
 import { createMockModelMap } from './create-mock-model-map';
 import { createMockTable as createMockOneTable } from '@ag-oss/one-table';
+import { AuthModels } from '../lib/table';
 
 export function createMockTable(dbFixture?: DbFixture) {
   const mockDbRef = {
@@ -10,7 +10,7 @@ export function createMockTable(dbFixture?: DbFixture) {
   };
   const table = createMockOneTable();
   const modelMap = createMockModelMap(mockDbRef, table);
-  table.getModel.mockImplementation((modelName: TableModelName) => {
+  table.getModel.mockImplementation((modelName: keyof AuthModels) => {
     return modelMap[modelName];
   });
   table.exists.mockImplementation(async () => {

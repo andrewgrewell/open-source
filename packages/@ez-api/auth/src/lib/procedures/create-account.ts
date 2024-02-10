@@ -1,8 +1,7 @@
 import { verboseLogger as log } from '@ag-oss/logging';
 import { createRandomCode } from '../utils';
-import { BasicRole } from '@ez-api/core';
 import { IAccount } from '../table';
-import { AuthProcedureExecutor } from '../types';
+import { BasicRole, AuthProcedureExecutor } from '../types';
 
 export type CreateAccountOptions = {
   email: string;
@@ -12,7 +11,7 @@ export type CreateAccountOptions = {
 
 interface CreateAccountReturn {
   account: IAccount;
-  passcode: string;
+  verifyCode: string;
 }
 
 export const createAccount: AuthProcedureExecutor<
@@ -26,12 +25,12 @@ export const createAccount: AuthProcedureExecutor<
     password,
     role,
   });
-  const passcode = createRandomCode(6);
+  const verifyCode = createRandomCode(6);
   await AccountVerifyCode.create({
     accountId: account.id,
-    code: passcode,
+    code: verifyCode,
     email: account.email,
   });
   log.verbose(`Account created with id ${account.id}`);
-  return { account, passcode };
+  return { account, verifyCode };
 };

@@ -1,12 +1,11 @@
-import { AuthProcedureExecutor } from '../types';
-import { createUserTokens } from '../utils';
+import { AuthProcedureExecutor, AuthTokenService } from '../types';
 import { verboseLogger as log } from '@ag-oss/logging';
 import { getAccountToken } from './get-account-token';
-import { StarWarsTokenService } from '@starwars/db';
+import { createUserTokens } from './create-user-tokens';
 
 export type RefreshTokenOptions = {
   token: string;
-  tokenService: StarWarsTokenService;
+  tokenService: AuthTokenService;
 };
 
 export const refreshToken: AuthProcedureExecutor<

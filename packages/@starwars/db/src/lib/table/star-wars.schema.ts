@@ -1,8 +1,9 @@
 import { createTableSchema, Table } from '@ez-api/dynamodb';
-import { authTableSchema } from '@ez-api/auth';
+import { AuthModels, authTableSchema } from '@ez-api/auth';
 
 export const tableName = 'StarWarsTable';
 
+export type StarWarsModels = AuthModels;
 /**
  * The schema for the StarWarsTable. The table follows "OneTable" patterns.
  */

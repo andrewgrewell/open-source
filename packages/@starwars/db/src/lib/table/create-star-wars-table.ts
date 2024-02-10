@@ -13,7 +13,7 @@ export function createStarWarsTable(options: CreateStarWarsTableOptions): StarWa
     log,
     name: tableName,
     schema: starWarsTableSchema,
-  });
+  }) as StarWarsTable;
 }
 
 export interface CreateLocalStarWarsTableOptions
@@ -22,11 +22,11 @@ export interface CreateLocalStarWarsTableOptions
 }
 
 export function createLocalStarWarsTable(
-  options: CreateStarWarsTableOptions & { port: number },
+  options: CreateLocalStarWarsTableOptions,
 ): StarWarsTable {
   return createLocalTable({
     ...options,
     name: tableName,
     schema: starWarsTableSchema,
-  });
+  }) as StarWarsTable;
 }

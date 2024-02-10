@@ -1,13 +1,7 @@
-import {
-  createStarWarsModels,
-  createStarWarsTable,
-  starWarsTableDefLocal,
-} from '@starwars/db';
-import { createOneTableClient } from '@ag-oss/one-table';
+import { createLocalStarWarsTable, getStarWarsModels } from '@starwars/db';
 
-export const db = createStarWarsTable({
-  client: createOneTableClient(starWarsTableDefLocal.clientConfig),
-  logger: true,
+export const Table = createLocalStarWarsTable({
+  log: true,
 });
 
-export const dataModels = createStarWarsModels(db);
+export const models = getStarWarsModels(Table);

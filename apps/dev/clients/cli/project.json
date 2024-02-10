@@ -9,7 +9,6 @@
       "options": {
         "command": "ncc build src/index.ts -t -o ../../../../dist/apps/dev/clients/cli/build",
         "cwd": "apps/dev/clients/cli",
-        "envFile": "apps/dev/clients/cli/.env"
       }
     },
     "package": {

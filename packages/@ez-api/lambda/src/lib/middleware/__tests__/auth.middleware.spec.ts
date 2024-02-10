@@ -16,8 +16,8 @@ interface TestSetupOptions {
 }
 
 const authKey = 'test';
-const noRoleToken = sign({ id: 'no-role', roles: [] }, authKey);
-const userToken = sign({ id: 'user-token', roles: ['user'] }, authKey);
+const noRoleToken = sign({ id: 'no-role', role: undefined }, authKey);
+const userToken = sign({ id: 'user-token', role: 'user' }, authKey);
 
 describe('authMiddleware', () => {
   const consoleMock = mockConsole(console);

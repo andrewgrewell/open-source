@@ -8,7 +8,7 @@ const { readFileSync } = require('fs');
 const envPlugin = {
   name: 'env',
   setup(build) {
-    build.onResolve({ filter: /config$/ }, (args) => {
+    build.onResolve({ filter: /\..*\/config$/ }, (args) => {
       return {
         namespace: 'env-ns',
         path: args.path,

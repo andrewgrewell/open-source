@@ -7,15 +7,15 @@ export interface SendVerifyEmailOptions {
     address: string;
     name: string;
   };
-  passcode: string;
+  verifyCode: string;
   email: string;
 }
 
 export async function sendVerifyEmail(options: SendVerifyEmailOptions) {
-  const { transporter, passcode, email, productName, from } = options;
+  const { transporter, verifyCode, email, productName, from } = options;
   const mailOpt = {
     from,
-    html: getVerifyEmailTemplate(passcode),
+    html: getVerifyEmailTemplate(verifyCode),
     subject: `${productName} - Verify Email`,
     text: 'Please confirm your email.',
     to: email,
@@ -23,7 +23,7 @@ export async function sendVerifyEmail(options: SendVerifyEmailOptions) {
   await transporter.sendMail(mailOpt);
 }
 
-export function getVerifyEmailTemplate(passcode: string) {
+export function getVerifyEmailTemplate(verifyCode: string) {
   return `
 <div style="width: 500px;background-color: rgb(175, 175, 175);overflow: hidden;border-radius: 5px;">
     <table style="width:500px;text-align:center;border-collapse:collapse;background-color:rgb(245,245,245);color:rgb(90,110,122)">
@@ -40,7 +40,7 @@ export function getVerifyEmailTemplate(passcode: string) {
         </tr>
         <tr>
             <td>
-                <h2 style="margin:15px;">Your verification code is: ${passcode}</h2>
+                <h2 style="margin:15px;">Your verification code is: ${verifyCode}</h2>
             </td>
         </tr>
         <tr>

@@ -27,7 +27,6 @@ describe('createMockModelMap', function () {
       const modelMap = createMockModelMap(dbRef, table);
       const account = await modelMap.Account.create({
         email: 'test-user@email.com',
-        name: 'testuser',
         password: 'P@ssw0rd!',
       });
       expect(account).toBeDefined();
@@ -41,7 +40,6 @@ describe('createMockModelMap', function () {
         async () =>
           await modelMap.Account.create({
             email: defaultAccountFixture.email,
-            name: defaultAccountFixture.name,
             password: defaultAccountFixture.password,
           }),
       ).rejects.toThrow('Account already exists');

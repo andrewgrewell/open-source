@@ -4,14 +4,13 @@ import { getAccount } from '../get-account';
 
 describe('getAccount', () => {
   it('should get an account', async function () {
-    const table = createMockTable();
-    const modelMap = createMockModelMap({ current: defaultDbFixture }, table);
-    await getAccount.executor(
-      {
-        email: 'test@email.com',
-      },
-      modelMap,
-    );
+    const Table = createMockTable() as never;
+    const modelMap = createMockModelMap({ current: defaultDbFixture }, Table);
+    await getAccount({
+      Table,
+      ...modelMap,
+      email: 'test@email.com',
+    });
     expect(modelMap.Account.get).toHaveBeenCalledWith(
       {
         email: 'test@email.com',

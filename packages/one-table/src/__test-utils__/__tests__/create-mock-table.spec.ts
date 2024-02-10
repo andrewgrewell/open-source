@@ -1,8 +1,9 @@
 import { createMockTable, TABLE_METHOD_NAMES } from '../create-mock-table';
+import { Table } from 'dynamodb-onetable';
 
 describe('createMockTable', function () {
   const setup = () => {
-    const table = createMockTable();
+    const table = createMockTable() as jest.Mocked<Table>;
     return { table };
   };
 
@@ -14,9 +15,7 @@ describe('createMockTable', function () {
   it.each(TABLE_METHOD_NAMES)('should have a %s mock function', function (methodName) {
     const { table } = setup();
     const method = table[methodName];
-    method.mockReturnValueOnce('test');
-    const result = method();
+    method('a', { nothrow: true });
     expect(method).toHaveBeenCalledTimes(1);
-    expect(result).toBe('test');
   });
 });

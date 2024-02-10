@@ -12,10 +12,10 @@ export const createAccountVerifyCode: AuthProcedureExecutor<
   CreateAccountVerifyCodeOptions
 > = (options) => {
   const { AccountVerifyCode, accountId, email } = options;
-  const passcode = createRandomCode(6);
+  const verifyCode = createRandomCode(6);
   return AccountVerifyCode.create({
     accountId,
-    code: passcode,
+    code: verifyCode,
     email,
   });
 };

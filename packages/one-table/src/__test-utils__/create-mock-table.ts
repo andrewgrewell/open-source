@@ -1,5 +1,7 @@
 /// <reference types="jest" />
 
+import { Table } from 'dynamodb-onetable';
+
 export const TABLE_METHOD_NAMES = [
   'createTable',
   'exists',
@@ -16,5 +18,5 @@ export function createMockTable() {
     exists: jest.fn(),
     getModel: jest.fn(),
   };
-  return mockTable;
+  return mockTable as never as jest.Mocked<Table>;
 }

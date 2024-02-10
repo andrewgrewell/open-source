@@ -1,6 +1,6 @@
 import { Entity, Model, OneSchema, Table } from 'dynamodb-onetable';
 import { fieldValidators } from '@ag-oss/one-table';
-import { BasicRole } from '@ez-api/core';
+import { BasicRole } from '../../types';
 import { withCommonAttributes } from '../common.schema';
 
 /**

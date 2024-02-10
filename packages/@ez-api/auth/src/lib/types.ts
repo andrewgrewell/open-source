@@ -31,3 +31,9 @@ export type AuthTokenService = JwtService<
   IdTokenPayload,
   RefreshTokenPayload
 >;
+
+export enum BasicRole {
+  Admin = 'admin',
+  Support = 'support',
+  User = 'user',
+}

@@ -1,9 +1,9 @@
 import { createAccount, createUserTokens } from '@ez-api/auth';
-import { dataModels } from '../../db';
 import { sendVerifyEmail } from '../../email';
 import { tokenService } from '../../jwt';
 import { createPublicHandler } from '../../utils/create-public-handler';
 import { httpErrorResponse, BodyParams, httpSuccessResponse } from '@ez-api/lambda';
+import { execute } from '../../utils/execute';
 
 type Body = BodyParams<{ email: string; password: string }>;
 
@@ -11,17 +11,16 @@ export const handler = createPublicHandler<Body>(async (event) => {
   const { email, password } = event.body;
   try {
     console.log(`Attempting create account for email "${email}"...`);
-    const { account, verifyCode } = await createAccount.executor(
-      { email, password },
-      dataModels,
-    );
+    const { account, verifyCode } = await execute(createAccount, {
+      email,
+      password,
+    });
     console.log(`Account created for email "${account.email}".`);
     console.log(`Sending verify email...`);
     await sendVerifyEmail({ email, verifyCode });
     console.log(`Verify email sent.`);
-    const tokens = await createUserTokens({
+    const tokens = await execute(createUserTokens, {
       accountId: account.id,
-      dataModels,
       email: account.email,
       tokenService,
     });

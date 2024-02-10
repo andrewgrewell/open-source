@@ -8,14 +8,14 @@ export type CreateAccountTokensOptions = {
   tokenService: AuthTokenService;
 };
 
-export interface CreateAccountTokensResult {
+export type UserTokens = {
   accessToken: string;
   idToken: string;
   refreshToken: string;
-}
+};
 
 export const createUserTokens: AuthProcedureExecutor<
-  Promise<CreateAccountTokensResult>,
+  Promise<UserTokens>,
   CreateAccountTokensOptions
 > = async (options) => {
   const { tokenService, accountId, email } = options;

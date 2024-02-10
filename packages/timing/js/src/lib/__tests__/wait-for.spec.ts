@@ -6,7 +6,7 @@ describe('waitFor', () => {
     timeout: 10,
   };
 
-  it('should resolve after condition is true', async function () {
+  it('should resolve if condition is true', async function () {
     const waiting = waitFor(() => true, testOptions);
     jest.advanceTimersByTime(3);
     await waiting;
@@ -26,7 +26,7 @@ describe('waitFor', () => {
     let condition = false;
     setTimeout(() => (condition = true), 5);
     const waiting = waitFor(() => condition, testOptions);
-    jest.advanceTimersByTime(6);
+    await jest.advanceTimersByTimeAsync(6);
     await waiting;
     return expect(waiting).resolves.toBeTruthy();
   });

@@ -1,7 +1,11 @@
 import { config } from '../config';
 import { createJwtService } from '@ag-oss/jwt';
-import { AccessTokenPayload, IdTokenPayload, RefreshTokenPayload } from '@starwars/db';
-import { BasicRole } from '@ez-api/core';
+import {
+  BasicRole,
+  AccessTokenPayload,
+  IdTokenPayload,
+  RefreshTokenPayload,
+} from '@ez-api/auth';
 
 export const tokenService = createJwtService<
   AccessTokenPayload,

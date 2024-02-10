@@ -5,10 +5,10 @@ import { MigrationsController } from './migrations-controller';
 import { OneSchema } from 'dynamodb-onetable';
 import Dynamo from 'dynamodb-onetable/Dynamo';
 
-export interface RunMigrationsOptions<TableType> {
+export interface RunMigrationsOptions {
   client: Dynamo['client'];
   migrationConfig: {
-    migrations: MigrationsConfigMap<TableType>;
+    migrations: MigrationsConfigMap;
     tableName: string;
     schema: OneSchema;
   };
@@ -16,7 +16,7 @@ export interface RunMigrationsOptions<TableType> {
   createTable?: boolean;
 }
 
-export async function runMigrations<TableType>(options: RunMigrationsOptions<TableType>) {
+export async function runMigrations(options: RunMigrationsOptions) {
   const { client, migrationConfig, apply, createTable } = options;
   console.log(`Running migrations`);
   const table = createOneTable({

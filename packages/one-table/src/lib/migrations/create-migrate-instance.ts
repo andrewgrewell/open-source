@@ -1,8 +1,8 @@
 import { MigrationConfig } from '../types';
 import { Migrate } from 'onetable-migrate';
 
-export async function createMigrateInstance<TableType>(
-  migrations: MigrationConfig<TableType>[],
+export async function createMigrateInstance(
+  migrations: MigrationConfig[],
   params: Record<string, unknown>,
   apply?: boolean,
 ) {

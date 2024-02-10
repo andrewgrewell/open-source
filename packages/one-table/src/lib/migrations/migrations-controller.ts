@@ -1,20 +1,22 @@
 import { MigrationConfig, MigrationsControllerConfig } from '../types';
-import { oneTableCrypto } from '../utils/crypto';
 import { convertMigrationsMapToConfigArray } from './convert-migrations-map-to-config-array';
 import { createMigrateInstance } from './create-migrate-instance';
 import { verboseLogger as log } from '@ag-oss/logging';
 import { compareVersions } from 'compare-versions';
 import { Migrate } from 'onetable-migrate';
+import { Table } from 'dynamodb-onetable';
+import { oneTableCrypto } from '../utils/crypto';
 
-export class MigrationsController<TableType> {
-  private readonly migrations: MigrationConfig<TableType>[];
+export class MigrationsController<TableType extends Table> {
+  private readonly migrations: MigrationConfig[];
   private readonly oneTableParams: Record<string, unknown>;
 
   constructor(config: MigrationsControllerConfig<TableType> & { client: object }) {
-    const { migrations, tableName, client } = config;
-    if (!oneTableCrypto.primary.password || !oneTableCrypto.primary.cipher) {
+    const { migrations, tableName, client, crypto: configCrypto } = config;
+    const crypto = configCrypto ?? oneTableCrypto;
+    if (!crypto.primary.password || !crypto.primary.cipher) {
       throw new Error(
-        'oneTableCrypto not initialized, ensure the primary password and cipher are set on the environment.',
+        'Please provide a primary cipher and secret for securing the data at rest',
       );
     }
     this.oneTableParams = {

@@ -1,14 +1,15 @@
-import { AuthProcedureExecutor } from '../types';
+import { AuthProcedureExecutor, AuthTokenService } from '../types';
 import { getAccount } from './get-account';
 import { verboseLogger as log } from '@ag-oss/logging';
-import { IAccount } from '../table';
+import { createUserTokens, UserTokens } from './create-user-tokens';
 
 export type SignInOptions = {
   email: string;
   password: string;
+  tokenService: AuthTokenService;
 };
 
-export const signIn: AuthProcedureExecutor<Promise<IAccount>, SignInOptions> = async (
+export const signIn: AuthProcedureExecutor<Promise<UserTokens>, SignInOptions> = async (
   options,
 ) => {
   const { email, password } = options;
@@ -23,7 +24,12 @@ export const signIn: AuthProcedureExecutor<Promise<IAccount>, SignInOptions> = a
   }
   log.verbose('Password is correct.');
   if (account.verifiedEmail !== account.email) {
+    // TODO: return specific errors so that the code can be extracted and handled on the client
     throw new Error('Email is not verified.');
   }
-  return account;
+  return createUserTokens({
+    ...options,
+    accountId: account.id,
+    email: account.email,
+  });
 };
