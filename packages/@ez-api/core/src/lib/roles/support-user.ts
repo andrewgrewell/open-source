@@ -1,3 +1,3 @@
-import { EzApiBasicRole } from './types';
+import { BasicRole } from './types';
 
-export const supportUser = [EzApiBasicRole.Support, EzApiBasicRole.User];
+export const supportUser = [BasicRole.Support, BasicRole.User];

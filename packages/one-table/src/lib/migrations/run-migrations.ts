@@ -2,12 +2,11 @@
 import { MigrationsConfigMap } from '../types';
 import { createOneTable } from '../utils';
 import { MigrationsController } from './migrations-controller';
-import { createDynamodbClient, CreateDynamodbClientConfig } from '@ag-oss/dynamodb';
 import { OneSchema } from 'dynamodb-onetable';
+import Dynamo from 'dynamodb-onetable/Dynamo';
 
 export interface RunMigrationsOptions<TableType> {
-  client?: object;
-  clientConfig: CreateDynamodbClientConfig;
+  client: Dynamo['client'];
   migrationConfig: {
     migrations: MigrationsConfigMap<TableType>;
     tableName: string;
@@ -18,15 +17,8 @@ export interface RunMigrationsOptions<TableType> {
 }
 
 export async function runMigrations<TableType>(options: RunMigrationsOptions<TableType>) {
-  const {
-    client: optionsClient,
-    clientConfig,
-    migrationConfig,
-    apply,
-    createTable,
-  } = options;
+  const { client, migrationConfig, apply, createTable } = options;
   console.log(`Running migrations`);
-  const client = optionsClient ?? createDynamodbClient(clientConfig);
   const table = createOneTable({
     client,
     name: migrationConfig.tableName,

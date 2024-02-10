@@ -12,19 +12,19 @@ const transporter = NodeMailer.createTransport({
 });
 
 export interface SendConfirmEmailOptions {
-  passcode: string;
+  verifyCode: string;
   email: string;
 }
 
 export async function sendVerifyEmail(options: SendConfirmEmailOptions) {
-  const { passcode, email } = options;
+  const { verifyCode, email } = options;
   console.log('Sending email from domain: ', config.email.domain);
   const mailOpt = {
     from: {
       address: config.email.username,
       name: 'StarWars App',
     },
-    html: getVerifyEmailTemplate({ passcode }),
+    html: getVerifyEmailTemplate({ verifyCode }),
     subject: 'Verify your email with StarWars App',
     text: 'Please confirm your email.',
     to: email,

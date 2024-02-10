@@ -1,9 +1,9 @@
 export interface GetVerifyEmailTemplateOptions {
-  passcode: string;
+  verifyCode: string;
 }
 
 export function getVerifyEmailTemplate(options: GetVerifyEmailTemplateOptions) {
-  const { passcode } = options;
+  const { verifyCode } = options;
   return `
 <div style="width: 500px;background-color: rgb(175, 175, 175);overflow: hidden;border-radius: 5px;">
     <table style="width:500px;text-align:center;border-collapse:collapse;background-color:rgb(245,245,245);color:rgb(90,110,122)">
@@ -20,7 +20,7 @@ export function getVerifyEmailTemplate(options: GetVerifyEmailTemplateOptions) {
         </tr>
         <tr>
             <td>
-                <h2 style="margin:15px;">Your verification code is: ${passcode}</h2>
+                <h2 style="margin:15px;">Your verification code is: ${verifyCode}</h2>
             </td>
         </tr>
         <tr>

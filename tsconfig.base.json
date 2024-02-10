@@ -43,6 +43,7 @@
       "@ez-api/auth": ["packages/@ez-api/auth/src/index.ts"],
       "@ez-api/core": ["packages/@ez-api/core/src/index.ts"],
       "@ez-api/dynamodb": ["packages/@ez-api/dynamodb/src/index.ts"],
+      "@ez-api/email": ["packages/@ez-api/email/src/index.ts"],
       "@ez-api/lambda": ["packages/@ez-api/lambda/src/index.ts"],
       "@starwars/api-client": ["packages/@starwars/api-client/src/index.ts"],
       "@starwars/components-react": ["packages/@starwars/components/react/src/index.ts"],

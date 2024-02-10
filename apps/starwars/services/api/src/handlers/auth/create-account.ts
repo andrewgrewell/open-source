@@ -1,4 +1,4 @@
-import { createAccount, createUserTokens } from '@starwars/db';
+import { createAccount, createUserTokens } from '@ez-api/auth';
 import { dataModels } from '../../db';
 import { sendVerifyEmail } from '../../email';
 import { tokenService } from '../../jwt';
@@ -11,13 +11,13 @@ export const handler = createPublicHandler<Body>(async (event) => {
   const { email, password } = event.body;
   try {
     console.log(`Attempting create account for email "${email}"...`);
-    const { account, passcode } = await createAccount.executor(
+    const { account, verifyCode } = await createAccount.executor(
       { email, password },
       dataModels,
     );
     console.log(`Account created for email "${account.email}".`);
     console.log(`Sending verify email...`);
-    await sendVerifyEmail({ email, passcode });
+    await sendVerifyEmail({ email, verifyCode });
     console.log(`Verify email sent.`);
     const tokens = await createUserTokens({
       accountId: account.id,

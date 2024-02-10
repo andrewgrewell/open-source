@@ -8,10 +8,15 @@ import {
 import { createDryRunDb } from '../utils';
 import { verboseLogger as log } from '@ag-oss/logging';
 
+/**
+ * Creates a migration config which can be passed into OneTable MigrationController.
+ * This provides a way to define a more flexible API than what OneTable provides.
+ * @param config
+ */
 export function createMigration<TableType>(
   config: CreateMigrationConfig<TableType>,
 ): MigrationConfig<TableType> {
-  log.verbose('Config: ', config);
+  log.verbose('createMigration config: ', config);
   return {
     description: config.description,
     down(db, migrate, params) {

@@ -1,11 +1,3 @@
-# ez-api-auth
+# EZ-API Auth
 
-This library was generated with [Nx](https://nx.dev).
-
-## Building
-
-Run `nx build ez-api-auth` to build the library.
-
-## Running unit tests
-
-Run `nx test ez-api-auth` to execute the unit tests via [Jest](https://jestjs.io).
+This package provides helpful utilities for setting up authentication in your EZ-API application.

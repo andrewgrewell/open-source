@@ -39,7 +39,7 @@ export type Handler<P extends EventParams, isProtected extends boolean = true> =
 export type AuthPayload = {
   accountId: string;
   email: string;
-  roles?: string[];
+  role?: string;
   iat: number;
   aud: string;
   iss: string;

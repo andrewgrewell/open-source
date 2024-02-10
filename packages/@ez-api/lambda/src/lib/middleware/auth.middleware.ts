@@ -33,10 +33,12 @@ export function authMiddleware(
     try {
       const data = verify(token, authKey);
       if (allowedRoles.length > 0) {
-        const roles = (data as AuthPayload).roles || [];
-        const hasRole = allowedRoles.some((role) => roles.includes(role));
+        const role = (data as AuthPayload).role;
+        const hasRole = allowedRoles.includes(role);
         if (!hasRole) {
-          console.log(`Account does not have allowed roles [${allowedRoles.join(',')}]`);
+          console.log(
+            `Account role ""${role} is not in allowed roles [${allowedRoles.join(',')}]`,
+          );
           return httpErrorResponse('Unauthorized', {
             statusCode: StatusCode.ClientErrorUnauthorized,
           });
