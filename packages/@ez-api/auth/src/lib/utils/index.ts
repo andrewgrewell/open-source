@@ -1,2 +1,2 @@
 export * from './create-random-code';
-export * from './create-user-tokens';
+export * from './get-auth-models';

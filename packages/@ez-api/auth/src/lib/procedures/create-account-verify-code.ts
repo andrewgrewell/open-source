@@ -1,41 +1,21 @@
-import { TableModelsMap } from '../types';
 import { createRandomCode } from '../utils';
+import { AuthProcedureExecutor } from '../types';
+import { IAccountVerifyCode } from '../table';
 
-export interface CreateAccountVerifyCodeOptions {
+export type CreateAccountVerifyCodeOptions = {
   accountId: string;
   email: string;
-}
+};
 
-async function createAccountVerifyCodeExecutor(
-  options: CreateAccountVerifyCodeOptions,
-  models: TableModelsMap,
-) {
-  const { accountId, email } = options;
-  const { AccountVerifyCode } = models;
+export const createAccountVerifyCode: AuthProcedureExecutor<
+  Promise<IAccountVerifyCode>,
+  CreateAccountVerifyCodeOptions
+> = (options) => {
+  const { AccountVerifyCode, accountId, email } = options;
   const passcode = createRandomCode(6);
-  await AccountVerifyCode.create({
+  return AccountVerifyCode.create({
     accountId,
     code: passcode,
     email,
   });
-}
-
-export const createAccountVerifyCode = {
-  executor: createAccountVerifyCodeExecutor,
-  params: [
-    {
-      name: 'createAccountVerifyCodeConfig',
-      params: [
-        {
-          name: 'email',
-          type: 'string',
-        },
-        {
-          name: 'password',
-          type: 'string',
-        },
-      ],
-      type: 'object',
-    },
-  ],
 };

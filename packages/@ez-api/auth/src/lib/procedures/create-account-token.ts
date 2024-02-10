@@ -1,19 +1,19 @@
-import { TableModelsMap } from '../types';
 import { verboseLogger as log } from '@ag-oss/logging';
+import { IAccountToken } from '../table';
+import { AuthProcedureExecutor } from '../types';
 
-export interface CreateAccountTokenConfig {
+export type CreateAccountTokenOptions = {
   accountId: string;
   email: string;
   token: string;
-}
+};
 
-async function createAccountTokenExecutor(
-  config: CreateAccountTokenConfig,
-  models: TableModelsMap,
-) {
-  const { accountId, email, token } = config;
+export const createAccountToken: AuthProcedureExecutor<
+  Promise<IAccountToken>,
+  CreateAccountTokenOptions
+> = async (options) => {
+  const { AccountToken, accountId, email, token } = options;
   log.verbose(`Creating account token for account ${email}`);
-  const { AccountToken } = models;
   const accountToken = await AccountToken.create(
     {
       accountId,
@@ -24,28 +24,4 @@ async function createAccountTokenExecutor(
   );
   log.verbose(`AccountToken created for account ${email}`);
   return accountToken;
-}
-
-export const createAccountToken = {
-  executor: createAccountTokenExecutor,
-  params: [
-    {
-      name: 'createAccountTokenConfig',
-      params: [
-        {
-          name: 'accountId',
-          type: 'string',
-        },
-        {
-          name: 'email',
-          type: 'string',
-        },
-        {
-          name: 'token',
-          type: 'string',
-        },
-      ],
-      type: 'object',
-    },
-  ],
 };

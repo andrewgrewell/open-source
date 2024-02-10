@@ -1,5 +1,5 @@
 import { createLocalTable, createTable } from '@ez-api/dynamodb';
-import { StarWarsTable, starWarsTableSchema, tableName } from './schema';
+import { StarWarsTable, starWarsTableSchema, tableName } from './star-wars.schema';
 
 export interface CreateStarWarsTableOptions {
   client: object;

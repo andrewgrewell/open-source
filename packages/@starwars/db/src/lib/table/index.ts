@@ -1,2 +1,2 @@
 export * from './create-star-wars-table';
-export * from './schema';
+export * from './star-wars.schema';

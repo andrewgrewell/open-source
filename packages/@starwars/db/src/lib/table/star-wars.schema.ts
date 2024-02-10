@@ -14,6 +14,8 @@ export const starWarsTableSchema = createTableSchema({
   version: '0.0.1',
 } as const);
 
+export type StarWarsSchemaModels = typeof starWarsTableSchema.models;
+
 export type StarWarsTableSchema = typeof starWarsTableSchema;
 
-export type StarWarsTable = Table<StarWarsTableSchema>;
+export type StarWarsTable = Table<StarWarsTableSchema, StarWarsSchemaModels>;

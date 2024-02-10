@@ -1,4 +1,4 @@
-import { createTableSchema, ProcedureDefinition, Table } from '@ez-api/dynamodb';
+import { createTableSchema, Table } from '@ez-api/dynamodb';
 import {
   AccountEntityName,
   AccountModel,
@@ -38,8 +38,3 @@ export type AuthTableSchema = typeof authTableSchema;
 // TODO: OneTable isn't typed very well so there is no way besides re-defining the type
 //  to get proper type errors when accessing non-existent models.
 export type AuthTable = Table<AuthTableSchema, AuthSchemaModels>;
-
-export type AuthProcedureDefinition<
-  TReturn,
-  TOptions extends Record<string, unknown>,
-> = ProcedureDefinition<AuthTable, AuthModels, TReturn, TOptions>;

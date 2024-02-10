@@ -1,35 +1,21 @@
-import { TableModelsMap } from '../types';
+import { AuthProcedureExecutor } from '../types';
 import { verboseLogger as log } from '@ag-oss/logging';
+import { IAccount } from '../table';
 
-export interface GetAccountOptions {
+export type GetAccountOptions = {
   email: string;
   accountId?: string;
-}
+};
 
-export const getAccount = {
-  executor: async (options: GetAccountOptions, { Account }: TableModelsMap) => {
-    const { accountId, email } = options;
-    if (accountId) {
-      log.verbose(`Getting account for account ID: "${accountId}"...`);
-      return Account.get({ id: accountId });
-    }
-    log.verbose(`Getting account for email: "${email}"...`);
-    return Account.get({ email }, { follow: true, index: 'gs1' });
-  },
-  params: [
-    {
-      name: 'getAccountOptions',
-      params: [
-        {
-          name: 'email',
-          type: 'string',
-        },
-        {
-          name: 'accountId',
-          type: 'string',
-        },
-      ],
-      type: 'object',
-    },
-  ],
+export const getAccount: AuthProcedureExecutor<
+  Promise<IAccount>,
+  GetAccountOptions
+> = async (options) => {
+  const { Account, accountId, email } = options;
+  if (accountId) {
+    log.verbose(`Getting account for account ID: "${accountId}"...`);
+    return Account.get({ id: accountId });
+  }
+  log.verbose(`Getting account for email: "${email}"...`);
+  return Account.get({ email }, { follow: true, index: 'gs1' });
 };
