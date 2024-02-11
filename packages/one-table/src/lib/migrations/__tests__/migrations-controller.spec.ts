@@ -38,6 +38,12 @@ describe('MigrationsController', () => {
     const client = {};
     const config = {
       client,
+      crypto: {
+        primary: {
+          cipher: 'test-cipher',
+          password: 'test-secret',
+        },
+      },
       migrations,
       tableName,
     };

@@ -2,60 +2,47 @@
 import { MigrationsConfigMap } from '../types';
 import { createOneTable } from '../utils';
 import { MigrationsController } from './migrations-controller';
-import { createDynamodbClient, CreateDynamodbClientConfig } from '@ag-oss/dynamodb';
-import { verboseLogger as log } from '@ag-oss/logging';
-import { withPrettyOutput } from '@ag-oss/console-ui';
 import { OneSchema } from 'dynamodb-onetable';
-import prompts from 'prompts';
+import Dynamo from 'dynamodb-onetable/Dynamo';
 
-export interface RunMigrationsOptions<TableType> {
-  client?: object;
-  clientConfig: CreateDynamodbClientConfig;
+export interface RunMigrationsOptions {
+  client: Dynamo['client'];
   migrationConfig: {
-    migrations: MigrationsConfigMap<TableType>;
+    migrations: MigrationsConfigMap;
     tableName: string;
     schema: OneSchema;
   };
   apply?: boolean;
+  createTable?: boolean;
 }
 
-export async function runMigrations<TableType>(options: RunMigrationsOptions<TableType>) {
-  await withPrettyOutput(async ({ spinner }) => {
-    try {
-      const { client: optionsClient, clientConfig, migrationConfig, apply } = options;
-      spinner.start(`Running migrations`);
-      const client = optionsClient ?? createDynamodbClient(clientConfig);
-      const table = createOneTable({
-        client,
-        name: migrationConfig.tableName,
-        schema: migrationConfig.schema,
-      });
-      if (!(await table.exists())) {
-        spinner.fail(`Table ${migrationConfig.tableName} does not exist`);
-        const { create } = await prompts({
-          initial: true,
-          message: `Would you like to create table ${migrationConfig.tableName}?`,
-          name: 'create',
-          type: 'confirm',
-        });
-        if (!create) {
-          return;
-        }
-        spinner.start('Creating table');
-        await table.createTable();
-        spinner.succeed(`Table ${migrationConfig.tableName} created`);
-      }
-      const controller = new MigrationsController({
-        client,
-        migrations: migrationConfig.migrations,
-        tableName: migrationConfig.tableName,
-      });
-      await controller.applyLatest(apply);
-      spinner.succeed('Migrations complete');
-    } catch (e) {
-      spinner.fail((e as Error)?.message || 'Failed to run migrations');
-      log.verbose(e);
-      return;
-    }
+export async function runMigrations(options: RunMigrationsOptions) {
+  const { client, migrationConfig, apply, createTable } = options;
+  console.log(`Running migrations`);
+  const table = createOneTable({
+    client,
+    name: migrationConfig.tableName,
+    schema: migrationConfig.schema,
   });
+  if (!(await table.exists())) {
+    if (createTable) {
+      console.log(
+        'Table ${migrationConfig.tableName} does not exist and createTable was true. Creating table',
+      );
+      await table.createTable();
+      console.log(`Table ${migrationConfig.tableName} created`);
+    } else {
+      const errorMessage = `Table ${migrationConfig.tableName} does not exist and createTable was false, migration aborted`;
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }
+  const controller = new MigrationsController({
+    client,
+    migrations: migrationConfig.migrations,
+    tableName: migrationConfig.tableName,
+  });
+  const migrationsApplied = await controller.applyLatest(apply);
+  console.log(`Migrations complete applied ${migrationsApplied} migrations`);
+  return migrationsApplied;
 }

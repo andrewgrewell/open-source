@@ -1,15 +1,15 @@
 import { OneSchema, Table } from 'dynamodb-onetable';
 import { oneTableCrypto } from './crypto';
 
-export interface CreateTableOptions {
+export interface CreateOneTableOptions {
   name: string;
   schema: OneSchema;
   client?: object;
-  logger?: boolean;
+  log?: boolean;
 }
 
-export function createOneTable(options: CreateTableOptions): Table<OneSchema> {
-  const { name, schema, client, logger } = options;
+export function createOneTable(options: CreateOneTableOptions): Table<OneSchema> {
+  const { name, schema, client, log } = options;
   //  Crypto setup to add additional encryption layer
   //  TODO: this should be optional as it could be redundant depending on the db provider
   if (!oneTableCrypto.primary.password || !oneTableCrypto.primary.cipher) {
@@ -20,7 +20,7 @@ export function createOneTable(options: CreateTableOptions): Table<OneSchema> {
   return new Table({
     client,
     crypto: oneTableCrypto,
-    logger,
+    logger: log,
     name,
     partial: true,
     schema,

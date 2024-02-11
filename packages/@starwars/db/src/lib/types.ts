@@ -1,34 +1,25 @@
-import { starWarsSchema } from './schema';
-import { orgSchema } from './schema/org.schema';
-import { userSchema } from './schema/user.schema';
-import { Entity, Model, Table } from 'dynamodb-onetable';
-
-export interface CreateTableOptions {
-  client?: object;
-  logger?: boolean;
-}
-
-export type StarWarsTable = Table<typeof starWarsSchema>;
-
-export type IOrg = Entity<typeof orgSchema.Org>;
-export type IUser = Entity<typeof userSchema.User>;
-
-export const TableName = 'StarWarsTable';
-
-export enum TableModelName {
-  Org = 'Org',
-  User = 'User',
-}
-export interface TableModelsMap {
-  table: StarWarsTable;
-  [TableModelName.Org]: Model<IOrg>;
-  [TableModelName.User]: Model<IUser>;
-}
+import { JwtService } from '@ag-oss/jwt';
 
 export enum UserRoles {
-  InternalAdmin = 'internalAdmin',
-  InternalSupport = 'internalSupport',
-  OrgOwner = 'orgAdmin',
-  OrgAdmin = 'orgSupport',
-  OrgMember = 'orgMember',
+  Admin = 'admin',
+  User = 'user',
 }
+
+export interface CommonTokenPayload {
+  // TODO: add typing from what jsonwebtoken adds to the payload
+  [key: string]: unknown;
+  accountId: string;
+  email: string;
+}
+
+export interface AccessTokenPayload extends CommonTokenPayload {}
+
+export interface IdTokenPayload extends CommonTokenPayload {}
+
+export interface RefreshTokenPayload extends CommonTokenPayload {}
+
+export type StarWarsTokenService = JwtService<
+  AccessTokenPayload,
+  IdTokenPayload,
+  RefreshTokenPayload
+>;

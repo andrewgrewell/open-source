@@ -15,11 +15,11 @@ interface SetupConfig {
 describe('createMigration', () => {
   const consoleMock = mockConsole(console);
   const setup = (config?: SetupConfig) => {
-    const db = createMockTable();
+    const Table = createMockTable();
     const migrate = createMockObject();
     const params = { dry: !!config?.dry };
     return {
-      db,
+      Table,
       migrate,
       migration: createMigration(migrationConfigFixture),
       params,
@@ -108,17 +108,17 @@ describe('createMigration', () => {
   });
 
   it('should pass params from one-table migrate to up and down functions', async () => {
-    const { migration, db, migrate, params } = setup({ dry: true });
-    await migration.up(db, migrate, params);
+    const { migration, Table, migrate, params } = setup({ dry: true });
+    await migration.up(Table, migrate, params);
     expect(migrationConfigFixture.up).toHaveBeenCalledWith({
-      db,
+      Table,
       dryLog: expect.any(Function),
       migrate,
       params,
     });
-    await migration.down(db, migrate, params);
+    await migration.down(Table, migrate, params);
     expect(migrationConfigFixture.down).toHaveBeenCalledWith({
-      db,
+      Table,
       dryLog: expect.any(Function),
       migrate,
       params,

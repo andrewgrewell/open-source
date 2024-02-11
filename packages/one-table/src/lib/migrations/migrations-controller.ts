@@ -1,17 +1,24 @@
 import { MigrationConfig, MigrationsControllerConfig } from '../types';
-import { oneTableCrypto } from '../utils/crypto';
 import { convertMigrationsMapToConfigArray } from './convert-migrations-map-to-config-array';
 import { createMigrateInstance } from './create-migrate-instance';
 import { verboseLogger as log } from '@ag-oss/logging';
 import { compareVersions } from 'compare-versions';
 import { Migrate } from 'onetable-migrate';
+import { Table } from 'dynamodb-onetable';
+import { oneTableCrypto } from '../utils/crypto';
 
-export class MigrationsController<TableType> {
-  private readonly migrations: MigrationConfig<TableType>[];
+export class MigrationsController<TableType extends Table> {
+  private readonly migrations: MigrationConfig[];
   private readonly oneTableParams: Record<string, unknown>;
 
   constructor(config: MigrationsControllerConfig<TableType> & { client: object }) {
-    const { migrations, tableName, client } = config;
+    const { migrations, tableName, client, crypto: configCrypto } = config;
+    const crypto = configCrypto ?? oneTableCrypto;
+    if (!crypto.primary.password || !crypto.primary.cipher) {
+      throw new Error(
+        'Please provide a primary cipher and secret for securing the data at rest',
+      );
+    }
     this.oneTableParams = {
       client: client,
       crypto: oneTableCrypto,
@@ -97,7 +104,7 @@ export class MigrationsController<TableType> {
     await migrate.apply(1, targetVersion, { dry: !apply });
   }
 
-  async applyLatest(apply?: boolean) {
+  async applyLatest(apply?: boolean): Promise<number> {
     const migrate = await createMigrateInstance(
       this.migrations,
       this.oneTableParams,
@@ -105,8 +112,12 @@ export class MigrationsController<TableType> {
     );
     const outstandingMigrations = await this.getOutstandingMigrations(migrate);
     log.verbose('outstandingMigrations', outstandingMigrations);
+    if (!outstandingMigrations?.length) {
+      return 0;
+    }
     for (const migration of outstandingMigrations) {
       await migrate.apply(1, migration.version, { dry: !apply });
     }
+    return outstandingMigrations.length;
   }
 }

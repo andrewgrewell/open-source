@@ -1,0 +1,30 @@
+{
+  "name": "ez-api-lambda",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@ez-api/lambda/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@ez-api/lambda",
+        "main": "packages/@ez-api/lambda/src/index.ts",
+        "tsConfig": "packages/@ez-api/lambda/tsconfig.lib.json",
+        "assets": ["packages/@ez-api/lambda/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@ez-api/lambda/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["node"]
+}

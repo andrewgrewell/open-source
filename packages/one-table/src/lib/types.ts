@@ -1,4 +1,4 @@
-import { OneSchema } from 'dynamodb-onetable';
+import { OneSchema, Table } from 'dynamodb-onetable';
 
 export type MigrateInstance = Record<string, unknown>;
 
@@ -6,45 +6,51 @@ export type MigrationParams = {
   dry?: boolean;
 } & Record<string, unknown>;
 
-export type MigrationFn<TableType> = (
-  db: TableType,
+export type MigrationFn = (
+  Table: Table,
   migrate: MigrateInstance,
   params: MigrationParams,
 ) => Promise<void>;
 
-export interface MigrationConfig<TableType> {
+export interface MigrationConfig {
   version: string;
   description: string;
   schema: OneSchema;
-  up: MigrationFn<TableType>;
-  down: MigrationFn<TableType>;
+  up: MigrationFn;
+  down: MigrationFn;
 }
 
-export interface MigrationImplContext<TableType> {
-  db: TableType; // On dry-runs this is a proxy, and any models are proxies
+export interface MigrationImplContext<TTable extends Table> {
+  Table: TTable; // On dry-runs this is a proxy, and any models are proxies
   migrate: MigrateInstance;
   params: MigrationParams;
   dryLog: (message: string) => void;
 }
 
-export type MigrationImplementation<TableType> = (
-  context: MigrationImplContext<TableType>,
+export type MigrationImplementation<TTable extends Table> = (
+  context: MigrationImplContext<TTable>,
 ) => Promise<void> | void;
 
-export interface CreateMigrationConfig<TableType>
-  extends Omit<MigrationConfig<TableType>, 'up' | 'down'> {
-  up: MigrationImplementation<TableType>;
-  down: MigrationImplementation<TableType>;
+export interface CreateMigrationConfig<TTable extends Table>
+  extends Omit<MigrationConfig, 'up' | 'down'> {
+  up: MigrationImplementation<TTable>;
+  down: MigrationImplementation<TTable>;
 }
 
-export type MigrationsConfigMap<TableType> = Record<
+export type MigrationsConfigMap<TTable extends Table = Table> = Record<
   string,
-  Omit<CreateMigrationConfig<TableType>, 'version'>
+  Omit<CreateMigrationConfig<TTable>, 'version'>
 >;
 
-export interface MigrationsControllerConfig<TableType> {
+export interface MigrationsControllerConfig<TTable extends Table> {
+  crypto?: {
+    primary: {
+      password: string;
+      cipher: string;
+    };
+  };
   tableName: string;
-  migrations: MigrationsConfigMap<TableType>;
+  migrations: MigrationsConfigMap<TTable>;
 }
 
 export type AccessPatternExecutor = (...args: any[]) => Promise<unknown>;

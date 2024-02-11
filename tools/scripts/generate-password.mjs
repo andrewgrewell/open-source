@@ -6,7 +6,7 @@ const password = generator.generate({
   uppercase: true,
   lowercase: true,
   numbers: true,
-  symbols: '!@#$%^&*_+?',
+  symbols: '@$!%*?&',
 });
 
 console.log('-------------- PASSWORD --------------');

@@ -1,0 +1,30 @@
+{
+  "name": "ez-api-email",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@ez-api/email/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@ez-api/email",
+        "main": "packages/@ez-api/email/src/index.ts",
+        "tsConfig": "packages/@ez-api/email/tsconfig.lib.json",
+        "assets": ["packages/@ez-api/email/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@ez-api/email/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["node"]
+}

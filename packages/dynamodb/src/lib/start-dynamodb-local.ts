@@ -16,7 +16,7 @@ export async function startDynamodbLocal(options: StartDynamodbLocalOptions = {}
     sharedDb = true,
     inMemory = true,
     silent,
-    detached = true,
+    detached = false,
     name,
   } = options;
   const args = ['run'];
@@ -40,12 +40,12 @@ export async function startDynamodbLocal(options: StartDynamodbLocalOptions = {}
   if (sharedDb) {
     args.push('-sharedDb');
   }
-  const processPromise = spawnAsync('docker', args, {
+  const runningPromise = await spawnAsync('docker', args, {
     stdio: silent ? 'ignore' : 'inherit',
   });
   if (detached) {
-    await waitForContainerState(_name, 'Running');
+    return waitForContainerState(_name, 'Running');
   } else {
-    await processPromise;
+    return runningPromise;
   }
 }

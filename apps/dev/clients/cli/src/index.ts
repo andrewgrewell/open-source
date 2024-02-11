@@ -8,8 +8,6 @@ dotenv.config();
 
 try {
   Object.values(commands).forEach((command) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     yargs.command(command);
   });
   void yargs
