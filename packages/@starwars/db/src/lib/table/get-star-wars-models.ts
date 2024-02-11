@@ -8,7 +8,7 @@ export function getStarWarsModels(table: StarWarsTable): StarWarsModels {
   return Object.keys(starWarsTableSchema.models).reduce((acc, modelName) => {
     return {
       ...acc,
-      [modelName]: table.getModel(modelName),
+      [modelName]: table.getModel(modelName as keyof StarWarsModels),
     };
   }, {} as StarWarsModels);
 }

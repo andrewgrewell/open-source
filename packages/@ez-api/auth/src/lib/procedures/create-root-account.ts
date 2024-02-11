@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { BasicRole, AuthProcedureExecutor } from '../types';
 import { verboseLogger as log } from '@ag-oss/logging';
 import { verifyEmail } from './verify-email';

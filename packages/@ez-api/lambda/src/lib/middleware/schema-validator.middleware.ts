@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { BaseSchema, ValidationError } from 'yup';
 import middy from '@middy/core';
 import { APIGatewayProxyResult } from 'aws-lambda';

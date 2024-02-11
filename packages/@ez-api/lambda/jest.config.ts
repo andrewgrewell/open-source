@@ -7,7 +7,7 @@ export default {
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
-  transformIgnorePatterns: ['node_modules/(?!@middy/core)'],
+  transformIgnorePatterns: ['node_modules/(?!@middy/*)'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../../coverage/packages/@ez-api/lambda',
 };

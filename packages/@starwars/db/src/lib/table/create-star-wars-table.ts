@@ -13,7 +13,7 @@ export function createStarWarsTable(options: CreateStarWarsTableOptions): StarWa
     log,
     name: tableName,
     schema: starWarsTableSchema,
-  }) as StarWarsTable;
+  }) as unknown as StarWarsTable;
 }
 
 export interface CreateLocalStarWarsTableOptions
@@ -28,5 +28,5 @@ export function createLocalStarWarsTable(
     ...options,
     name: tableName,
     schema: starWarsTableSchema,
-  }) as StarWarsTable;
+  }) as unknown as StarWarsTable;
 }

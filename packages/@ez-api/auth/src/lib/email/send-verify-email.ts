@@ -12,10 +12,10 @@ export interface SendVerifyEmailOptions {
 }
 
 export async function sendVerifyEmail(options: SendVerifyEmailOptions) {
-  const { transporter, verifyCode, email, productName, from } = options;
+  const { transporter, email, productName, from } = options;
   const mailOpt = {
     from,
-    html: getVerifyEmailTemplate(verifyCode),
+    html: getVerifyEmailTemplate(options),
     subject: `${productName} - Verify Email`,
     text: 'Please confirm your email.',
     to: email,
@@ -23,7 +23,8 @@ export async function sendVerifyEmail(options: SendVerifyEmailOptions) {
   await transporter.sendMail(mailOpt);
 }
 
-export function getVerifyEmailTemplate(verifyCode: string) {
+export function getVerifyEmailTemplate(options: SendVerifyEmailOptions) {
+  const { verifyCode, productName } = options;
   return `
 <div style="width: 500px;background-color: rgb(175, 175, 175);overflow: hidden;border-radius: 5px;">
     <table style="width:500px;text-align:center;border-collapse:collapse;background-color:rgb(245,245,245);color:rgb(90,110,122)">
@@ -35,7 +36,7 @@ export function getVerifyEmailTemplate(verifyCode: string) {
         <tbody style="background-color: rgb(235, 235, 235)">
         <tr>
             <td>
-                <h2 style="margin:15px;">You have created an account with StarWars App</h2>
+                <h2 style="margin:15px;">You have created an account with ${productName}</h2>
             </td>
         </tr>
         <tr>

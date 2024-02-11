@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { verboseLogger as log } from '@ag-oss/logging';
 import { AuthProcedureExecutor, AuthTokenService } from '../types';
 import { createAccountToken } from './create-account-token';

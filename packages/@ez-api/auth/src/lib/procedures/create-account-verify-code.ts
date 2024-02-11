@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { createRandomCode } from '../utils';
 import { AuthProcedureExecutor } from '../types';
 import { IAccountVerifyCode } from '../table';

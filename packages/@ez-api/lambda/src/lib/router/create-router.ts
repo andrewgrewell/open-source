@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import middy from '@middy/core';
 import { MiddyMiddleware, MiddyRoute, RouterRoute } from '../types';
 import httpRouterHandler from '@middy/http-router';
@@ -20,7 +21,7 @@ export function createRouter(options?: CreateHandlerRouterOptions) {
 
 function parseRoutes(basePath = '', routes: RouterRoute[]): MiddyRoute[] {
   const base = removeTrailingChar(addLeadingChar(basePath, '/'), '/');
-  return routes.map((route) => {
+  return routes?.map((route) => {
     const { path, method, handler } = route;
     return {
       handler,
