@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "Docusaurus",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "appName": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Which app are the docs for?"
+    },
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": "docs",
+      "x-prompt": "Which is the name of the docs?"
+    }
+  },
+  "required": ["appName"]
+}
