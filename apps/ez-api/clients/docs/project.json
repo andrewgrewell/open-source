@@ -1,19 +1,19 @@
 {
-  "name": "<%= projectName %> ",
+  "name": "ez-api-docs",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/<%= appName %>/clients/<%= clientName %>",
+  "sourceRoot": "apps/ez-api/clients/docs",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "nx:run-commands",
       "options": {
         "command": "docusaurus build",
-        "cwd": "apps/<%= appName %>/clients/<%= clientName %>"
+        "cwd": "apps/ez-api/clients/docs"
       },
       "outputs": ["{options.outputPath}"],
       "configurations": {
         "development": {
-          "outputPath": "apps/<%= appName %>/clients/<%= clientName %>"
+          "outputPath": "apps/ez-api/clients/docs"
         },
         "production": {}
       }
@@ -22,16 +22,16 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "docusaurus start",
-        "cwd": "apps/<%= appName %>/clients/<%= clientName %>"
+        "cwd": "apps/ez-api/clients/docs"
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/<%= appName %>/clients/<%= clientName %>/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/ez-api/clients/docs/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
-  "tags": ["@<%= appName %>", "browser"]
+  "tags": ["@ez-api", "browser"]
 }

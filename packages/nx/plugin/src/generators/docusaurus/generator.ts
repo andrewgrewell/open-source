@@ -7,10 +7,11 @@ import {
   generateFiles,
 } from '@nx/devkit';
 import { join } from 'path';
+import { copyFiles } from '../../utils/copy-files';
 
 export async function packageGenerator(tree: Tree, options: DocusaurusGeneratorSchema) {
-  const { name, appName } = options;
-  const projectPath = join('app', appName, 'clients', name);
+  const { name = 'docs', appName } = options;
+  const projectPath = join('apps', appName, 'clients', name);
   // TODO handle dependency versions
   addDependenciesToPackageJson(
     tree,
@@ -27,10 +28,11 @@ export async function packageGenerator(tree: Tree, options: DocusaurusGeneratorS
       '@docusaurus/types': '3.1.1',
     },
   );
-  generateFiles(tree, join(__dirname, 'files'), projectPath, {
-    appName: 'myscript',
-    clientName: 'myclient',
-    projectName: 'myproject',
+  await copyFiles(tree, join(__dirname, 'files'), projectPath);
+  generateFiles(tree, join(__dirname, 'templates'), projectPath, {
+    appName,
+    name,
+    projectName: `${appName}-${name}`,
     tmpl: '',
   });
   await formatFiles(tree);

@@ -1,6 +1,6 @@
 {
-  "extends": ["../../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*", "**/files/**/*", "**/templates/**/*"],
+  "extends": ["plugin:@nx/react-typescript", "../../../../.eslintrc.json"],
+  "ignorePatterns": ["!**/*", "constants.js", ".docusaurus/**/*", "node_modules/**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -14,5 +14,9 @@
       "files": ["*.js", "*.jsx"],
       "rules": {}
     }
-  ]
+  ],
+  "rules": {},
+  "env": {
+    "jest": true
+  }
 }
