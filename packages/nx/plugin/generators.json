@@ -1,5 +1,10 @@
 {
   "generators": {
+    "docs": {
+      "factory": "./src/generators/docusaurus/generator",
+      "schema": "./src/generators/docusaurus/schema.json",
+      "description": "Create docs for a project"
+    },
     "remove-jsonc": {
       "factory": "./src/generators/remove-jsonc/generator",
       "schema": "./src/generators/remove-jsonc/schema.json",

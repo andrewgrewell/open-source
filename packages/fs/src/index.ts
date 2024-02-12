@@ -1,4 +1,5 @@
 export * from './__test-utils__';
+export * from './lib/copy-files';
 export * from './lib/create-file-browser-service';
 export * from './lib/create-file-tree-browser';
 export * from './lib/create-file-tree-map';
