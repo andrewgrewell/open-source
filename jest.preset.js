@@ -61,6 +61,7 @@ module.exports = merge(
       '/apps/',
       '/test-utils/',
       '/__test-utils--/',
+      '/figma-ui/',
     ],
     coverageReporters: ['text', 'json', 'json-summary'],
     coverageThreshold: {
