@@ -21,10 +21,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: ./.github/actions/init-monorepo
-
       - name: Count new commits
         run: echo "NEW_COMMIT_COUNT=$(git log --oneline --since '24 hours ago' | wc -l)" >> $GITHUB_ENV
+
+      - uses: ./.github/actions/init-monorepo
+        if: ${{ env.NEW_COMMIT_COUNT > 0 }}
 
       - name: Run tests
         if: ${{ env.NEW_COMMIT_COUNT > 0 }}
@@ -43,11 +44,11 @@ jobs:
 
       - name: Merge Coverage Reports
         id: merge-coverage-reports
-        if: always()
+        if: always() && env.NEW_COMMIT_COUNT > 0
         run: ./tools/scripts/merge-coverage-reports.sh
 
       - name: Upload coverage reports to Codecov
-        if: steps.merge-coverage-reports.outputs.exists == 'true'
+        if: steps.merge-coverage-reports.outputs.exists == 'true' && env.NEW_COMMIT_COUNT > 0
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -73,7 +74,7 @@ jobs:
           fi
 
       - name: Jest Results
-        if: always() && steps.test-results.outputs.exists == 'true'
+        if: always() && steps.test-results.outputs.exists == 'true' && env.NEW_COMMIT_COUNT > 0
         uses: phoenix-actions/test-reporting@v12
         with:
           name: Jest Results            # Name of the check run which will be created
