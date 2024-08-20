@@ -1,4 +1,6 @@
-const AgLogo = (props) => (
+import { SVGProps } from 'react';
+
+const AgLogo = (props: SVGProps<any>) => (
   <svg
     xmlSpace="preserve"
     width={52}

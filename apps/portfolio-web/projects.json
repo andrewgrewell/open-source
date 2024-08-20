@@ -1,0 +1,45 @@
+{
+
+  "projects": [
+    {
+      "name": "Portfolio Web",
+      "description": "This is my portfolio web app.",
+      "githubLink": "#",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "name": "Portfolio API",
+      "description": "This is the API for my portfolio web app.",
+      "githubLink": "#",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "name": "Portfolio API",
+      "description": "This is the API for my portfolio web app.",
+      "githubLink": "#",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "name": "Portfolio API",
+      "description": "This is the API for my portfolio web app.",
+      "githubLink": "#",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ]
+    }
+  ]
+}
