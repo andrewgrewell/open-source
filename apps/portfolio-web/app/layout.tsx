@@ -6,6 +6,8 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { MaxContentWidth } from '../components/max-content-width';
 import { PageContainer } from '../components/page-container';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 const fontBody = Questrial({
   subsets: ['latin'],
@@ -42,6 +44,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </PageContainer>
         </MaxContentWidth>
         <Footer />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
