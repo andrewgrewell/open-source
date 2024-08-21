@@ -13,7 +13,7 @@ export const Header: FC = () => {
   return (
     <header className="flex flex-1 flex-row">
       <MaxContentWidth>
-        <nav className="flex flex-1 items-center border-b-2 border-b-slate-100 py-5">
+        <nav className="flex flex-1 items-center border-b border-b-slate-100 py-5">
           <ul className="flex flex-1 flex-row gap-x-4">
             {NavRoutes.map(({ href, label, color }) => {
               return (

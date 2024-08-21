@@ -12,14 +12,14 @@ const fontSans = Questrial({
 export const About: FC = () => {
   return (
     <Section data-testid="about-section" className="flex flex-col">
-      <SectionTitle>Hi, I&apos;m Andrew Grewell</SectionTitle>
+      <SectionTitle>Hi, I&apos;m Andrew</SectionTitle>
       <p
         className={clsx(
           'text-xl leading-relaxed text-slate-700 font-sans',
           fontSans.className,
         )}
       >
-        I&apos;m a seasoned Software Engineer based in the Pacific Northwest.
+        a seasoned Software Engineer based in the Pacific Northwest.
       </p>
     </Section>
   );
