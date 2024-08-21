@@ -1,0 +1,56 @@
+{
+
+  "projects": [
+    {
+      "name": "AG OSS",
+      "description": "A monorepo containing all of my open-source projects.",
+      "githubPath": "open-source",
+      "tags": [
+        "Nx",
+        "Monorepo",
+        "Node",
+        "React",
+        "TypeScript",
+        "Tailwind",
+        "NextJS",
+        "React Native",
+        "Electron"
+      ]
+    },
+    {
+      "name": "Reactify (Coming Soon)",
+      "description": "A simple reactive state management library.",
+      "githubPath": "open-source",
+      "tags": [
+        "State Management",
+        "Reactive Programming",
+        "Proxy",
+        "React",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Vagrant Box",
+      "description": "Easily create portable development environments.",
+      "githubPath": "vagrant-box",
+      "tags": [
+        "Ansible",
+        "Vagrant",
+        "Virtual Box",
+        "IaC",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "EZ-API",
+      "description": "Easily create open and secure serverless REST APIs.",
+      "githubPath": "open-source/tree/main/packages/%40ez-api",
+      "tags": [
+        "Serverless",
+        "REST",
+        "RBAC",
+        "Microservices"
+      ]
+    }
+  ]
+}

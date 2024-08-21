@@ -1,0 +1,53 @@
+{
+  "jobs": [
+    {
+      "company": "Stealth Startup",
+      "title": "Co-Founder and Lead Developer",
+      "startDate": "Jun 2024",
+      "endDate": "Sep 2024"
+    },
+    {
+      "company": "BoomPop",
+      "title": "Senior Fullstack Engineer",
+      "startDate": "Apr 2024",
+      "endDate": "Jun 2024",
+      "contract": true
+    },
+    {
+      "company": "TrueNorth",
+      "title": "Senior Front-End Engineer",
+      "startDate": "Oct 2022",
+      "endDate": "Dec 2023"
+    },
+    {
+      "company": "Streem",
+      "title": "Senior Front-End Software Engineer",
+      "startDate": "Jun 2021",
+      "endDate": "Sept 2022"
+    },
+    {
+      "company": "Streem",
+      "title": "Senior Software Engineer",
+      "startDate": "Nov 2018",
+      "endDate": "May 2021"
+    },
+    {
+      "company": "Provata Health",
+      "title": "Developer",
+      "startDate": "Sep 2014",
+      "endDate": "Nov 2018"
+    },
+    {
+      "company": "Provata Health",
+      "title": "Designer",
+      "startDate": "Jun 2014",
+      "endDate": "Sep 2014"
+    },
+    {
+      "company": "PCC Marketing and Communications",
+      "title": "Graphic Designer",
+      "startDate": "Jun 2013",
+      "endDate": "Apr 2014"
+    }
+  ]
+}

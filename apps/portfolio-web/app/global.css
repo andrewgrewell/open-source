@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  tab-size: 4;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+h1,
+h2,
+p,
+pre {
+  margin: 0;
+}
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: currentColor;
+}
+h1,
+h2 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), serif;
+}
+p {
+  font-family: var(--font-body), sans-serif;
+}
