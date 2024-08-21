@@ -25,7 +25,6 @@ export const Cv: FC = () => {
       >
         Download CV <ArrowDownTrayIcon className="ml-2 w-5 h-5" />
       </a>
-      nx
     </Section>
   );
 };
