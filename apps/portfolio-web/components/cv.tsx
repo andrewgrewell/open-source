@@ -17,9 +17,15 @@ export const Cv: FC = () => {
         </div>
       </SectionTitle>
       <JobList jobs={cvJson.jobs} />
-      <button className="flex flex-row items-center justify-center bg-slate-50 hover:bg-slate-100 p-4 rounded-md mt-4 font-bold text-slate-600">
+      <a
+        className="flex flex-row items-center justify-center bg-slate-50 hover:bg-slate-100 p-4 rounded-md mt-4 font-bold text-slate-600"
+        href="https://drive.google.com/file/d/1AHIiWQO-JFVaBlYwuV0MhhEmP4_VvcXQ/view?usp=drive_link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Download CV <ArrowDownTrayIcon className="ml-2 w-5 h-5" />
-      </button>
+      </a>
+      nx
     </Section>
   );
 };
