@@ -2,43 +2,54 @@
 
   "projects": [
     {
-      "name": "Portfolio Web",
-      "description": "This is my portfolio web app.",
-      "githubLink": "#",
+      "name": "AG OSS",
+      "description": "A monorepo containing all of my open-source projects.",
+      "githubPath": "open-source",
       "tags": [
+        "Nx",
+        "Monorepo",
+        "Node",
         "React",
         "TypeScript",
-        "Tailwind CSS"
+        "Tailwind",
+        "NextJS",
+        "React Native",
+        "Electron"
       ]
     },
     {
-      "name": "Portfolio API",
-      "description": "This is the API for my portfolio web app.",
-      "githubLink": "#",
+      "name": "Reactify (Coming Soon)",
+      "description": "A simple reactive state management library.",
+      "githubPath": "open-source",
       "tags": [
+        "State Management",
+        "Reactive Programming",
+        "Proxy",
         "React",
-        "TypeScript",
-        "Tailwind CSS"
+        "TypeScript"
       ]
     },
     {
-      "name": "Portfolio API",
-      "description": "This is the API for my portfolio web app.",
-      "githubLink": "#",
+      "name": "Vagrant Box",
+      "description": "Easily create portable development environments.",
+      "githubPath": "vagrant-box",
       "tags": [
-        "React",
-        "TypeScript",
-        "Tailwind CSS"
+        "Ansible",
+        "Vagrant",
+        "Virtual Box",
+        "IaC",
+        "TypeScript"
       ]
     },
     {
-      "name": "Portfolio API",
-      "description": "This is the API for my portfolio web app.",
-      "githubLink": "#",
+      "name": "EZ-API",
+      "description": "Easily create open and secure serverless REST APIs.",
+      "githubPath": "open-source/tree/main/packages/%40ez-api",
       "tags": [
-        "React",
-        "TypeScript",
-        "Tailwind CSS"
+        "Serverless",
+        "REST",
+        "RBAC",
+        "Microservices"
       ]
     }
   ]

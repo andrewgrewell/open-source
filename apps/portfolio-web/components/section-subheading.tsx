@@ -9,5 +9,5 @@ export const SectionSubheading: FC<PropsWithChildren<SectionSubheadingProps>> = 
   children,
   className,
 }) => {
-  return <p className={clsx(['font-sans', className])}>{children}</p>;
+  return <p className={clsx(['font-body', className])}>{children}</p>;
 };

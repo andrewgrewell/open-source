@@ -2,6 +2,8 @@ import { FC } from 'react';
 import clsx from 'clsx';
 import { MaxContentWidth } from './max-content-width';
 import { GithubLink } from './github-link';
+import Link from 'next/link';
+import { LinkedinLink } from './linkedin-link';
 
 const NavRoutes = [
   { color: 'red', href: '#about', label: 'About' },
@@ -18,9 +20,9 @@ export const Header: FC = () => {
             {NavRoutes.map(({ href, label, color }) => {
               return (
                 <li key={href}>
-                  <a
+                  <Link
                     className={clsx(
-                      'px-2 py-2 border-b-2 border-transparent text-lg text-slate-500 font-bold font-display',
+                      'px-2 py-2 border-b-2 border-transparent text-lg text-slate-500 font-bold font-heading',
                       {
                         'hover:border-blue-700 hover:text-blue-700': color === 'blue',
                         'hover:border-purple-700 hover:text-purple-700':
@@ -31,12 +33,13 @@ export const Header: FC = () => {
                     href={href}
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               );
             })}
           </ul>
           <div className="flex gap-x-6">
+            <LinkedinLink />
             <GithubLink />
           </div>
         </nav>
