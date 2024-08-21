@@ -23,6 +23,7 @@ export const JobList: FC<JobListProps> = ({ jobs }) => {
             <div className="flex flex-1 flew-row">
               <h4 className="flex flex-1 font-display font-bold text-slate-700">
                 {entry.title}
+                {entry.contract ? <Tag className="ml-4 text-tiny">Contract</Tag> : null}
               </h4>
               <span className="flex flex-row font-display font-light text-slate-500">
                 {entry.startDate} — {entry.endDate}
@@ -31,7 +32,6 @@ export const JobList: FC<JobListProps> = ({ jobs }) => {
 
             <div className="flex flex-row">
               <p className="flex flex-1">{entry.company}</p>
-              {entry.contract ? <Tag className="ml-4 text-tiny">Contract</Tag> : null}
             </div>
           </Card>
         </li>

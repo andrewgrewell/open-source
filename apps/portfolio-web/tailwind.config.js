@@ -16,8 +16,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "font-display": "var(--font-display)",
-        "font-sans": "var(--font-sans)",
+        "font-heading": "var(--font-heading)",
+        "font-body": "var(--font-body)",
       },
       fontSize: {
         tiny: ['0.5rem', { lineHeight: '0.75rem' }],

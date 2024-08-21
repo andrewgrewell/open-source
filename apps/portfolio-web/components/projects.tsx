@@ -7,7 +7,7 @@ import { ProjectList } from './project-list';
 export const Projects: FC = () => {
   return (
     <Section>
-      <SectionTitle>Projects</SectionTitle>
+      <SectionTitle id="projects">Projects</SectionTitle>
       <p>Here are some of the projects I have worked on:</p>
       <div className="mt-4">
         <ProjectList projects={projectsJson.projects} />

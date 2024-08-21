@@ -7,14 +7,14 @@ import { Footer } from '../components/footer';
 import { MaxContentWidth } from '../components/max-content-width';
 import { PageContainer } from '../components/page-container';
 
-const fontSans = Questrial({
+const fontBody = Questrial({
   subsets: ['latin'],
-  variable: '--font-sans',
+  variable: '--font-body',
   weight: '400',
 });
-const fontDisplay = M_PLUS_Rounded_1c({
+const fontHeading = M_PLUS_Rounded_1c({
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-heading',
   weight: ['300', '400', '500', '700', '900'],
 });
 
@@ -29,8 +29,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html
       lang="en"
       className={clsx(
-        fontDisplay.variable,
-        fontSans.variable,
+        fontHeading.variable,
+        fontBody.variable,
         'h-full scroll-smooth bg-white antialiased',
       )}
     >
