@@ -11,9 +11,14 @@ export const Cv: FC = () => {
       <SectionTitle id="cv">
         <div className="flex flex-row items-center">
           <span className="flex flex-1">CV </span>
-          <button className="ml-2 bg-slate-50 hover:bg-slate-100 rounded-md p-1">
+          <a
+            className="ml-2 bg-slate-50 hover:bg-slate-100 rounded-md p-1"
+            href="https://drive.google.com/file/d/1AHIiWQO-JFVaBlYwuV0MhhEmP4_VvcXQ/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <ArrowDownTrayIcon className="w-6 h-6" />
-          </button>
+          </a>
         </div>
       </SectionTitle>
       <JobList jobs={cvJson.jobs} />
