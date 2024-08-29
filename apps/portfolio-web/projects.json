@@ -2,6 +2,20 @@
 
   "projects": [
     {
+      "name": "Statements Direct",
+      "description": "Easy financial statement management and sharing",
+      "href": "https://statementsdirect.com",
+      "tags": [
+        "Fintech",
+        "SaaS",
+        "GraphQL",
+        "Infrastructure",
+        "TypeScript",
+        "Tailwind",
+        "NextJS"
+      ]
+    },
+    {
       "name": "AG OSS",
       "description": "A monorepo containing all of my open-source projects.",
       "githubPath": "open-source",
