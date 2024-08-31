@@ -4,6 +4,7 @@ import { SectionTitle } from './section-title';
 import cvJson from '../cv.json';
 import { JobList } from './job-list';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { CV_LINK } from '../config';
 
 export const Cv: FC = () => {
   return (
@@ -13,7 +14,7 @@ export const Cv: FC = () => {
           <span className="flex flex-1">CV </span>
           <a
             className="ml-2 bg-slate-50 hover:bg-slate-100 rounded-md p-1"
-            href="https://drive.google.com/file/d/1AHIiWQO-JFVaBlYwuV0MhhEmP4_VvcXQ/view?usp=drive_link"
+            href={CV_LINK}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -24,7 +25,7 @@ export const Cv: FC = () => {
       <JobList jobs={cvJson.jobs} />
       <a
         className="flex flex-row items-center justify-center bg-slate-50 hover:bg-slate-100 p-4 rounded-md mt-4 font-bold text-slate-600"
-        href="https://drive.google.com/file/d/1AHIiWQO-JFVaBlYwuV0MhhEmP4_VvcXQ/view?usp=drive_link"
+        href={CV_LINK}
         target="_blank"
         rel="noopener noreferrer"
       >
