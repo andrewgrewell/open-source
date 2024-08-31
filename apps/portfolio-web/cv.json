@@ -1,10 +1,11 @@
 {
   "jobs": [
     {
-      "company": "Stealth Startup",
+      "company": "Statements Direct",
       "title": "Co-Founder and Lead Developer",
       "startDate": "Jun 2024",
-      "endDate": "Sep 2024"
+      "endDate": "Sep 2024",
+      "contract": true
     },
     {
       "company": "BoomPop",

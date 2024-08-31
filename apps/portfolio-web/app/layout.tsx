@@ -14,6 +14,7 @@ const fontBody = Questrial({
   variable: '--font-body',
   weight: '400',
 });
+
 const fontHeading = M_PLUS_Rounded_1c({
   subsets: ['latin'],
   variable: '--font-heading',
