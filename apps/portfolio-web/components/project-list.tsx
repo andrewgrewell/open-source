@@ -12,18 +12,8 @@ export interface Project {
   href?: string;
 }
 
-interface GithubProject extends Project {
-  githubPath: string;
-  href: never;
-}
-
-interface HostedProject extends Project {
-  githubPath: never;
-  href: string;
-}
-
 export interface ProjectListProps {
-  projects: (GithubProject | HostedProject)[];
+  projects: Project[];
 }
 export const ProjectList: FC<ProjectListProps> = ({ projects }) => {
   return (
@@ -33,7 +23,7 @@ export const ProjectList: FC<ProjectListProps> = ({ projects }) => {
           ? `${PERSONAL_GITHUB_LINK}/${project.githubPath}`
           : project.href;
         return (
-          <Link key={project.name} href={href} target="_blank">
+          <Link key={project.name} href={href!} target="_blank">
             <Card className="min-w-48">
               <h4 className="font-heading font-bold mb-2">{project.name}</h4>
               <p className="flex flex-1 mb-2">{project.description}</p>
